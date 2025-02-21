@@ -1,5 +1,7 @@
-const ProductPage = async ({params} : {params: {id: string}}) => {
-    const {id} = params;
+type Params = Promise<{ id: string[] }>
+
+const ProductPage = async ({params} : {params: Params}) => {
+    const {id} = await params;
     
     return (
         <div className="text-gray-500">
