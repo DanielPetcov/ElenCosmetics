@@ -7,5 +7,4 @@ const ProductPage = async ({params} : {params: {id: string}}) => {
         </div>
     )
 }
-
 export default ProductPage;
