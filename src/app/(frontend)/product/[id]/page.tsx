@@ -1,5 +1,5 @@
 const ProductPage = async ({params} : {params: {id: string}}) => {
-    const {id} = await params;
+    const {id} = params;
     
     return (
         <div className="text-gray-500">
