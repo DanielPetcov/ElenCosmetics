@@ -11,7 +11,7 @@ import FeaturedCategories from './components/FeaturedCollections/FeaturedCollect
 
 export default async function HomePage() {
   return (
-    <div className="flex flex-col gap-20">
+    <div className="flex flex-col gap-14 lg:gap-20">
       <div><ImgSlider data={banners} /></div>
       <div className="container mx-auto">
         <CategoriesCarousel data={categories} />

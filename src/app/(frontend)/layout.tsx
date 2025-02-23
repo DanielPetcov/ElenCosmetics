@@ -1,5 +1,6 @@
 import React from 'react'
 import './globals.css'
+import './style.css'
 import { poppins } from './ui/fonts'
 import Subheader from './components/Subheader'
 import Footer from './components/Footer'
