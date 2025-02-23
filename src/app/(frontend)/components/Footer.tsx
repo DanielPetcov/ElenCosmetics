@@ -1,12 +1,12 @@
-import Logo from "../testdata/Logo";
+import Logo from "./Icons/Logo";
 import Link from "next/link";
 
 const Footer = () => {
     return (
-        <div className="bg-gray-700 flex justify-center items-center p-4 mt-12">
-            <div className="flex flex-col gap-[50px] items-center">
+        <div className="bg-gray-700 flex justify-center items-center p-4 py-10 mt-12">
+            <div className="flex flex-col gap-20 items-center">
                 <Link href='/'>
-                    <Logo width="w-[100px]" color="#fff"/>
+                    <Logo width={100} color="#fff" />
                 </Link>
                 <div className="grid grid-cols-3 gap-[90px]">
                     <div className="flex flex-col gap-2">
