@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <div className="bg-gray-700 flex justify-center items-center p-4 py-10 mt-12">
+        <div className="bg-gray-700 flex justify-center items-center p-4 py-10">
             <div className="flex flex-col gap-20 items-center">
                 <Link href='/'>
                     <Logo width={100} color="#fff" />
@@ -23,7 +23,7 @@ const Footer = () => {
                     </div>
                 </div>
                 <div>
-                    <span className="text-sm font-normal">@ 2025 - Toate drepturile sunt rezervate. Facut de Petcov Daniel </span>
+                    <span className="text-sm font-normal">@ 2025 - Toate drepturile sunt rezervate. Autor - Petcov Daniel </span>
                 </div>
             </div>
         </div>

@@ -69,16 +69,26 @@ export interface Config {
     media: Media;
     products: Product;
     collection: Collection;
+    termsPage: TermsPage;
+    Tags: Tag;
+    orders: Order;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
-  collectionsJoins: {};
+  collectionsJoins: {
+    products: {
+      relatedCollections: 'collection';
+    };
+  };
   collectionsSelect: {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     collection: CollectionSelect<false> | CollectionSelect<true>;
+    termsPage: TermsPageSelect<false> | TermsPageSelect<true>;
+    Tags: TagsSelect<false> | TagsSelect<true>;
+    orders: OrdersSelect<false> | OrdersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -86,8 +96,14 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    footer: Footer;
+    homepage: Homepage;
+  };
+  globalsSelect: {
+    footer: FooterSelect<false> | FooterSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
+  };
   locale: null;
   user: User & {
     collection: 'users';
@@ -121,6 +137,15 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  role: 'customer' | 'admin';
+  firstName: string;
+  lastName: string;
+  phone?: string | null;
+  address?: {
+    street?: string | null;
+    city?: string | null;
+    zipCode?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -162,7 +187,22 @@ export interface Product {
   Media?: (string | Media)[] | null;
   Price: number;
   'Compare price'?: number | null;
-  Collections?: (string | Collection)[] | null;
+  stock?: number | null;
+  tags?: (string | Tag)[] | null;
+  relatedCollections?: {
+    docs?: (string | Collection)[] | null;
+    hasNextPage?: boolean | null;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Tags".
+ */
+export interface Tag {
+  id: string;
+  assignProducts?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -173,8 +213,63 @@ export interface Product {
 export interface Collection {
   id: string;
   Title: string;
+  Products?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "termsPage".
+ */
+export interface TermsPage {
+  id: string;
+  Title?: string | null;
+  Description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders".
+ */
+export interface Order {
+  id: string;
+  orderNumber: string;
+  customer: string | User;
+  items: {
+    product: string | Product;
+    quantity: number;
+    price: number;
+    id?: string | null;
+  }[];
+  subtotal: number;
+  shippingCost: number;
+  totalAmount: number;
+  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
+  shippingAddress: {
+    fullName: string;
+    street: string;
+    city: string;
+    zipCode: string;
+    phone: string;
+  };
+  trackingNumber?: string | null;
+  createdAt: string;
+  updatedAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -198,6 +293,18 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'collection';
         value: string | Collection;
+      } | null)
+    | ({
+        relationTo: 'termsPage';
+        value: string | TermsPage;
+      } | null)
+    | ({
+        relationTo: 'Tags';
+        value: string | Tag;
+      } | null)
+    | ({
+        relationTo: 'orders';
+        value: string | Order;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -246,6 +353,17 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  role?: T;
+  firstName?: T;
+  lastName?: T;
+  phone?: T;
+  address?:
+    | T
+    | {
+        street?: T;
+        city?: T;
+        zipCode?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -284,7 +402,9 @@ export interface ProductsSelect<T extends boolean = true> {
   Media?: T;
   Price?: T;
   'Compare price'?: T;
-  Collections?: T;
+  stock?: T;
+  tags?: T;
+  relatedCollections?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -294,8 +414,60 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface CollectionSelect<T extends boolean = true> {
   Title?: T;
+  Products?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "termsPage_select".
+ */
+export interface TermsPageSelect<T extends boolean = true> {
+  Title?: T;
+  Description?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  assignProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "orders_select".
+ */
+export interface OrdersSelect<T extends boolean = true> {
+  orderNumber?: T;
+  customer?: T;
+  items?:
+    | T
+    | {
+        product?: T;
+        quantity?: T;
+        price?: T;
+        id?: T;
+      };
+  subtotal?: T;
+  shippingCost?: T;
+  totalAmount?: T;
+  status?: T;
+  shippingAddress?:
+    | T
+    | {
+        fullName?: T;
+        street?: T;
+        city?: T;
+        zipCode?: T;
+        phone?: T;
+      };
+  trackingNumber?: T;
+  createdAt?: T;
+  updatedAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -328,6 +500,124 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: string;
+  'Special Links'?:
+    | {
+        Title?: string | null;
+        Link?:
+          | {
+              Title?: string | null;
+              Page?: (string | null) | TermsPage;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: string;
+  Layout: (
+    | {
+        title: string;
+        category: string | Collection;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'productList';
+      }
+    | {
+        slides: {
+          img: string | Media;
+          linkType: 'none' | 'internal' | 'external';
+          internalLink?:
+            | ({
+                relationTo: 'collection';
+                value: string | Collection;
+              } | null)
+            | ({
+                relationTo: 'products';
+                value: string | Product;
+              } | null);
+          externalUrl?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imgslider';
+      }
+  )[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  'Special Links'?:
+    | T
+    | {
+        Title?: T;
+        Link?:
+          | T
+          | {
+              Title?: T;
+              Page?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  Layout?:
+    | T
+    | {
+        productList?:
+          | T
+          | {
+              title?: T;
+              category?: T;
+              id?: T;
+              blockName?: T;
+            };
+        imgslider?:
+          | T
+          | {
+              slides?:
+                | T
+                | {
+                    img?: T;
+                    linkType?: T;
+                    internalLink?: T;
+                    externalUrl?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

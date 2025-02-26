@@ -7,6 +7,12 @@ export const Collection: CollectionConfig = {
             name: 'Title',
             type: 'text',
             required: true
+        },
+        {
+            name: 'Products',
+            type: 'relationship',
+            relationTo: 'products',
+            hasMany: true,
         }
     ],
     admin: {

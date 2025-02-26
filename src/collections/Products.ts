@@ -1,5 +1,4 @@
 import type { CollectionConfig } from "payload";
-import { relationship } from "payload/shared";
 
 export const Products: CollectionConfig = {
     slug: 'products',
@@ -34,10 +33,25 @@ export const Products: CollectionConfig = {
             type: 'number',
         },
         {
-            name: 'Collections',
+            name: 'stock',
+            label: 'Stock',
+            type: 'number'
+        },
+        {
+            name: 'tags',
+            label: 'Tags',
             type: 'relationship',
-            relationTo: 'collection',
+            relationTo: 'Tags',
             hasMany: true
+        },
+        {
+            name: 'relatedCollections',
+            type: 'join',
+            collection: 'collection',
+            on: 'Products'
         }
-    ]
+    ],
+    admin: {
+        useAsTitle: 'Title'
+    }
 }

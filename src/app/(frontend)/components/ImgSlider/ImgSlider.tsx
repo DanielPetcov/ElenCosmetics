@@ -1,6 +1,6 @@
 'use client'
 
-import {Swiper, SwiperSlide} from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 
 import PrevSlide from '../navigationIcons/prevSlide';
@@ -8,17 +8,23 @@ import NextSlide from '../navigationIcons/nextSlide';
 
 import 'swiper/css';
 
-import BannerProp from '../../types/BannerType';
 import ImgSlide from './ImgSlide';
 
+
+import { Homepage } from '@/payload-types';
+
+type ImgSliderBlock = Extract<Homepage['Layout'][number], { blockType: 'imgslider' }>;
+type Slides = ImgSliderBlock['slides'];
+
 interface ImgSliderProps {
-    data: BannerProp[]
+    slides: Slides;
 }
 
-const ImgSlider:React.FC<ImgSliderProps> = ({data}) => {
+const ImgSlider = ({ slides }: ImgSliderProps) => {
+    console.log(slides);
     return (
         <div className='flex flex-col gap-3 md:gap-6'>
-            <div>
+            <div className='max-h-[500px] overflow-hidden'>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}
@@ -37,9 +43,9 @@ const ImgSlider:React.FC<ImgSliderProps> = ({data}) => {
                     }}
                     modules={[Pagination, Navigation]}
                 >
-                    {data.map((slide) => (
-                        <SwiperSlide key={slide.id}>
-                            <ImgSlide id={slide.id} img={slide.img} url={slide.url} />
+                    {slides.map((slide, index) => (
+                        <SwiperSlide key={index}>
+                            <ImgSlide img={slide.img} url='string' />
                         </SwiperSlide>
                     ))}
                 </Swiper>

@@ -6,7 +6,7 @@ import CartIcon from "../Icons/CartIcon";
 import Link from "next/link";
 
 const Header = () => {
-    return <div className="py-6 px-10">
+    return <div className="py-6 px-10 bg-white shadow-bottom">
         <div className="grid grid-cols-3 w-full items-center h-fit">
             <div className="flex justify-start">
                 <BurgerMenuIcon />

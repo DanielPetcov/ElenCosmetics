@@ -7,10 +7,18 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+// collections
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Collection } from './collections/Collections'
+import { TermsPage } from './collections/TermsPages'
+import { Tags } from './collections/Tags'
+import { Orders } from './collections/Orders'
+
+// globals
+import { Footer } from './globals/Footer'
+import { HomePage } from './globals/HomePage'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -22,8 +30,24 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Users, Media, Products, Collection],
-  editor: lexicalEditor(),
+  collections: [
+    Users, 
+    Media, 
+    Products, 
+    Collection,
+    TermsPage,
+    Tags,
+    Orders
+  ],
+  globals: [
+    Footer,
+    HomePage
+  ],
+  editor: lexicalEditor({
+    features: ({defaultFeatures}) => [
+      ...defaultFeatures
+    ]
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
