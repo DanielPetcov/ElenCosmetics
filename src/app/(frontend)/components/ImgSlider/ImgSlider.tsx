@@ -21,7 +21,6 @@ interface ImgSliderProps {
 }
 
 const ImgSlider = ({ slides }: ImgSliderProps) => {
-    console.log(slides);
     return (
         <div className='flex flex-col gap-3 md:gap-6'>
             <div className='max-h-[500px] overflow-hidden'>

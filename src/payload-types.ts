@@ -99,10 +99,12 @@ export interface Config {
   globals: {
     footer: Footer;
     homepage: Homepage;
+    header: Header;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: null;
   user: User & {
@@ -563,6 +565,31 @@ export interface Homepage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: string;
+  upperHeader?: string | null;
+  logo: string | Media;
+  menuItems?:
+    | {
+        label: string;
+        link: string;
+        subItems?:
+          | {
+              label: string;
+              link: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -614,6 +641,31 @@ export interface HomepageSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  upperHeader?: T;
+  logo?: T;
+  menuItems?:
+    | T
+    | {
+        label?: T;
+        link?: T;
+        subItems?:
+          | T
+          | {
+              label?: T;
+              link?: T;
+              id?: T;
+            };
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

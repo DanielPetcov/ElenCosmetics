@@ -19,6 +19,7 @@ import { Orders } from './collections/Orders'
 // globals
 import { Footer } from './globals/Footer'
 import { HomePage } from './globals/HomePage'
+import { Header } from './globals/Header'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -41,7 +42,8 @@ export default buildConfig({
   ],
   globals: [
     Footer,
-    HomePage
+    HomePage,
+    Header
   ],
   editor: lexicalEditor({
     features: ({defaultFeatures}) => [
