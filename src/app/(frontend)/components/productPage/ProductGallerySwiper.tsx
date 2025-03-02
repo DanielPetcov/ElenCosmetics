@@ -1,9 +1,7 @@
 'use client'
 import { Product } from "@/payload-types";
 type MediaType = Product['Media']
-import { Media } from "@/payload-types";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';

@@ -1,5 +1,4 @@
 type Params = Promise<{ id: string }>
-import { Media } from "@/payload-types";
 import payload from "@/queries";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";

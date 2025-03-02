@@ -1,5 +1,4 @@
 import React from "react";
-import Subheader from "../components/Subheader";
 import Header from "../components/Header/Header";
 
 export default async function Layout(props: { children: React.ReactNode }) {

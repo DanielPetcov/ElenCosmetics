@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -95,7 +94,7 @@ const LoginForm = () => {
                 </form>
             </Form>
             <div className='flex gap-2 items-baseline justify-center flex-wrap'>
-                <span className='text-gray-500 text-sm md:text-base'>Don't have an account?</span><Link href="/signup" className='text-gray-500 underline text-sm md:text-base'>Signup</Link>
+                <span className='text-gray-500 text-sm md:text-base'>Don&apos;t have an account?</span><Link href="/signup" className='text-gray-500 underline text-sm md:text-base'>Signup</Link>
             </div>
         </div>
     )

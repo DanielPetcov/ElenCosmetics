@@ -1,5 +1,4 @@
 import React from "react";
-import Subheader from "../components/Subheader";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer";
 

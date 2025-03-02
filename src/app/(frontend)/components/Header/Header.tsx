@@ -1,14 +1,12 @@
-import BurgerMenuIcon from "../Icons/BurgerMenuIcon";
 import Logo from "../Icons/Logo";
 import SearchIcon from "../Icons/SearchIcon";
-import AccountIcon from "../Icons/AccountIcon";
 import CartIcon from "../Icons/CartIcon";
 import Link from "next/link";
 import payload from "@/queries";
 
 import AccountBtn from "./AccountBtn";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 
@@ -30,7 +28,9 @@ const Header = async () => {
         <Sheet>
             <Megamenu items={header.menuItems} />
             {header.upperHeader ?
-                <Subheader children={header.upperHeader} />
+                <Subheader>
+                    {header.upperHeader}
+                </Subheader>
                 : null}
             <div className="py-4 px-6 md:py-6 md:px-10 bg-white shadow-bottom">
                 <div className="grid grid-cols-3 w-full items-center h-fit">

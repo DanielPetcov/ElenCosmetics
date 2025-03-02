@@ -7,7 +7,6 @@ import { Product } from "@/payload-types"
 import { useState, useEffect } from "react"
 
 import { Media } from "@/payload-types"
-import { Content } from "next/font/google"
 type MediaType = Product['Media']
 
 interface Props {
@@ -32,9 +31,9 @@ const ProductGallery = ({ featuredImg, media }: Props) => {
 
     useEffect(() => {
         if (media) {
-            let urls: string[] = [];
+            const urls: string[] = [];
             media.forEach((file) => {
-                // @ts-ignore
+                // @ts-expect-error: TypeScript does not recognize the 'url' property on 'file'
                 urls.push(file.url)
             })
             setGallery((content) => [...content, ...urls])

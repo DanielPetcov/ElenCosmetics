@@ -1,5 +1,4 @@
 'use client'
-import ProductCardType from "../../types/ProductCardType";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { Product } from "@/payload-types";
@@ -28,7 +27,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
                         spaceBetween={30}
                     >
                         {products.map((product, index) => (
-                            <SwiperSlide key={product.id} style={{ width: "auto" }}>
+                            <SwiperSlide key={index} style={{ width: "auto" }}>
                                 <ProductCard
                                     id={product.id}
                                     Title={product.Title}

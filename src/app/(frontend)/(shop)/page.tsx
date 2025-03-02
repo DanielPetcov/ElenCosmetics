@@ -1,4 +1,3 @@
-import config from '@payload-config'
 import payload from '@/queries'
 import ProductList from '../components/productList/ProductList'
 import ImgSlider from '../components/ImgSlider/ImgSlider'
@@ -17,12 +16,12 @@ export default async function HomePage() {
   return (
     <div className="flex flex-col gap-14 lg:gap-20 py-5">
       {
-        layout.map((block) => {
+        layout.map((block, index) => {
           switch (block.blockType) {
             case 'productList':
-              return <ProductList title={block.title} category={block.category} />
+              return <ProductList key={index} title={block.title} category={block.category} />
             case 'imgslider':
-              return <ImgSlider slides={block.slides} />
+              return <ImgSlider key={index} slides={block.slides} />
             default:
               return null
           }

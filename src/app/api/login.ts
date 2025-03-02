@@ -22,6 +22,7 @@ export default async function POST(req: NextApiRequest, res: NextApiResponse) {
         // res.setHeader('Set-Cookie', `payload-token=${result.token}; HttpOnly; Path=/; SameSite=Strict`);
         return res.status(200).json({ success: true, token: result.token });
     } catch (error) {
+        console.log(error);
         return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 }

@@ -18,9 +18,9 @@ const Account = async () => {
         const user = (await result).user
 
         return (
-            <div className="text-gray-500 flex flex-1 items-center justify-center">
+            <div className="text-gray-500 flex flex-1 items-center justify-center py-10 px-5">
                 <AccountCard
-                    id={user?.id}
+                    id={user && user.id ? user.id : undefined}
                     firstName={user?.firstName}
                     lastName={user?.lastName}
                     email={user?.email}
@@ -29,6 +29,7 @@ const Account = async () => {
             </div>
         );
     } catch (error) {
+        console.log(error);
         redirect('/login');
     }
 }
