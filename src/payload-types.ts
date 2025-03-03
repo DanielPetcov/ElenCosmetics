@@ -189,6 +189,22 @@ export interface Product {
   Media?: (string | Media)[] | null;
   Price: number;
   'Compare price'?: number | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  ingredients?: string | null;
   stock?: number | null;
   tags?: (string | Tag)[] | null;
   relatedCollections?: {
@@ -404,6 +420,8 @@ export interface ProductsSelect<T extends boolean = true> {
   Media?: T;
   Price?: T;
   'Compare price'?: T;
+  description?: T;
+  ingredients?: T;
   stock?: T;
   tags?: T;
   relatedCollections?: T;

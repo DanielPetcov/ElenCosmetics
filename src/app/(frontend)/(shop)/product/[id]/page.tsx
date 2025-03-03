@@ -7,6 +7,7 @@ import AddToCartBtn from "@/app/(frontend)/components/AddToCartBtn";
 import { ChevronRight } from 'lucide-react';
 import QuantityButtons from "./quantityButtons";
 
+import ProductAccordion from "./productAccordion";
 const ProductPage = async ({ params }: { params: Params }) => {
     const { id } = await params;
 
@@ -31,9 +32,14 @@ const ProductPage = async ({ params }: { params: Params }) => {
                         <ProductGallery featuredImg={product.FeaturedImg} media={product.Media} />
                         : null}
                     {/* product description */}
-                    <div className="bg-white p-5 rounded-md">
-
-                    </div>
+                    {product.description || product.ingredients ?
+                        <div className="bg-white p-5 rounded-md text-gray-700">
+                            <ProductAccordion
+                                description={product.description}
+                                ingredients={product.ingredients}
+                            />
+                        </div> : null
+                    }
                 </div>
                 <div className="sticky top-0 bg-white p-10 rounded-md h-fit">
                     <div className="flex flex-col gap-3 h-fit">

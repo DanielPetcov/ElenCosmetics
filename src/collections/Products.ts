@@ -33,6 +33,16 @@ export const Products: CollectionConfig = {
             type: 'number',
         },
         {
+            name: 'description',
+            label: 'Descriere',
+            type: 'richText'
+        },
+        {
+            name: 'ingredients',
+            label: 'Ingrediente',
+            type: 'text'
+        },
+        {
             name: 'stock',
             label: 'Stock',
             type: 'number'
