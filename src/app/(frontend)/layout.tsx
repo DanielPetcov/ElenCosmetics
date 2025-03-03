@@ -2,6 +2,7 @@ import React from 'react'
 import './globals.css'
 import './style.css'
 import { poppins } from './ui/fonts'
+import { Toaster } from "@/components/ui/sonner"
 
 export const metadata = {
   description: 'ElenCosmetics',
@@ -15,6 +16,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
     <html lang="ro">
       <body className={`${poppins.className} antialiased bg-gray-100 text-gray-50`}>
         <main className='flex-1 flex flex-col'>{children}</main>
+        <Toaster />
       </body>
     </html>
   )

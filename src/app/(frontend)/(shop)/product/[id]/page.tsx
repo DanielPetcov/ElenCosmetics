@@ -1,8 +1,11 @@
 type Params = Promise<{ id: string }>
 import payload from "@/queries";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import ProductGallery from "../../../components/productPage/ProductGallery";
+import AddToCartBtn from "@/app/(frontend)/components/AddToCartBtn";
+
+import { ChevronRight } from 'lucide-react';
+import QuantityButtons from "./quantityButtons";
 
 const ProductPage = async ({ params }: { params: Params }) => {
     const { id } = await params;
@@ -18,7 +21,7 @@ const ProductPage = async ({ params }: { params: Params }) => {
         <div className="flex flex-col gap-10 container px-10 py-6 mx-auto w-full">
             <div className="flex gap-2">
                 <Link href='/' className="text-gray-500 hover:underline">HOME</Link>
-                <span className="text-gray-500">%</span>
+                <span className="text-gray-500"><ChevronRight /></span>
                 <span className="text-gray-600 uppercase">{product.Title}</span>
             </div>
             <div className="grid grid-cols-2 gap-10">
@@ -39,16 +42,32 @@ const ProductPage = async ({ params }: { params: Params }) => {
                             reviews
                         </div>
                         <div>
-                            <Button>Button</Button>
-                        </div>
-                        <div>
                             volum: 19
                         </div>
-                        <div>
-                            price
+                        <div className="text-gray-700">
+                            {
+                                product["Compare price"] ?
+                                    <div className="flex gap-2 items-baseline">
+                                        <span className="line-through">{product.Price}</span>
+                                        <span className="text-red-600 font-semibold text-xl">{product["Compare price"]} MDL</span>
+                                    </div>
+                                    : <span className="text-lg font-semibold">
+                                        {product.Price} MDL
+                                    </span>
+                            }
                         </div>
-                        <div>
-                            buy buttons
+                        <div className="grid grid-cols-[auto_1fr] gap-2">
+                            <QuantityButtons id={product.id} product={product} />
+                            <AddToCartBtn
+                                name={product.Title}
+                                price={product.Price}
+                                productId={product.id}
+                                quantity={1}
+                                comparePrice={product["Compare price"] !== undefined ? product["Compare price"] : null}
+                                img={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.url ? product.FeaturedImg.url : null : null}
+                                imgHeight={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.height ? product.FeaturedImg.height : null : null}
+                                imgWidth={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.width ? product.FeaturedImg.width : null : null}
+                            />
                         </div>
                     </div>
                 </div>

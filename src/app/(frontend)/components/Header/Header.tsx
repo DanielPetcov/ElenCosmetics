@@ -1,18 +1,18 @@
 import Logo from "../Icons/Logo";
-import SearchIcon from "../Icons/SearchIcon";
-import CartIcon from "../Icons/CartIcon";
 import Link from "next/link";
 import payload from "@/queries";
 
-import AccountBtn from "./AccountBtn";
-
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
 
 import Image from "next/image";
 import Subheader from "../Subheader";
 import Megamenu from "./Megamenu";
+
+import { Menu } from "lucide-react";
+import { UserRound } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 
 const Header = async () => {
@@ -36,7 +36,7 @@ const Header = async () => {
                 <div className="grid grid-cols-3 w-full items-center h-fit">
                     <SheetTrigger asChild className="w-fit">
                         <Button variant="ghost" className="p-2">
-                            <Menu className="w-8 h-8 text-[#374151]" />
+                            <Menu className="w-8 h-8" color="#374151" />
                         </Button>
                     </SheetTrigger>
                     <Link href="/" className="flex justify-center w-[100px] h-auto mx-auto">
@@ -51,11 +51,13 @@ const Header = async () => {
                             : <Logo width={110} color="#374151" />
                         }
                     </Link>
-                    <div className="flex gap-5 items-center justify-end">
-                        <SearchIcon />
-                        <AccountBtn />
+                    <div className="flex gap-5 items-center justify-end text-gray-700">
+                        <Search strokeWidth={1.5} />
+                        <Link href='/account' className="hidden md:block">
+                            <UserRound strokeWidth={1.5} />
+                        </Link>
                         <Link href={'/cart'} className="hidden md:block">
-                            <CartIcon />
+                            <ShoppingBag strokeWidth={1.5} />
                         </Link>
                     </div>
                 </div>

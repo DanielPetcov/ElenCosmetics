@@ -27,7 +27,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
                         spaceBetween={30}
                     >
                         {products.map((product, index) => (
-                            <SwiperSlide key={index} style={{ width: "auto" }}>
+                            <SwiperSlide key={index} style={{ width: "auto", height: "auto" }}>
                                 <ProductCard
                                     id={product.id}
                                     Title={product.Title}
@@ -35,6 +35,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
                                     FeaturedImg={product.FeaturedImg}
                                     updatedAt={product.updatedAt}
                                     createdAt={product.createdAt}
+                                    comparePrice={product["Compare price"]}
                                 />
                             </SwiperSlide>
                         ))}

@@ -99,12 +99,16 @@ const Megamenu = ({ items }: { items: Props }) => {
                 )}
             </div>
             <div className="grid grid-cols-2 gap-5 md:hidden">
-                <Button variant="secondary">
-                    <ShoppingBag />
-                </Button>
-                <Button variant="secondary">
-                    <UserRound />
-                </Button>
+                <Link href='/cart'>
+                    <Button variant="secondary">
+                        <ShoppingBag />
+                    </Button>
+                </Link>
+                <Link href='/account'>
+                    <Button variant="secondary">
+                        <UserRound />
+                    </Button>
+                </Link>
             </div>
         </SheetContent>
     );
