@@ -21,7 +21,8 @@ const ProductPage = async ({ params }: { params: Params }) => {
     const product = ProductData.docs[0];
 
     const ProductPage = await payload.findGlobal({
-        slug: 'productPage'
+        slug: 'productPage',
+        depth: 3
     })
 
     const layout = ProductPage.layout;
