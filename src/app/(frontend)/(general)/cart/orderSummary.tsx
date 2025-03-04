@@ -27,7 +27,7 @@ const OrderSummary = ({ items, discount }: Props) => {
     }
 
     return (
-        <div className="text-gray-700 border border-gray-300 rounded-xl p-5 flex flex-col gap-6">
+        <div className="text-gray-700 border border-gray-300 rounded-xl p-5 flex flex-col gap-6 max-w-[400px] h-fit">
             <h2 className="text-xl font-semibold">Order Summary</h2>
             <div className="flex flex-col gap-4">
                 <div className="flex items-baseline justify-between text-lg">

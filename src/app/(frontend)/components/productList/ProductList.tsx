@@ -18,7 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
     const products: Product[] = Array.isArray(category.Products) && typeof category !== 'string' ? category.Products.filter((product): product is Product => typeof product !== 'string') : [];
 
     return (
-        <div className="flex flex-col gap-5 lg:gap-10">
+        <div className="flex flex-col gap-5 lg:gap-10 mx-auto container px-2 md:px-4">
             <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 text-center uppercase">{title}</div>
             {products.length > 0 ? (
                 <div>
@@ -30,12 +30,12 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
                             <SwiperSlide key={index} style={{ width: "auto", height: "auto" }}>
                                 <ProductCard
                                     id={product.id}
-                                    Title={product.Title}
-                                    Price={product.Price}
-                                    FeaturedImg={product.FeaturedImg}
+                                    title={product.title}
+                                    price={product.price}
+                                    featuredImg={product.featuredImg}
                                     updatedAt={product.updatedAt}
                                     createdAt={product.createdAt}
-                                    comparePrice={product["Compare price"]}
+                                    comparePrice={product.compare_price}
                                 />
                             </SwiperSlide>
                         ))}

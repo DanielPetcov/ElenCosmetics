@@ -4,12 +4,15 @@ export const Products: CollectionConfig = {
     slug: 'products',
     fields: [
         {
-            name: 'Title',
+            name: 'title',
+            label: 'Title',
             type: 'text',
+            index: true,
             required: true
         },
         {
-            name: 'FeaturedImg',
+            name: 'featuredImg',
+            label: 'FeaturedImg',
             type: 'upload',
             relationTo: 'media',
             filterOptions: {
@@ -18,18 +21,21 @@ export const Products: CollectionConfig = {
             required: true
         },
         {
-            name: 'Media',
+            name: 'media',
+            label: 'Media',
             type: 'relationship',
             relationTo: 'media',
             hasMany: true
         },
         {
-            name: 'Price',
+            name: 'price',
+            label: 'Price',
             type: 'number',
             required: true
         },
         {
-            name: 'Compare price',
+            name: 'compare_price',
+            label: 'Compare price',
             type: 'number',
         },
         {
@@ -61,7 +67,10 @@ export const Products: CollectionConfig = {
             on: 'Products'
         }
     ],
+    access: {
+        read: () => true
+    },
     admin: {
-        useAsTitle: 'Title'
+        useAsTitle: 'title'
     }
 }

@@ -22,7 +22,9 @@ const ProductAccordion = ({ description, ingredients }: Props) => {
                 <AccordionItem value="item-1" className="border-none" >
                     <AccordionTrigger className="text-xl hover:underline-none">Descriere</AccordionTrigger>
                     <AccordionContent>
-                        <RichText data={description} />
+                        <div className="text-gray-500">
+                            <RichText data={description} />
+                        </div>
                     </AccordionContent>
                 </AccordionItem>
                 : null

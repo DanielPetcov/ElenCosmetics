@@ -17,12 +17,12 @@ const QuantityButtons = ({ id, product }: { id: string, product: Product }) => {
                 onClick={() => decreaseQuantity(item ? item :
                     {
                         productId: product.id,
-                        price: product.Price,
-                        comparePrice: product["Compare price"] !== undefined ? product["Compare price"] : null,
-                        img: typeof product.FeaturedImg === 'string' ? product.FeaturedImg : null,
-                        imgHeight: typeof product.FeaturedImg !== 'string' ? (product.FeaturedImg.height ?? null) : null,
-                        imgWidth: typeof product.FeaturedImg !== 'string' ? (product.FeaturedImg.width ?? null) : null,
-                        name: product.Title,
+                        price: product.price,
+                        comparePrice: product.compare_price !== undefined ? product.compare_price : null,
+                        img: typeof product.featuredImg === 'string' ? product.featuredImg : null,
+                        imgHeight: typeof product.featuredImg !== 'string' ? (product.featuredImg.height ?? null) : null,
+                        imgWidth: typeof product.featuredImg !== 'string' ? (product.featuredImg.width ?? null) : null,
+                        name: product.title,
                         quantity: 1
                     }
                 )}
@@ -35,12 +35,12 @@ const QuantityButtons = ({ id, product }: { id: string, product: Product }) => {
                 onClick={() => addToCart(item ? item :
                     {
                         productId: product.id,
-                        price: product.Price,
-                        comparePrice: product["Compare price"] !== undefined ? product["Compare price"] : null,
-                        img: typeof product.FeaturedImg === 'string' ? product.FeaturedImg : null,
-                        imgHeight: typeof product.FeaturedImg !== 'string' ? (product.FeaturedImg.height ?? null) : null,
-                        imgWidth: typeof product.FeaturedImg !== 'string' ? (product.FeaturedImg.width ?? null) : null,
-                        name: product.Title,
+                        price: product.price,
+                        comparePrice: product.compare_price !== undefined ? product.compare_price : null,
+                        img: typeof product.featuredImg === 'string' ? product.featuredImg : null,
+                        imgHeight: typeof product.featuredImg !== 'string' ? (product.featuredImg.height ?? null) : null,
+                        imgWidth: typeof product.featuredImg !== 'string' ? (product.featuredImg.width ?? null) : null,
+                        name: product.title,
                         quantity: 1
                     }
                 )}

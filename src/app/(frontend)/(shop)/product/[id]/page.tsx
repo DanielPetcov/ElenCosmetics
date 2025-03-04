@@ -8,6 +8,8 @@ import { ChevronRight } from 'lucide-react';
 import QuantityButtons from "./quantityButtons";
 
 import ProductAccordion from "./productAccordion";
+
+import ProductList from "@/app/(frontend)/components/productList/ProductList";
 const ProductPage = async ({ params }: { params: Params }) => {
     const { id } = await params;
 
@@ -18,18 +20,24 @@ const ProductPage = async ({ params }: { params: Params }) => {
 
     const product = ProductData.docs[0];
 
+    const ProductPage = await payload.findGlobal({
+        slug: 'productPage'
+    })
+
+    const layout = ProductPage.layout;
+
     return (
         <div className="flex flex-col gap-10 container px-10 py-6 mx-auto w-full">
             <div className="flex gap-2">
                 <Link href='/' className="text-gray-500 hover:underline">HOME</Link>
                 <span className="text-gray-500"><ChevronRight /></span>
-                <span className="text-gray-600 uppercase">{product.Title}</span>
+                <span className="text-gray-600 uppercase">{product.title}</span>
             </div>
             <div className="grid grid-cols-2 gap-10">
                 <div className="flex flex-col gap-10">
                     {/* product gallery */}
-                    {typeof product.FeaturedImg !== 'string' ?
-                        <ProductGallery featuredImg={product.FeaturedImg} media={product.Media} />
+                    {typeof product.featuredImg !== 'string' ?
+                        <ProductGallery featuredImg={product.featuredImg} media={product.media} />
                         : null}
                     {/* product description */}
                     {product.description || product.ingredients ?
@@ -43,7 +51,7 @@ const ProductPage = async ({ params }: { params: Params }) => {
                 </div>
                 <div className="sticky top-0 bg-white p-10 rounded-md h-fit">
                     <div className="flex flex-col gap-3 h-fit">
-                        <p className="text-slate-800 text-2xl font-semibold">{product.Title}</p>
+                        <p className="text-slate-800 text-2xl font-semibold">{product.title}</p>
                         <div>
                             reviews
                         </div>
@@ -52,32 +60,42 @@ const ProductPage = async ({ params }: { params: Params }) => {
                         </div>
                         <div className="text-gray-700">
                             {
-                                product["Compare price"] ?
+                                product.compare_price ?
                                     <div className="flex gap-2 items-baseline">
-                                        <span className="line-through">{product.Price}</span>
-                                        <span className="text-red-600 font-semibold text-xl">{product["Compare price"]} MDL</span>
+                                        <span className="line-through">{product.price}</span>
+                                        <span className="text-red-600 font-semibold text-xl">{product.compare_price} MDL</span>
                                     </div>
                                     : <span className="text-lg font-semibold">
-                                        {product.Price} MDL
+                                        {product.price} MDL
                                     </span>
                             }
                         </div>
                         <div className="grid grid-cols-[auto_1fr] gap-2">
                             <QuantityButtons id={product.id} product={product} />
                             <AddToCartBtn
-                                name={product.Title}
-                                price={product.Price}
+                                name={product.title}
+                                price={product.price}
                                 productId={product.id}
                                 quantity={1}
-                                comparePrice={product["Compare price"] !== undefined ? product["Compare price"] : null}
-                                img={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.url ? product.FeaturedImg.url : null : null}
-                                imgHeight={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.height ? product.FeaturedImg.height : null : null}
-                                imgWidth={typeof product.FeaturedImg !== 'string' ? product.FeaturedImg.width ? product.FeaturedImg.width : null : null}
+                                comparePrice={product.compare_price !== undefined ? product.compare_price : null}
+                                img={typeof product.featuredImg !== 'string' ? product.featuredImg.url ? product.featuredImg.url : null : null}
+                                imgHeight={typeof product.featuredImg !== 'string' ? product.featuredImg.height ? product.featuredImg.height : null : null}
+                                imgWidth={typeof product.featuredImg !== 'string' ? product.featuredImg.width ? product.featuredImg.width : null : null}
                             />
                         </div>
                     </div>
                 </div>
             </div>
+            {
+                layout && layout.length > 0 && layout.map((block, index) => {
+                    switch (block.blockType) {
+                        case 'productList':
+                            return <ProductList key={index} title={block.title} category={block.category} />
+                        default:
+                            return null
+                    }
+                })
+            }
         </div>
     )
 }

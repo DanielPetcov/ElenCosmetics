@@ -11,7 +11,7 @@ type Props = {
 const RichText = (props: Props) => {
     const { className, ...rest } = props
     return (
-        <div className="text-gray-500">
+        <div>
             <RichTextConverter {...rest} className={className} />
         </div>
     )

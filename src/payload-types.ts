@@ -100,11 +100,13 @@ export interface Config {
     footer: Footer;
     homepage: Homepage;
     header: Header;
+    productPage: ProductPage;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
+    productPage: ProductPageSelect<false> | ProductPageSelect<true>;
   };
   locale: null;
   user: User & {
@@ -184,11 +186,11 @@ export interface Media {
  */
 export interface Product {
   id: string;
-  Title: string;
-  FeaturedImg: string | Media;
-  Media?: (string | Media)[] | null;
-  Price: number;
-  'Compare price'?: number | null;
+  title: string;
+  featuredImg: string | Media;
+  media?: (string | Media)[] | null;
+  price: number;
+  compare_price?: number | null;
   description?: {
     root: {
       type: string;
@@ -241,8 +243,8 @@ export interface Collection {
  */
 export interface TermsPage {
   id: string;
-  Title?: string | null;
-  Description?: {
+  title: string;
+  description?: {
     root: {
       type: string;
       children: {
@@ -415,11 +417,11 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
-  Title?: T;
-  FeaturedImg?: T;
-  Media?: T;
-  Price?: T;
-  'Compare price'?: T;
+  title?: T;
+  featuredImg?: T;
+  media?: T;
+  price?: T;
+  compare_price?: T;
   description?: T;
   ingredients?: T;
   stock?: T;
@@ -443,8 +445,8 @@ export interface CollectionSelect<T extends boolean = true> {
  * via the `definition` "termsPage_select".
  */
 export interface TermsPageSelect<T extends boolean = true> {
-  Title?: T;
-  Description?: T;
+  title?: T;
+  description?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -527,13 +529,35 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface Footer {
   id: string;
-  'Special Links'?:
+  our_adress?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  social_links?:
     | {
-        Title?: string | null;
-        Link?:
+        social_link: string;
+        social_icon: 'instagram' | 'facebook' | 'tiktok';
+        id?: string | null;
+      }[]
+    | null;
+  special_links?:
+    | {
+        title: string;
+        link?:
           | {
-              Title?: string | null;
-              Page?: (string | null) | TermsPage;
+              title: string;
+              page: string | TermsPage;
               id?: string | null;
             }[]
           | null;
@@ -608,18 +632,42 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productPage".
+ */
+export interface ProductPage {
+  id: string;
+  layout: {
+    title: string;
+    category: string | Collection;
+    id?: string | null;
+    blockName?: string | null;
+    blockType: 'productList';
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  'Special Links'?:
+  our_adress?: T;
+  social_links?:
     | T
     | {
-        Title?: T;
-        Link?:
+        social_link?: T;
+        social_icon?: T;
+        id?: T;
+      };
+  special_links?:
+    | T
+    | {
+        title?: T;
+        link?:
           | T
           | {
-              Title?: T;
-              Page?: T;
+              title?: T;
+              page?: T;
               id?: T;
             };
         id?: T;
@@ -684,6 +732,27 @@ export interface HeaderSelect<T extends boolean = true> {
               id?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "productPage_select".
+ */
+export interface ProductPageSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        productList?:
+          | T
+          | {
+              title?: T;
+              category?: T;
+              id?: T;
+              blockName?: T;
+            };
       };
   updatedAt?: T;
   createdAt?: T;

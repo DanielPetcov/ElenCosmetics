@@ -50,9 +50,9 @@ const Cart = () => {
     }
 
     return (
-        <div className="container flex flex-col gap-4 px-10 py-10">
+        <div className="container flex flex-col gap-4 px-10 py-10 mx-auto">
             <PageTitle title="Cosul meu" />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-[1fr_auto] gap-4">
                 <div className="flex flex-col gap-4 text-gray-700 border border-gray-300 rounded-xl p-5 h-fit">
                     {items.map((item, index) => {
                         if (index + 1 === items.length) {

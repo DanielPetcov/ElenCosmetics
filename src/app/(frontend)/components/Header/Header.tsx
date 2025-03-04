@@ -12,8 +12,8 @@ import Megamenu from "./Megamenu";
 import { Menu } from "lucide-react";
 import { UserRound } from 'lucide-react';
 import { ShoppingBag } from 'lucide-react';
-import { Search } from 'lucide-react';
 
+import SearchBar from "../SearchBar/SearchBar";
 
 const Header = async () => {
     const header = await payload.findGlobal({
@@ -52,7 +52,7 @@ const Header = async () => {
                         }
                     </Link>
                     <div className="flex gap-5 items-center justify-end text-gray-700">
-                        <Search strokeWidth={1.5} />
+                        <SearchBar />
                         <Link href='/account' className="hidden md:block">
                             <UserRound strokeWidth={1.5} />
                         </Link>

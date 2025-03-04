@@ -23,7 +23,7 @@ interface ImgSliderProps {
 const ImgSlider = ({ slides }: ImgSliderProps) => {
     return (
         <div className='flex flex-col gap-3 md:gap-6'>
-            <div className='max-h-[500px] overflow-hidden'>
+            <div className='max-h-[1000px] overflow-hidden'>
                 <Swiper
                     slidesPerView={1}
                     spaceBetween={10}

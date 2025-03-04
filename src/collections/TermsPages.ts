@@ -4,15 +4,18 @@ export const TermsPage: CollectionConfig = {
     slug: 'termsPage',
     fields: [
         {
-            name: 'Title',
-            type: 'text'
+            name: 'title',
+            label: 'Titlu',
+            type: 'text',
+            required: true
         },
         {
-            name: 'Description',
+            name: 'description',
+            label: 'Descriere',
             type: 'richText'
         }
     ],
     admin: {
-        useAsTitle: 'Title'
+        useAsTitle: 'title'
     }
 }
