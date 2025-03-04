@@ -7,7 +7,7 @@ import { Product } from "@/payload-types"
 import { useState, useEffect } from "react"
 
 import { Media } from "@/payload-types"
-type MediaType = Product['Media']
+type MediaType = Product['media']
 
 interface Props {
     featuredImg: Media
@@ -48,7 +48,7 @@ const ProductGallery = ({ featuredImg, media }: Props) => {
             }
 
             {
-                gallery.length > 0 ?
+                gallery.length > 1 ?
                     <ProductGallerySwiper media={media} onclick={onClickImgChange} />
                     : null
             }

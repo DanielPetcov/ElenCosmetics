@@ -50,7 +50,7 @@ const SearchResults = ({ word }: { word: string }) => {
 
 
     return (
-        <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-4 gap-5 overflow-y-auto max-h-[500px]">
+        <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-5 overflow-y-auto max-h-[500px]">
             {loading ? (
                 <div>Loading...</div>
             ) : results && results.length > 0 ? (

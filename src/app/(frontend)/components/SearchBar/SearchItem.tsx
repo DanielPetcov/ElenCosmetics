@@ -10,10 +10,10 @@ const SearchItem = ({ product }: { product: Product }) => {
                     : <div>no image</div>}
             </div>
             <div>
-                <div className="text-lg">
+                <div className="text-base md:text-lg font-semibold">
                     {product.title}
                 </div>
-                <div>
+                <div className="text-sm md:text-base">
                     {
                         product.compare_price ?
                             <div>

@@ -44,9 +44,9 @@ const CartItem = ({
                     : <div>mising img</div>
                 }
             </div>
-            <div className="flex justify-between gap-5">
+            <div className="flex justify-between gap-5 flex-col md:flex-row">
                 <div className="flex flex-col gap-4 justify-between text-gray-700">
-                    <Link href={`/product/${id}`} className="line-clamp-2 text-sm text-gray-500 hover:underline">{title}</Link>
+                    <Link href={`/product/${id}`} className="line-clamp-2 text-sm text-gray-500 hover:underline text-wrap max-w-[250px]">{title}</Link>
                     <div className="flex items-baseline gap-2">
                         {comparePrice ?
                             <div>
@@ -59,7 +59,7 @@ const CartItem = ({
                         <span className="font-semibold">MDL</span>
                     </div>
                 </div>
-                <div className="text-gray-700 flex flex-col justify-between items-end gap-5">
+                <div className="text-gray-700 flex md:flex-col flex-row justify-end md:justify-between items-center md:items-end gap-5 ">
                     <RemoveItem id={id} color="#ff3333" />
                     <Counter
                         quantity={quantity}

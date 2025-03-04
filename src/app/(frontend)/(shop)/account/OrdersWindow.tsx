@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import {
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -28,38 +27,46 @@ const OrdersWindow = async ({ id }: { id: string | undefined }) => {
         result.docs.map((doc) => orders.push(doc));
     }
     return (
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent className="md:max-w-[600px] max-h-[500px] overflow-y-scroll">
             <DialogHeader>
                 <DialogTitle>Orders</DialogTitle>
-                <DialogDescription>
-                    Here you can find all your orders
-                </DialogDescription>
             </DialogHeader>
             <div className="flex flex-col gap-5">
                 {orders && orders.length > 0 ?
                     <div className="flex flex-col gap-5">
                         {orders.map((order, index) => (
                             <div key={index} className="flex flex-col gap-2 text-gray-500 border border-gray-300 p-2 rounded-lg">
-                                <div className="flex items-center gap-2">
-                                    <span>Order nr.</span>
-                                    <span>{order.orderNumber}</span>
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="text-lg">Order nr.</span>
+                                    <span className="font-semibold">{order.orderNumber}</span>
                                 </div>
                                 <div className="space-y-2">
+                                    <p className="text-lg">Products:</p>
                                     {typeof order.items !== 'string' && order.items.map((item: { product: string | Product; quantity: number; price: number; }, index) => (
-                                        <div key={index} className="flex items-baseline justify-between gap-5">
+                                        <div key={index} className="flex items-baseline justify-between gap-5 text-sm">
                                             <div>
-                                                <span className="max-w-10 truncate">{typeof item.product === 'string' ? item.product : item.product.Title}</span>
+                                                <span className="max-w-10 truncate">{typeof item.product === 'string' ? item.product : item.product.title}</span>
                                             </div>
-                                            <div className="flex gap-1 items-baseline">
-                                                <span>price:</span>
-                                                <span>{item.price}</span>
-                                            </div>
-                                            <div className="flex gap-1 items-baseline">
-                                                <span>quantity:</span>
-                                                <span>{item.quantity}</span>
+                                            <div className="flex flex-col gap-2">
+                                                <div className="flex justify-between gap-2 items-baseline">
+                                                    <span>price:</span>
+                                                    <span>{item.price}</span>
+                                                </div>
+                                                <div className="flex justify-between gap-2 items-baseline">
+                                                    <span>quantity:</span>
+                                                    <span>{item.quantity}</span>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
+                                </div>
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="text-lg">Created:</span>
+                                    <span>{order.createdAt}</span>
+                                </div>
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="text-lg">Status:</span>
+                                    <span>{order.status}</span>
                                 </div>
                             </div>
                         ))}

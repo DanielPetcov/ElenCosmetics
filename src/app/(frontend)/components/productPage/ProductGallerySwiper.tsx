@@ -1,6 +1,6 @@
 'use client'
 import { Product } from "@/payload-types";
-type MediaType = Product['Media']
+type MediaType = Product['media']
 import Image from "next/image";
 
 import { Swiper, SwiperSlide } from 'swiper/react';

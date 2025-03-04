@@ -39,12 +39,13 @@ const SearchBar = () => {
                     exit={{ opacity: 0 }}
                     className="fixed inset-0 z-50 bg-black/80 p-4"
                 >
-                    <div ref={searchContentRef} className="flex flex-col gap-5 h-fit max-w-[1000px] w-full mx-auto">
+                    <div ref={searchContentRef} className="flex flex-col gap-2 md:gap-5 h-fit max-w-[1000px] w-full mx-auto">
                         <div className="bg-white rounded-md p-4 grid grid-cols-[1fr_auto] gap-4 items-center w-full">
                             <Input
                                 type="text"
                                 value={word}
                                 onChange={(e) => setWord(e.target.value)}
+                                className="text-sm md:text-base"
                             />
                             <X className="cursor-pointer" onClick={() => setVisible(false)} />
                         </div>

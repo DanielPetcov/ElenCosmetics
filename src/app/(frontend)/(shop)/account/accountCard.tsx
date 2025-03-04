@@ -34,10 +34,13 @@ const AccountCard = async ({ id, firstName, lastName, email, phoneNumber }: User
                     <Mail />
                     <span className="text-sm">{email}</span>
                 </div>
-                <div className="border border-gray-300 p-3 rounded-lg flex items-center gap-4">
-                    <Phone />
-                    <span className="text-sm">{phoneNumber}</span>
-                </div>
+                {
+                    phoneNumber ?
+                        <div className="border border-gray-300 p-3 rounded-lg flex items-center gap-4">
+                            <Phone />
+                            <span className="text-sm">{phoneNumber}</span>
+                        </div> : null
+                }
             </div>
             <Dialog >
                 <div className="space-y-2 w-full">
