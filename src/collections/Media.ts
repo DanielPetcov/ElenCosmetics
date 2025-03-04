@@ -1,4 +1,4 @@
-import type { CollectionConfig } from 'payload'
+import type { CollectionConfig } from 'payload';
 
 export const Media: CollectionConfig = {
   slug: 'media',
@@ -12,5 +12,8 @@ export const Media: CollectionConfig = {
       required: true,
     },
   ],
-  upload: true,
-}
+  upload: {
+    disableLocalStorage: true,
+    adminThumbnail: ({ doc }) => (typeof doc?.url === 'string' ? doc.url : null),
+  },
+};
