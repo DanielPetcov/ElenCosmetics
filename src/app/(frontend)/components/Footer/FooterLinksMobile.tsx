@@ -29,7 +29,7 @@ const FooterLinksMobile = ({ footer }: { footer: Footer }) => {
                 </AccordionItem>
                 {footer.special_links && footer.special_links.length > 0 ? (
                     footer.special_links.map((specialLink, index) => (
-                        <AccordionItem value={`item-${index + 2}`}>
+                        <AccordionItem value={`item-${index + 2}`} key={index}>
                             <AccordionTrigger className="font-semibold uppercase">{specialLink.title}</AccordionTrigger>
                             {specialLink.link && specialLink.link.length > 0 ?
                                 <AccordionContent className="flex flex-col gap-2">

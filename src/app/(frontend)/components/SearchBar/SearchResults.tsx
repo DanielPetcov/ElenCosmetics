@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import SearchItem from './SearchItem';
 
 const SearchResults = ({ word }: { word: string }) => {
+    //@typescript-eslint/no-explicit-any
     const [results, setResults] = useState<any[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -39,14 +40,14 @@ const SearchResults = ({ word }: { word: string }) => {
                 const data = await res.json();
                 setResults(data.docs);
             } catch (error) {
-
+                console.log(error);
                 setResults([]);
             }
             setLoading(false);
         };
 
         fetchResults();
-    }, [word]);
+    }, [word, stringifiedQuery]);
 
 
     return (

@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import { Minus, Plus } from 'lucide-react';
 import { Product } from "@/payload-types";
 
-const QuantityButtons = ({ id, product }: { id: string, product: Product }) => {
+const QuantityButtons = ({ product }: { product: Product }) => {
     const addToCart = useCartStore((state) => state.addToCart);
     const decreaseQuantity = useCartStore((state) => state.decreaseQuantity);
     const items = useCartStore((state) => state.items);
