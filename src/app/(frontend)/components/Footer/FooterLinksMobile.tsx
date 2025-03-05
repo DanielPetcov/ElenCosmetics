@@ -49,7 +49,7 @@ const FooterLinksMobile = ({ footer }: { footer: Footer }) => {
                 ) : null}
             </Accordion>
             {footer.social_links && footer.social_links.length > 0 ? (
-                <div className="flex gap-5 items-center justify-center">
+                <div className="md:hidden flex gap-5 items-center justify-center">
                     {footer.social_links.map((link) => {
                         let socialIcon;
                         const color = "#fff";
