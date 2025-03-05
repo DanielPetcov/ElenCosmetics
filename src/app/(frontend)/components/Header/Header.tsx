@@ -39,14 +39,14 @@ const Header = async () => {
                             <Menu className="w-8 h-8" color="#374151" />
                         </Button>
                     </SheetTrigger>
-                    <Link href="/" className="flex justify-center w-[100px] h-auto mx-auto">
+                    <Link href="/" className="flex justify-center mx-auto">
                         {logoUrl ?
                             <Image
                                 src={logoUrl}
                                 alt={typeof header.logo !== 'string' ? header.logo.alt : 'Logo'}
                                 width={typeof header.logo !== 'string' ? header.logo.width ? header.logo.width : 50 : 50}
                                 height={typeof header.logo !== 'string' ? header.logo.height ? header.logo.height : 50 : 50}
-                                className="w-full h-auto mx-auto"
+                                className="w-[120px]"
                             />
                             : <Logo width={110} color="#374151" />
                         }

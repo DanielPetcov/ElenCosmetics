@@ -65,7 +65,12 @@ export default buildConfig({
     payloadCloudPlugin(),
     s3Storage({
       collections: {
-        media: true
+        media: {
+          generateFileURL: ({filename}) => {
+            return `${process.env.S3_PUBLIC_BUCKET_URL}/elen-cosmetic/${filename}`
+          },
+          disableLocalStorage: true,
+        }
       },
       bucket: process.env.S3_BUCKET || '',
       config: {

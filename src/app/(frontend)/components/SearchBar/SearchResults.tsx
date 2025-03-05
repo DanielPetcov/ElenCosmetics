@@ -50,16 +50,16 @@ const SearchResults = ({ word }: { word: string }) => {
 
 
     return (
-        <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-5 overflow-y-auto max-h-[500px]">
+        <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-10 md:gap-5 overflow-y-auto max-h-[500px]">
             {loading ? (
-                <div>Loading...</div>
+                <div>Se caută...</div>
             ) : results && results.length > 0 ? (
                 results.map((doc: Product, index) =>
                     <div key={index}>
                         <SearchItem product={doc} />
                     </div>)
             ) : (
-                <div>No results found</div>
+                <div>Nu au fost gasit rezultate</div>
             )}
         </div>
     );

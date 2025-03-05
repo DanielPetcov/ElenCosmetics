@@ -4,9 +4,10 @@ import Link from "next/link";
 const SearchItem = ({ product }: { product: Product }) => {
     return (
         <Link href={`/product/${product.id}`} className="w-full flex flex-col justify-between gap-5 text-gray-700 group">
-            <div>
+            <div className="w-full aspect-square overflow-hidden">
                 {product.featuredImg && typeof product.featuredImg !== 'string' ?
-                    <Image src={product.featuredImg.url || ''} alt={product.title} width={product.featuredImg.width || 100} height={product.featuredImg.height || 100} className="group-hover:scale-105 transition-all duration-300" />
+                    <Image src={product.featuredImg.url || ''} alt={product.title} width={product.featuredImg.width || 100} height={product.featuredImg.height || 100}
+                        className="w-full h-full object-contain object-center group-hover:scale-105 transition-all duration-300" />
                     : <div>no image</div>}
             </div>
             <div>

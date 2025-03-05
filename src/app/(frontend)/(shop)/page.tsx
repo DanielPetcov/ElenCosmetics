@@ -14,7 +14,7 @@ export default async function HomePage() {
   const layout = (await homePageBlock).Layout;
 
   return (
-    <div className="flex flex-col gap-14 lg:gap-20 py-5">
+    <div className="flex flex-col gap-14 lg:gap-20 py-5 pt-0">
       {
         layout.map((block, index) => {
           switch (block.blockType) {
