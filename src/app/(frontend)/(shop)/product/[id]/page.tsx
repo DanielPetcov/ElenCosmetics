@@ -73,7 +73,7 @@ const ProductPage = async ({ params }: { params: Params }) => {
                                 }
                             </div>
                             <div className="grid grid-cols-[auto_1fr] gap-2">
-                                <QuantityButtons id={product.id} product={product} />
+                                <QuantityButtons product={product} />
                                 <AddToCartBtn
                                     name={product.title}
                                     price={product.price}
