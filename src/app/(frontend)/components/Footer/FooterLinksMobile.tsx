@@ -15,8 +15,8 @@ import Link from "next/link";
 
 const FooterLinksMobile = ({ footer }: { footer: Footer }) => {
     return (
-        <div className="flex flex-col gap-5 w-full">
-            <Accordion type="multiple" className="w-full md:hidden">
+        <div className="md:hidden flex flex-col gap-5 w-full">
+            <Accordion type="multiple" className="w-full">
                 <AccordionItem value="item-1">
                     <AccordionTrigger className="font-semibold uppercase">Adresa noastră</AccordionTrigger>
                     <AccordionContent>
@@ -49,7 +49,7 @@ const FooterLinksMobile = ({ footer }: { footer: Footer }) => {
                 ) : null}
             </Accordion>
             {footer.social_links && footer.social_links.length > 0 ? (
-                <div className="md:hidden flex gap-5 items-center justify-center">
+                <div className="flex gap-5 items-center justify-center">
                     {footer.social_links.map((link) => {
                         let socialIcon;
                         const color = "#fff";
