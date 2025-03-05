@@ -4,24 +4,24 @@ import RemoveItem from "./removeItem";
 import Counter from "./counter";
 
 interface Props {
+    id: string,
     img: string | null,
     imgWidth: number | null,
     imgHeight: number | null,
     title: string,
     price: number,
     comparePrice: number | null,
-    id: string,
     quantity: number
 }
 
 const CartItem = ({
+    id,
     img,
     imgWidth,
     imgHeight,
     title,
     price,
     comparePrice,
-    id,
     quantity
 }: Props) => {
     const item = {

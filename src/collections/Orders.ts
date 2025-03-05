@@ -6,16 +6,26 @@ export const Orders: CollectionConfig = {
         {
             name: 'orderNumber',
             label: 'Order Number',
-            type: 'text',
+            type: 'number',
             unique: true,
             required: true
         },
         {
             name: 'customer',
-            label: 'Customer',
+            label: 'Customer (User ID)',
             type: 'relationship',
             relationTo: 'users',
-            required: true
+            required: false // This field is not required, because the user can checkout as a guestZZ
+        },
+        {
+            name: 'guestInfo',
+            label: 'Guest Information',
+            type: 'group',
+            fields: [
+                { name: 'name', type: 'text' },
+                { name: 'email', type: 'text' },
+                { name: 'phone', type: 'text' },
+            ],
         },
         {
             name: 'items',
@@ -36,61 +46,50 @@ export const Orders: CollectionConfig = {
                     required: true
                 },
                 {
-                    name: 'price',
+                    name: 'totalPrice',
                     type: 'number',
                     required: true
                 }
             ]
         },
         {
-            name: "subtotal",
-            label: "Subtotal",
-            type: "number",
-            required: true,
-        },
-        {
-            name: "shippingCost",
-            label: "Shipping Cost",
-            type: "number",
-            required: true,
-        },
-        {
-            name: "totalAmount",
-            label: "Total Amount",
-            type: "number",
-            required: true,
-        },
-        {
-            name: "status",
-            label: "Order Status",
-            type: "select",
-            required: true,
-            defaultValue: "pending",
-            options: ["pending", "shipped", "delivered", "cancelled"],
-        },
-        {
-            name: "shippingAddress",
-            label: "Shipping Address",
-            type: "group",
+            name: 'shippingAddress',
+            label: 'Shipping Address',
+            type: 'group',
             fields: [
-              { name: "fullName", type: "text", required: true },
-              { name: "street", type: "text", required: true },
-              { name: "city", type: "text", required: true },
-              { name: "zipCode", type: "text", required: true },
-              { name: "phone", type: "text", required: true },
+                { name: 'fullName', type: 'text', required: true },
+                { name: 'street', type: 'text', required: true },
+                { name: 'city', type: 'text', required: true },
+                { name: 'zipCode', type: 'text', required: true },
+                { name: 'phone', type: 'text', required: true },
             ],
         },
         {
-            name: "trackingNumber",
-            label: "Tracking Number",
-            type: "text",
+            name: 'subtotal',
+            type: 'number',
+            required: true,
         },
         {
-            name: "createdAt",
-            label: "Created At",
-            type: "date",
-            admin: { position: "sidebar" },
+            name: 'shippingCost',
+            type: 'number',
+            required: true,
+        },
+        {
+            name: 'totalAmount',
+            type: 'number',
+            required: true,
+        },
+        {
+            name: 'status',
+            type: 'select',
+            required: true,
+            defaultValue: 'pending',
+            options: ['pending', 'shipped', 'delivered', 'cancelled'],
+        },
+        {
+            name: 'createdAt',
+            type: 'date',
             defaultValue: () => new Date().toISOString(),
-          },
+        },
     ]
-}
+};

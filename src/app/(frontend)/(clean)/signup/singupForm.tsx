@@ -73,13 +73,10 @@ const SignUpForm = () => {
                 body: JSON.stringify(userData),  // Send the user data as JSON
             });
 
-            const result = await response.json();
-
             if (response.ok) {
-                console.log('User signed up successfully:', result);
                 router.replace('/account')
             } else {
-                console.error('Sign-up failed:', result.message);
+                console.error('Sign-up failed:', response.statusText);
             }
         } catch (error) {
             console.error('Error:', error);

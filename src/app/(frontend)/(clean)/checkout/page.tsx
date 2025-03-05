@@ -1,14 +1,16 @@
-import AddressForm from "./AddressForm";
+import CheckoutForm from "./CheckoutForm";
 import CheckoutSummary from "./CheckoutSummary";
-const Checkout = () => {
+import payload from "@/queries";
+import { headers as nextHeaders } from 'next/headers';
+
+const Checkout = async () => {
+    const headers = await nextHeaders();
+    const result = payload.auth({ headers });
+    const user = (await result).user;
+
     return (
-        <div className="text-gray-700 container mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-5 md:px-10 py-5">
-            <div className="flex flex-col gap-10">
-                <div className="flex flex-col gap-5">
-                    <h1 className="text-gray-700 text-3xl md:text-4xl font-semibold uppercase">Livrare</h1>
-                    <AddressForm />
-                </div>
-            </div>
+        <div className="text-gray-700 max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-18 px-5 md:px-10 py-5">
+            <CheckoutForm userId={user && user.id ? user.id : null} />
             <CheckoutSummary />
         </div>
     );

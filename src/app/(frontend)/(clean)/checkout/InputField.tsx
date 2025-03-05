@@ -26,7 +26,7 @@ const InputField = ({ form, name, type, label }: Props) => {
                 <FormItem className="w-full">
                     <FormLabel className='text-gray-700'>{label} <span className="text-red-500">*</span></FormLabel>
                     <FormControl>
-                        <Input type={type} placeholder='' className='text-gray-700 w-full max-w-none md:max-w-96' {...field} />
+                        <Input type={type} placeholder='' className='text-gray-700 w-full ' {...field} />
                     </FormControl>
                     <FormMessage />
                 </FormItem>

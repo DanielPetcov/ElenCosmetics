@@ -5,7 +5,7 @@ const CheckoutSummary = () => {
     const items = useCartStore((state) => state.items);
 
     return (
-        <div className="border border-gray-200 text-gray-700 p-5 rounded-2xl h-fit flex flex-col gap-10">
+        <div className="border border-gray-300 text-gray-700 p-5 rounded-2xl h-fit flex flex-col gap-10 max-h-[450px] md:max-h-none overflow-y-auto">
             <div className="flex flex-col gap-3">
                 {items.map((item, index) => (
                     <CheckoutItem key={index} item={item} />

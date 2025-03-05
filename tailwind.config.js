@@ -5,7 +5,7 @@ export default {
   theme: {
   	extend: {
   		colors: {
-  			custompink: '#F5A3B7',
+  			custompink: '#E53888',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

@@ -268,18 +268,19 @@ export interface TermsPage {
  */
 export interface Order {
   id: string;
-  orderNumber: string;
-  customer: string | User;
+  orderNumber: number;
+  customer?: (string | null) | User;
+  guestInfo?: {
+    name?: string | null;
+    email?: string | null;
+    phone?: string | null;
+  };
   items: {
     product: string | Product;
     quantity: number;
-    price: number;
+    totalPrice: number;
     id?: string | null;
   }[];
-  subtotal: number;
-  shippingCost: number;
-  totalAmount: number;
-  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
   shippingAddress: {
     fullName: string;
     street: string;
@@ -287,7 +288,10 @@ export interface Order {
     zipCode: string;
     phone: string;
   };
-  trackingNumber?: string | null;
+  subtotal: number;
+  shippingCost: number;
+  totalAmount: number;
+  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
   createdAt: string;
   updatedAt: string;
 }
@@ -466,18 +470,21 @@ export interface TagsSelect<T extends boolean = true> {
 export interface OrdersSelect<T extends boolean = true> {
   orderNumber?: T;
   customer?: T;
+  guestInfo?:
+    | T
+    | {
+        name?: T;
+        email?: T;
+        phone?: T;
+      };
   items?:
     | T
     | {
         product?: T;
         quantity?: T;
-        price?: T;
+        totalPrice?: T;
         id?: T;
       };
-  subtotal?: T;
-  shippingCost?: T;
-  totalAmount?: T;
-  status?: T;
   shippingAddress?:
     | T
     | {
@@ -487,7 +494,10 @@ export interface OrdersSelect<T extends boolean = true> {
         zipCode?: T;
         phone?: T;
       };
-  trackingNumber?: T;
+  subtotal?: T;
+  shippingCost?: T;
+  totalAmount?: T;
+  status?: T;
   createdAt?: T;
   updatedAt?: T;
 }

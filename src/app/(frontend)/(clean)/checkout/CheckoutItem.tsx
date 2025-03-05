@@ -1,4 +1,5 @@
 interface CartItem {
+    id: string;
     productId: string;
     name: string;
     price: number;
@@ -16,8 +17,8 @@ interface Props {
 import Image from "next/image";
 const CheckoutItem = ({ item }: Props) => {
     return (
-        <div className="flex md:items-center justify-between gap-5 text-gray-700">
-            <div className="flex items-center gap-4">
+        <div className="flex md:items-center justify-between gap-8 lg:gap-20 text-gray-700">
+            <div className="flex items-center gap-4 ">
                 <div className="relative">
                     <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-white p-1">
                         {item.img && (
@@ -34,9 +35,11 @@ const CheckoutItem = ({ item }: Props) => {
                         <span className="text-sm">{item.quantity}</span>
                     </div>
                 </div>
-                <div className="hidden md:block font-semibold max-w-[150px] line-clamp-3">{item.name} asdfasd</div>
+                <div className="hidden md:inline-block font-semibold ">
+                    <span className="line-clamp-2 text-sm sm:text-base">{item.name}</span>
+                </div>
             </div>
-            <div className="flex flex-col justify-between gap-1 flex-1 md:flex-auto">
+            <div className="flex flex-col justify-between gap-1 flex-1 md:flex-auto text-nowrap">
                 <div className="line-clamp-2 text-sm md:hidden">
                     {item.name}
                 </div>
