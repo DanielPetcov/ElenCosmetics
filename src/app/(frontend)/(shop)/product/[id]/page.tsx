@@ -2,14 +2,14 @@ type Params = Promise<{ id: string }>
 import payload from "@/queries";
 import Link from "next/link";
 import ProductGallery from "../../../components/productPage/ProductGallery";
-import AddToCartBtn from "@/app/(frontend)/components/AddToCartBtn";
 
 import { ChevronRight } from 'lucide-react';
-import QuantityButtons from "./quantityButtons";
 
 import ProductAccordion from "./productAccordion";
-
 import ProductList from "@/app/(frontend)/components/productList/ProductList";
+
+import BuyButtons from "./BuyButtons";
+
 const ProductPage = async ({ params }: { params: Params }) => {
     const { id } = await params;
 
@@ -72,19 +72,7 @@ const ProductPage = async ({ params }: { params: Params }) => {
                                         </span>
                                 }
                             </div>
-                            <div className="grid grid-cols-[auto_1fr] gap-2">
-                                <QuantityButtons product={product} />
-                                <AddToCartBtn
-                                    name={product.title}
-                                    price={product.price}
-                                    productId={product.id}
-                                    quantity={1}
-                                    comparePrice={product.compare_price !== undefined ? product.compare_price : null}
-                                    img={typeof product.featuredImg !== 'string' ? product.featuredImg.url ? product.featuredImg.url : null : null}
-                                    imgHeight={typeof product.featuredImg !== 'string' ? product.featuredImg.height ? product.featuredImg.height : null : null}
-                                    imgWidth={typeof product.featuredImg !== 'string' ? product.featuredImg.width ? product.featuredImg.width : null : null}
-                                />
-                            </div>
+                            <BuyButtons product={product} />
                         </div>
                     </div>
                 </div>

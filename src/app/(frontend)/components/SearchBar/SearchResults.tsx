@@ -1,5 +1,4 @@
-"use client"; // This makes it a Client Component
-
+"use client";
 import { stringify } from 'qs-esm'
 import type { Where } from 'payload'
 
@@ -8,9 +7,8 @@ import { useState, useEffect } from "react";
 
 import SearchItem from './SearchItem';
 
-const SearchResults = ({ word }: { word: string }) => {
-    //@typescript-eslint/no-explicit-any
-    const [results, setResults] = useState<any[]>([]);
+const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () => void }) => {
+    const [results, setResults] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
 
     const query: Where = {
@@ -49,7 +47,6 @@ const SearchResults = ({ word }: { word: string }) => {
         fetchResults();
     }, [word, stringifiedQuery]);
 
-
     return (
         <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-10 md:gap-5 overflow-y-auto max-h-[500px]">
             {loading ? (
@@ -57,7 +54,7 @@ const SearchResults = ({ word }: { word: string }) => {
             ) : results && results.length > 0 ? (
                 results.map((doc: Product, index) =>
                     <div key={index}>
-                        <SearchItem product={doc} />
+                        <SearchItem product={doc} onItemClick={onItemClick} />
                     </div>)
             ) : (
                 <div>Nu au fost gasit rezultate</div>

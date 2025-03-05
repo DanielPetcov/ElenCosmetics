@@ -1,9 +1,9 @@
 import { Product } from "@/payload-types";
 import Image from "next/image";
 import Link from "next/link";
-const SearchItem = ({ product }: { product: Product }) => {
+const SearchItem = ({ product, onItemClick }: { product: Product, onItemClick: () => void }) => {
     return (
-        <Link href={`/product/${product.id}`} className="w-full flex flex-col justify-between gap-5 text-gray-700 group">
+        <Link href={`/product/${product.id}`} className="w-full flex flex-col justify-between gap-5 text-gray-700 group" onClick={onItemClick}>
             <div className="w-full aspect-square overflow-hidden">
                 {product.featuredImg && typeof product.featuredImg !== 'string' ?
                     <Image src={product.featuredImg.url || ''} alt={product.title} width={product.featuredImg.width || 100} height={product.featuredImg.height || 100}

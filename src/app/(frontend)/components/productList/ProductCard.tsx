@@ -6,7 +6,7 @@ import AddToCartBtn from "../AddToCartBtn";
 
 const ProductCard = ({ id, title, price, featuredImg, comparePrice }: Product & { comparePrice: number | null | undefined }) => {
     return (
-        <div className="flex flex-col justify-between gap-5 md:gap-8 bg-white w-[200px] md:w-[220px] lg:w-[250px] rounded-md p-5 group h-full">
+        <div className="flex flex-col justify-between gap-3 md:gap-8 bg-white w-[170px] md:w-[220px] lg:w-[250px] rounded-md p-5 group h-full">
             <Link href={`/product/${id}`} className="max-w-[180px] aspect-square w-full mx-auto overflow-hidden text-gray-700 relative">
                 {(featuredImg && typeof featuredImg !== 'string' && featuredImg.url) ?
                     <Image
@@ -16,7 +16,7 @@ const ProductCard = ({ id, title, price, featuredImg, comparePrice }: Product & 
                         fill={true} />
                     : 'invalid url'}
             </Link>
-            <Link href={`/product/${id}`} className="flex flex-col gap-[10px]">
+            <Link href={`/product/${id}`} className="flex flex-col gap-1 md:gap-[10px]">
                 <span className="text-gray-700 font-semibold line-clamp-2">{title}</span>
                 <span className="text-gray-500 font-bold text-sm">{price} mdl</span>
             </Link>

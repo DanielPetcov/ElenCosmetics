@@ -36,10 +36,10 @@ const CartItem = ({
     }
     return (
         <div className="grid grid-cols-[auto_1fr] gap-4">
-            <div className="w-20 aspect-square overflow-hidden rounded-md">
+            <div className="w-20 aspect-square overflow-hidden rounded-md bg-white p-1">
                 {img && imgWidth && imgHeight ?
                     <Link href={`/product/${id}`}>
-                        <Image src={img} width={imgWidth} height={imgHeight} alt='' className="w-full h-full object-cover object-center" />
+                        <Image src={img} width={imgWidth} height={imgHeight} alt='' className="w-full h-full object-contain object-center" />
                     </Link>
                     : <div>mising img</div>
                 }

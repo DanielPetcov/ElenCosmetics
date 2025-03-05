@@ -11,7 +11,7 @@ import Megamenu from "./Megamenu";
 
 import { Menu } from "lucide-react";
 import { UserRound } from 'lucide-react';
-import { ShoppingBag } from 'lucide-react';
+import ShoppingBagIcon from "./ShoppingBagIcon";
 
 import SearchBar from "../SearchBar/SearchBar";
 
@@ -56,9 +56,7 @@ const Header = async () => {
                         <Link href='/account' className="hidden md:block">
                             <UserRound strokeWidth={1.5} />
                         </Link>
-                        <Link href={'/cart'} className="hidden md:block">
-                            <ShoppingBag strokeWidth={1.5} />
-                        </Link>
+                        <ShoppingBagIcon />
                     </div>
                 </div>
             </div>

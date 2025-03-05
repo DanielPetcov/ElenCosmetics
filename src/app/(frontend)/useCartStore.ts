@@ -24,18 +24,17 @@ export const useCartStore = create<CartState>()(
     persist(
         (set) => ({
             items: [],
-            addToCart: (item) =>
-                set((state) => {
-                    const existingItem = state.items.find((i) => i.productId === item.productId);
-                    if (existingItem) {
-                        return {
-                            items: state.items.map((i) =>
-                                i.productId === item.productId ? { ...i, quantity: i.quantity + 1 } : i
-                            ),
-                        };
-                    }
-                    return { items: [...state.items, item] };
-                }),
+            addToCart: (item) => set((state) => {
+                const existingItem = state.items.find((i) => i.productId === item.productId);
+                if (existingItem) {
+                    return {
+                        items: state.items.map((i) =>
+                            i.productId === item.productId ? { ...i, quantity: i.quantity + item.quantity } : i
+                        ),
+                    };
+                }
+                return { items: [...state.items, item] };
+            }),
             decreaseQuantity: (item) => 
                 set((state) => {
                     const existinItem = state.items.find((i) => i.productId === item.productId);

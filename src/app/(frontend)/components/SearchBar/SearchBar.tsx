@@ -49,7 +49,7 @@ const SearchBar = () => {
                             />
                             <X className="cursor-pointer" onClick={() => setVisible(false)} />
                         </div>
-                        {word.length > 2 && <SearchResults word={word} />}
+                        {word.length > 2 && <SearchResults word={word} onItemClick={() => setVisible(false)} />}
                     </div>
                 </motion.div>
             )}

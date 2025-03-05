@@ -36,7 +36,7 @@ const FooterLinks = ({ footer }: { footer: Footer }) => {
                                     socialIcon = <div key={link.id}>nothing</div>;
                             }
                             return (
-                                <Link href={link.social_link} className="w-5 h-5" key={link.id}>
+                                <Link href={link.social_link} target="_blank" className="w-5 h-5" key={link.id}>
                                     {socialIcon}
                                 </Link>
                             );

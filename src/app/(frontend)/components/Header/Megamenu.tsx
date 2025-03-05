@@ -100,12 +100,12 @@ const Megamenu = ({ items }: { items: Props }) => {
             </div>
             <div className="grid grid-cols-2 gap-5 md:hidden">
                 <Link href='/cart'>
-                    <Button variant="secondary">
+                    <Button variant="secondary" className="w-full">
                         <ShoppingBag />
                     </Button>
                 </Link>
                 <Link href='/account'>
-                    <Button variant="secondary">
+                    <Button variant="secondary" className="w-full">
                         <UserRound />
                     </Button>
                 </Link>

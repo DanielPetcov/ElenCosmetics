@@ -4,7 +4,6 @@ import { useCartStore } from "@/app/(frontend)/useCartStore";
 
 import { toast } from "sonner"
 
-
 interface Props {
     productId: string;
     name: string;
