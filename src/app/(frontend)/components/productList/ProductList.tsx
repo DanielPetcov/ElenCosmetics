@@ -18,7 +18,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, title }) => {
     const products: Product[] = Array.isArray(category.Products) && typeof category !== 'string' ? category.Products.filter((product): product is Product => typeof product !== 'string') : [];
 
     return (
-        <div className="flex flex-col gap-5 lg:gap-10 mx-auto container px-5 md:px-4">
+        <div className="flex flex-col gap-5 lg:gap-10 mx-auto max-w-[1400px] px-5 md:px-4">
             <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 text-center uppercase">{title}</div>
             {products.length > 0 ? (
                 <div>

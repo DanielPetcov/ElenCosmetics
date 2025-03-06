@@ -10,7 +10,6 @@ import 'swiper/css';
 
 import ImgSlide from './ImgSlide';
 
-
 import { Homepage } from '@/payload-types';
 
 type ImgSliderBlock = Extract<Homepage['Layout'][number], { blockType: 'imgslider' }>;

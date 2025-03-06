@@ -611,6 +611,26 @@ export interface Homepage {
         blockName?: string | null;
         blockType: 'imgslider';
       }
+    | {
+        categories: {
+          image: string | Media;
+          linkType: 'internal' | 'external';
+          internalLink?:
+            | ({
+                relationTo: 'collection';
+                value: string | Collection;
+              } | null)
+            | ({
+                relationTo: 'products';
+                value: string | Product;
+              } | null);
+          externalUrl?: string | null;
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'general-big-categories';
+      }
   )[];
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -709,6 +729,21 @@ export interface HomepageSelect<T extends boolean = true> {
                 | T
                 | {
                     img?: T;
+                    linkType?: T;
+                    internalLink?: T;
+                    externalUrl?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        'general-big-categories'?:
+          | T
+          | {
+              categories?:
+                | T
+                | {
+                    image?: T;
                     linkType?: T;
                     internalLink?: T;
                     externalUrl?: T;

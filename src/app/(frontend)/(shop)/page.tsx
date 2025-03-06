@@ -1,6 +1,7 @@
 import payload from '@/queries'
 import ProductList from '../components/productList/ProductList'
 import ImgSlider from '../components/ImgSlider/ImgSlider'
+import GeneralCategories from '../components/GeneralCategories/GeneralCategories'
 
 export default async function HomePage() {
 
@@ -22,6 +23,8 @@ export default async function HomePage() {
               return <ProductList key={index} title={block.title} category={block.category} />
             case 'imgslider':
               return <ImgSlider key={index} slides={block.slides} />
+            case 'general-big-categories':
+              return <GeneralCategories key={index} categories={block.categories} />
             default:
               return null
           }
