@@ -1,6 +1,6 @@
 'use client';
 import { useCartStore } from "../../useCartStore";
-import CheckoutItem from "./CheckoutItem";
+import CheckoutItem from "./components/CheckoutItem";
 const CheckoutSummary = () => {
     const items = useCartStore((state) => state.items);
 
