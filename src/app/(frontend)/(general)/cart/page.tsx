@@ -65,7 +65,7 @@ const Cart = () => {
                                     imgWidth={item.imgWidth}
                                     price={item.price}
                                     quantity={item.quantity}
-                                    id={item.productId}
+                                    productId={item.productId}
                                 />
                             )
                         }
@@ -79,7 +79,7 @@ const Cart = () => {
                                 imgWidth={item.imgWidth}
                                 price={item.price}
                                 quantity={item.quantity}
-                                id={item.productId}
+                                productId={item.productId}
                             />
                             <Separator />
                         </div>)

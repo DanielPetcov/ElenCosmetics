@@ -42,7 +42,7 @@ const OrdersWindow = async ({ id }: { id: string | undefined }) => {
                                 </div>
                                 <div className="space-y-2">
                                     <p className="text-lg">Products:</p>
-                                    {typeof order.items !== 'string' && order.items.map((item: { product: string | Product; quantity: number; price: number; }, index) => (
+                                    {typeof order.items !== 'string' && order.items.map((item: { product: string | Product; quantity: number; totalPrice: number; }, index) => (
                                         <div key={index} className="flex items-baseline justify-between gap-5 text-sm">
                                             <div>
                                                 <span className="max-w-10 truncate">{typeof item.product === 'string' ? item.product : item.product.title}</span>
@@ -50,7 +50,7 @@ const OrdersWindow = async ({ id }: { id: string | undefined }) => {
                                             <div className="flex flex-col gap-2">
                                                 <div className="flex justify-between gap-2 items-baseline">
                                                     <span>price:</span>
-                                                    <span>{item.price}</span>
+                                                    <span>{item.totalPrice}</span>
                                                 </div>
                                                 <div className="flex justify-between gap-2 items-baseline">
                                                     <span>quantity:</span>

@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 type CartItem = {
-    id: string;
     productId: string;
     name: string;
     price: number;

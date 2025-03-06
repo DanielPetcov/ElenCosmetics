@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
 interface CartItem {
-    id: string;
     productId: string;
     name: string;
     price: number;

@@ -4,7 +4,7 @@ import RemoveItem from "./removeItem";
 import Counter from "./counter";
 
 interface Props {
-    id: string,
+    productId: string,
     img: string | null,
     imgWidth: number | null,
     imgHeight: number | null,
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const CartItem = ({
-    id,
+    productId,
     img,
     imgWidth,
     imgHeight,
@@ -25,7 +25,7 @@ const CartItem = ({
     quantity
 }: Props) => {
     const item = {
-        productId: id,
+        productId: productId,
         name: title,
         price: price,
         comparePrice: comparePrice,
@@ -38,7 +38,7 @@ const CartItem = ({
         <div className="grid grid-cols-[auto_1fr] gap-4">
             <div className="w-20 aspect-square overflow-hidden rounded-md bg-white p-1">
                 {img && imgWidth && imgHeight ?
-                    <Link href={`/product/${id}`}>
+                    <Link href={`/product/${productId}`}>
                         <Image src={img} width={imgWidth} height={imgHeight} alt='' className="w-full h-full object-contain object-center" />
                     </Link>
                     : <div>mising img</div>
@@ -46,7 +46,7 @@ const CartItem = ({
             </div>
             <div className="flex justify-between gap-5 flex-col md:flex-row">
                 <div className="flex flex-col gap-4 justify-between text-gray-700">
-                    <Link href={`/product/${id}`} className="line-clamp-2 text-sm text-gray-500 hover:underline text-wrap max-w-[250px]">{title}</Link>
+                    <Link href={`/product/${productId}`} className="line-clamp-2 text-sm text-gray-500 hover:underline text-wrap max-w-[250px]">{title}</Link>
                     <div className="flex items-baseline gap-2">
                         {comparePrice ?
                             <div>
@@ -60,7 +60,7 @@ const CartItem = ({
                     </div>
                 </div>
                 <div className="text-gray-700 flex md:flex-col flex-row justify-end md:justify-between items-center md:items-end gap-5 ">
-                    <RemoveItem id={id} color="#ff3333" />
+                    <RemoveItem id={productId} color="#ff3333" />
                     <Counter
                         quantity={quantity}
                         item={item} />
