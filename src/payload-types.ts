@@ -101,12 +101,14 @@ export interface Config {
     homepage: Homepage;
     header: Header;
     productPage: ProductPage;
+    contact: Contact;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     productPage: ProductPageSelect<false> | ProductPageSelect<true>;
+    contact: ContactSelect<false> | ContactSelect<true>;
   };
   locale: null;
   user: User & {
@@ -678,6 +680,40 @@ export interface ProductPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact".
+ */
+export interface Contact {
+  id: string;
+  contacts: {
+    title: string;
+    type: 'link' | 'richtext';
+    link?: {
+      type?: ('facebook' | 'instagram') | null;
+      label: string;
+      url: string;
+    };
+    richtext?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    id?: string | null;
+  }[];
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -798,6 +834,30 @@ export interface ProductPageSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact_select".
+ */
+export interface ContactSelect<T extends boolean = true> {
+  contacts?:
+    | T
+    | {
+        title?: T;
+        type?: T;
+        link?:
+          | T
+          | {
+              type?: T;
+              label?: T;
+              url?: T;
+            };
+        richtext?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

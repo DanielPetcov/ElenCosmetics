@@ -4,8 +4,8 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Dialog } from '@radix-ui/react-dialog';
-import SuccessDialog from '../components/SuccesDialog';
-import FailedDialog from '../components/FaildedDialog';
+import SuccessDialog from '../../../components/Dialogs/SuccesDialog';
+import FailedDialog from '../../../components/Dialogs/FaildedDialog';
 import { CheckoutFormValues } from "../CheckoutSchema";
 
 const PaymentForm = ({ form, isLoading, orderStatus }: { form: UseFormReturn<CheckoutFormValues>, isLoading: boolean, orderStatus: 'success' | 'error' | null }) => (
@@ -26,8 +26,16 @@ const PaymentForm = ({ form, isLoading, orderStatus }: { form: UseFormReturn<Che
         <Button disabled={isLoading} type='submit' className='bg-custompink hover:bg-pink-400 focus:bg-pink-500 py-6'>
             {isLoading ? "Processing..." : "Submit"}
         </Button>
-        <Dialog open={orderStatus === 'success'}>
-            {orderStatus === 'success' ? <SuccessDialog /> : <FailedDialog />}
+        <Dialog open={orderStatus === 'success' || orderStatus === 'error'}>
+            {orderStatus === 'success' ?
+                <SuccessDialog
+                    title='Felicitări! comanda dumneavoastră a fost efectuată'
+                    description='Un document cu comanda dvs. a fost expediat pe e-mail.'
+                /> :
+                <FailedDialog
+                    title='Ceva nu a mers bine.'
+                    description='Vă rugăm să încercați din nou.'
+                />}
         </Dialog>
     </div>
 );

@@ -7,17 +7,19 @@ import {
 } from "@/components/ui/dialog"
 
 import { BadgeCheck } from 'lucide-react';
-import SendHome from "./SendHome";
+import SendHome from "../../(clean)/checkout/components/SendHome";
 
-const SuccessDialog = () => {
+const SuccessDialog = ({ title, description }: { title: string, description?: string }) => {
     return (
         <DialogContent className=" sm:max-w-[500px]">
             <DialogHeader>
                 <BadgeCheck className="w-16 h-16 text-green-600 mx-auto" />
-                <DialogTitle className="text-green-600 font-semibold text-lg text-center">Felicitări! comanda dumneavoastră a fost efectuată</DialogTitle>
-                <DialogDescription className="text-center">
-                    Un document cu comanda dvs. a fost expediat pe e-mail.
-                </DialogDescription>
+                <DialogTitle className="text-green-600 font-semibold text-lg text-center">{title}</DialogTitle>
+                {description &&
+                    <DialogDescription className="text-center">
+                        {description}
+                    </DialogDescription>
+                }
             </DialogHeader>
             <DialogFooter >
                 <SendHome />

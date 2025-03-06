@@ -22,6 +22,7 @@ import { Footer } from './globals/Footer'
 import { HomePage } from './globals/HomePage'
 import { Header } from './globals/Header'
 import { ProductPageGlobal } from './globals/ProductPage'
+import { Contact } from './globals/Contact'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -46,7 +47,8 @@ export default buildConfig({
     Footer,
     HomePage,
     Header,
-    ProductPageGlobal
+    ProductPageGlobal,
+    Contact
   ],
   editor: lexicalEditor({
     features: ({defaultFeatures}) => [
