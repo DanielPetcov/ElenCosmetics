@@ -7,6 +7,7 @@ export const Header: GlobalConfig = {
             name: 'upperHeader',
             label: 'Upper Header',
             type: 'text',
+            localized: true
         },
         {
             name: 'logo',

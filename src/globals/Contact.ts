@@ -13,7 +13,8 @@ export const Contact: GlobalConfig = {
                     name: 'title',
                     label: 'Titlu',
                     type: 'text',
-                    required: true
+                    required: true,
+                    localized: true
                 },
                 {
                     name: 'type',
@@ -43,7 +44,8 @@ export const Contact: GlobalConfig = {
                             name: 'label',
                             label: 'Label',
                             type: 'text',
-                            required: true
+                            required: true,
+                            localized: true
                         },
                         {
                             name: 'url',
@@ -60,6 +62,7 @@ export const Contact: GlobalConfig = {
                     name: 'richtext',
                     label: 'Richtext',
                     type: 'richText',
+                    localized: true,
                     admin: {
                         condition: (_, siblingData) => siblingData.type === 'richtext'
                     }

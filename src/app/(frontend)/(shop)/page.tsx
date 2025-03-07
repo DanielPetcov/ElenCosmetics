@@ -16,6 +16,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col gap-14 lg:gap-20 py-5 pt-0">
+      <div>this is homepage</div>
       {
         layout.map((block, index) => {
           switch (block.blockType) {

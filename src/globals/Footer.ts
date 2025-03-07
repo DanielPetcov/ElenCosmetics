@@ -7,6 +7,7 @@ export const Footer: GlobalConfig = {
             name: 'our_adress',
             label: 'Adresele noastra',
             type: 'richText',
+            localized: true
         },
         {
             name: 'social_links',
@@ -41,7 +42,8 @@ export const Footer: GlobalConfig = {
                     name: 'title',
                     label: 'Title',
                     type: 'text',
-                    required: true
+                    required: true,
+                    localized: true
                 },
                 {
                     name: 'link',
@@ -52,14 +54,34 @@ export const Footer: GlobalConfig = {
                             name: 'title',
                             label: 'Title',
                             type: 'text',
+                            required: true,
+                            localized: true
+                        },
+                        {
+                            name: 'linkType',
+                            type: 'select',
+                            label: 'Link Type',
+                            options: [
+                                { label: 'Internal Link', value: 'internal' },
+                                { label: 'External Link', value: 'external' } 
+                            ],
+                            defaultValue: 'internal',
                             required: true
                         },
                         {
-                            name: 'page',
-                            label: 'Page',
+                            name: 'internalLink',
                             type: 'relationship',
-                            relationTo: 'termsPage',
-                            required: true
+                            relationTo: ['collection', 'products', 'termsPage'],
+                            admin: {
+                                condition: (_, siblingData) => siblingData.linkType === 'internal'
+                            }
+                        },
+                        {
+                            name: 'externalUrl',
+                            type: 'text',
+                            admin: {
+                                condition: (_, siblingData) => siblingData.linkType === 'external'
+                            }
                         }
                     ]
                 }

@@ -110,7 +110,7 @@ export interface Config {
     productPage: ProductPageSelect<false> | ProductPageSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
   };
-  locale: null;
+  locale: 'ro' | 'ru';
   user: User & {
     collection: 'users';
   };
@@ -569,7 +569,21 @@ export interface Footer {
         link?:
           | {
               title: string;
-              page: string | TermsPage;
+              linkType: 'internal' | 'external';
+              internalLink?:
+                | ({
+                    relationTo: 'collection';
+                    value: string | Collection;
+                  } | null)
+                | ({
+                    relationTo: 'products';
+                    value: string | Product;
+                  } | null)
+                | ({
+                    relationTo: 'termsPage';
+                    value: string | TermsPage;
+                  } | null);
+              externalUrl?: string | null;
               id?: string | null;
             }[]
           | null;
@@ -733,7 +747,9 @@ export interface FooterSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
-              page?: T;
+              linkType?: T;
+              internalLink?: T;
+              externalUrl?: T;
               id?: T;
             };
         id?: T;

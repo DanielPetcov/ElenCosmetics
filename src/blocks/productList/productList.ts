@@ -6,7 +6,8 @@ const ProductListBlock: Block = {
         {
             name: 'title',
             type: 'text',
-            required: true
+            required: true,
+            localized: true
         },
         {
             name: 'category',

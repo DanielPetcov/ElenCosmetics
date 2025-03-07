@@ -1,4 +1,4 @@
-import { withPayload } from '@payloadcms/next/withPayload'
+import { withPayload } from '@payloadcms/next/withPayload';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,7 +11,8 @@ const nextConfig = {
         pathname: '/elen-cosmetic/**',
       }
     ], 
-  },
-}
+  }
+};
 
-export default withPayload(nextConfig)
+// Chain both plugins
+export default withPayload(nextConfig);

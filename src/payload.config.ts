@@ -85,4 +85,17 @@ export default buildConfig({
       }
     })
   ],
+  localization: {
+    locales: [
+      {
+        label: 'Romanian',
+        code: 'ro'
+      }, 
+      {
+        label: 'Russian',
+        code: 'ru'
+      }
+    ],
+    defaultLocale: 'ro'
+  }
 })

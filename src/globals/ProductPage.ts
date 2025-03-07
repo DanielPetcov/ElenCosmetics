@@ -8,7 +8,7 @@ export const ProductPageGlobal: GlobalConfig = {
             name: 'layout',
             type: 'blocks',
             blocks: [ProductListBlock],
-            required: true
+            required: true,
         }
     ]
 }
