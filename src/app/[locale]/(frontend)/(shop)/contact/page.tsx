@@ -1,6 +1,6 @@
-import PageTitle from "../../../[locale]/(frontend)/components/PageTitle"
+import PageTitle from "../../components/PageTitle"
 import ContactAdrese from "./ContactAdrese"
-import Map from "../../../[locale]/(frontend)/components/Map"
+import Map from "../../components/Map"
 import ContactForm from "./contactform/ContactForm"
 
 export default function ContactPage() {

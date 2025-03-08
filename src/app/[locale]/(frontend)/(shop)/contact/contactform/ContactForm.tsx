@@ -15,9 +15,8 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Dialog } from '@radix-ui/react-dialog';
-import SuccessDialog from "@/app/(frontend)/components/Dialogs/SuccesDialog";
-import FailedDialog from "@/app/(frontend)/components/Dialogs/FaildedDialog";
-
+import SuccessDialog from "../../../components/Dialogs/SuccesDialog";
+import FailedDialog from "../../../components/Dialogs/FaildedDialog";
 const ContactForm = () => {
     const [orderStatus, setOrderStatus] = useState<'success' | 'error' | null>(null);
 
