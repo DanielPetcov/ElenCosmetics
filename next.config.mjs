@@ -1,5 +1,5 @@
 import { withPayload } from '@payloadcms/next/withPayload';
-
+import createNextIntlPlugin from 'next-intl/plugin';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -14,5 +14,6 @@ const nextConfig = {
   }
 };
 
+const withNextIntl = createNextIntlPlugin();
 // Chain both plugins
-export default withPayload(nextConfig);
+export default withPayload(withNextIntl(nextConfig));

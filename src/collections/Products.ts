@@ -8,7 +8,8 @@ export const Products: CollectionConfig = {
             label: 'Title',
             type: 'text',
             index: true,
-            required: true
+            required: true,
+            localized: true
         },
         {
             name: 'featuredImg',
@@ -41,12 +42,14 @@ export const Products: CollectionConfig = {
         {
             name: 'description',
             label: 'Descriere',
-            type: 'richText'
+            type: 'richText',
+            localized: true
         },
         {
             name: 'ingredients',
             label: 'Ingrediente',
-            type: 'text'
+            type: 'text',
+            localized: true
         },
         {
             name: 'stock',

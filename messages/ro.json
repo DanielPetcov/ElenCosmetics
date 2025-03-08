@@ -1,0 +1,84 @@
+{
+    "Credentials": {
+        "title": "@ 2025 - Toate drepturile sunt rezervate. Autor - Petcov Daniel"
+    },
+    "LoginPage": {
+        "title": "Logare",
+        "email": "Email",
+        "password": "Parolă",
+        "submit": "Conectează-te",
+        "dontHaveAcc": "Nu ai cont?",
+        "signup": "Crează cont"
+    },
+    "CartPage": {
+        "title": "Coșul meu",
+        "orderSummary": "Sumar comandă",
+        "total": "Total",
+        "subtotal": "Subtotal",
+        "promo": "Promocod",
+        "apply": "Aplică",
+        "goCheckout": "Finalizează comanda",
+        "seeMore": "Vezi produsele de pe site"
+    },
+    "GeneralBreadcrumbs": {
+        "Gohome": "Acasă"
+    },
+    "CheckoutPage": {
+        "delivery": {
+            "title": "Livrare",
+            "name": "Nume",
+            "phone": "Telefon",
+            "email": "Email",
+            "address": "Adresa",
+            "city": "City",
+            "zipcode": "Zip Cod",
+            "terms": "Am luat la cunoștință despre politica de confidentialitate privind prelucrarea datelor cu caracter personal"
+        },
+        "payment": {
+            "title": "Plată",
+            "cash": "Numerar la primire",
+            "submit": "Achită",
+            "processing": "Se procesează..."
+        },
+        "dialog": {
+            "success": {
+                "title": "Felicitări! comanda dumneavoastră a fost efectuată",
+                "description": "Un document cu comanda dvs. a fost expediat pe e-mail."
+            },
+            "failed": {
+                "title": "Ceva nu a mers bine.",
+                "description": "Vă rugăm să încercați din nou."
+            },
+            "gohome": "Acasă"
+        },
+        "summary": {
+            "total": "Total"
+        },
+        "errors": {
+            "name_min": "Numele trebuie să conțină cel puțin 2 caractere.",
+            "name_max": "Numele trebuie să conțină cel mult 50 de caractere.",
+            "phone_min": "Numărul de telefon trebuie să conțină cel puțin 2 caractere.",
+            "phone_max": "Numărul de telefon trebuie să conțină cel mult 50 de caractere.",
+            "email_invalid": "Adresă de e-mail invalidă.",
+            "address_min": "Adresa trebuie să conțină cel puțin 2 caractere.",
+            "address_max": "Adresa trebuie să conțină cel mult 100 de caractere.",
+            "city_min": "Orașul trebuie să conțină cel puțin 2 caractere.",
+            "city_max": "Orașul trebuie să conțină cel mult 50 de caractere.",
+            "zip_min": "Codul poștal trebuie să conțină cel puțin 2 caractere.",
+            "zip_max": "Codul poștal trebuie să conțină cel mult 20 de caractere.",
+            "terms_required": "Trebuie să acceptați termenii.",
+            "payment_required": "Trebuie să selectați o metodă de plată."
+        }
+    },
+    "Searchbar": {
+        "noresults": "Nu au fost gasit rezultate",
+        "loading": "Se caută..."
+    },
+    "Product": {
+        "addToCart": "Cumpără",
+        "addedSuccesfully": "Produsul a fost adaugat cu succes"
+    },
+    "Footer": {
+        "ourAddress": "Adresa noastră"
+    }
+}

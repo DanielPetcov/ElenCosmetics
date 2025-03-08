@@ -1,10 +1,10 @@
-// import {defineRouting} from 'next-intl/routing';
-// import {createNavigation} from 'next-intl/navigation';
+import {defineRouting} from 'next-intl/routing';
+import {createNavigation} from 'next-intl/navigation';
  
-// export const routing = defineRouting({
-//   // A list of all locales that are supported
-//   locales: ['ro', 'ru'],
+export const routing = defineRouting({
+  // A list of all locales that are supported
+  locales: ['ro', 'ru'],
  
-//   // Used when no locale matches
-//   defaultLocale: 'ro'
-// });
+  // Used when no locale matches
+  defaultLocale: 'ru'
+});
