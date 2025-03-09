@@ -1,5 +1,5 @@
 'use client'
-import CategoryProps from "../../../[locale]/(frontend)/types/CategoryType"
+import CategoryProps from "../../types/CategoryType";
 import { Swiper, SwiperSlide } from "swiper/react"
 import CategoryCard from "./CategoryCard";
 import { FreeMode } from "swiper/modules";

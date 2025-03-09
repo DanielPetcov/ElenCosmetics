@@ -18,9 +18,9 @@ const fetchUser = async (token: string | undefined) => {
     }
 };
 
-const AccountPage = async ({ params }: { params: { locale: string } }) => {
+const AccountPage = async ({ params }: { params: Promise<{ locale: string }> }) => {
     const token = (await cookies()).get('payload-token')?.value;
-    const { locale } = params;
+    const { locale } = await params;
 
     if (!token) {
         redirect({ href: '/login', locale });

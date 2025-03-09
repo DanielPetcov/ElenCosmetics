@@ -1,4 +1,4 @@
-import CategoryProps from "../../../[locale]/(frontend)/types/CategoryType";
+import CategoryProps from "../../types/CategoryType";
 import Link from "next/link";
 import Image from "next/image";
 

@@ -1,4 +1,4 @@
-import FeaturedCategoryProps from "../../../[locale]/(frontend)/types/FeaturedCollectionType"
+import FeaturedCategoryProps from "../../types/FeaturedCollectionType"
 import FeaturedCollection from "./FeaturedCollection"
 interface FeaturedCategoriesProps {
     data: FeaturedCategoryProps[]

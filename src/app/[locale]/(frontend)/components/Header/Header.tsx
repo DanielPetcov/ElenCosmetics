@@ -16,12 +16,7 @@ import ShoppingBagIcon from "./ShoppingBagIcon";
 import SearchBar from "../SearchBar/SearchBar";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
-
-interface Params {
-    locale: string
-}
-
-const Header = async ({ params }: { params: Params }) => {
+const Header = async ({ params }: { params: Promise<{ locale: string }> }) => {
 
     const { locale } = await params;
     const header = await payload.findGlobal({

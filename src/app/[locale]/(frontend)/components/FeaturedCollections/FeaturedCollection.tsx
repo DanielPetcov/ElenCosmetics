@@ -1,4 +1,4 @@
-import FeaturedCategoryProps from "../../../[locale]/(frontend)/types/FeaturedCollectionType";
+import FeaturedCategoryProps from "../../types/FeaturedCollectionType";
 import Link from "next/link";
 import Image from "next/image";
 
