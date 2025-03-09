@@ -9,6 +9,7 @@ import { motion } from "motion/react";
 import { UserRound } from 'lucide-react';
 import { ShoppingBag } from 'lucide-react';
 import { Button } from "@/components/ui/button"
+import LanguageSelector from "../LanguageSelector/LanguageSelector";
 
 
 type Props = Header['menuItems'];
@@ -104,7 +105,8 @@ const Megamenu = ({ items }: { items: Props }) => {
                         <ShoppingBag />
                     </Button>
                 </Link>
-                <Link href='/account'>
+                <LanguageSelector className="md:hidden w-full" />
+                <Link href='/account' className="col-span-2">
                     <Button variant="secondary" className="w-full">
                         <UserRound />
                     </Button>

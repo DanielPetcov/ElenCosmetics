@@ -32,8 +32,8 @@ const Cart = () => {
     // Show loading spinner until Zustand has finished hydrating
     if (!hydrated) {
         return (
-            <div className="flex flex-1 justify-center items-center">
-                <LoadingSpinner color="#000" width={20} height={20} />
+            <div className="flex flex-1 justify-center items-center text-gray-700">
+                <LoadingSpinner className="w-14 h-14 lg:w-20 lg:h-20" />
             </div>
         );
     }

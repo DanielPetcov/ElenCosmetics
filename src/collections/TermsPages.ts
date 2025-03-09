@@ -7,12 +7,20 @@ export const TermsPage: CollectionConfig = {
             name: 'title',
             label: 'Titlu',
             type: 'text',
+            required: true,
+            localized: true
+        },
+        {
+            name: 'urlTitle',
+            label: 'Url Titlu',
+            type: 'text',
             required: true
         },
         {
             name: 'description',
             label: 'Descriere',
-            type: 'richText'
+            type: 'richText',
+            localized: true
         }
     ],
     admin: {

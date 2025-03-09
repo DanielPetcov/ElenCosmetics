@@ -16,7 +16,7 @@ const GeneralCatItem = ({ category }: Props) => {
 
     if (category.linkType === 'internal' && category.internalLink) {
         if (category.internalLink.relationTo === 'collection') {
-            link = `/collection/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.Title}`;
+            link = `/collection/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.title}`;
         } else if (category.internalLink.relationTo === 'products') {
             link = `/product/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.title}`;
         }

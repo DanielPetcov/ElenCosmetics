@@ -49,6 +49,7 @@ export const Footer: GlobalConfig = {
                     name: 'link',
                     label: 'Link',
                     type: 'array',
+                    required: true,
                     fields: [
                         {
                             name: 'title',
@@ -72,6 +73,7 @@ export const Footer: GlobalConfig = {
                             name: 'internalLink',
                             type: 'relationship',
                             relationTo: ['collection', 'products', 'termsPage'],
+                            required: true,
                             admin: {
                                 condition: (_, siblingData) => siblingData.linkType === 'internal'
                             }
@@ -79,6 +81,7 @@ export const Footer: GlobalConfig = {
                         {
                             name: 'externalUrl',
                             type: 'text',
+                            required: true,
                             admin: {
                                 condition: (_, siblingData) => siblingData.linkType === 'external'
                             }

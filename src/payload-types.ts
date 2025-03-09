@@ -234,7 +234,7 @@ export interface Tag {
  */
 export interface Collection {
   id: string;
-  Title: string;
+  title: string;
   Products?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -246,6 +246,7 @@ export interface Collection {
 export interface TermsPage {
   id: string;
   title: string;
+  urlTitle: string;
   description?: {
     root: {
       type: string;
@@ -441,7 +442,7 @@ export interface ProductsSelect<T extends boolean = true> {
  * via the `definition` "collection_select".
  */
 export interface CollectionSelect<T extends boolean = true> {
-  Title?: T;
+  title?: T;
   Products?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -452,6 +453,7 @@ export interface CollectionSelect<T extends boolean = true> {
  */
 export interface TermsPageSelect<T extends boolean = true> {
   title?: T;
+  urlTitle?: T;
   description?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -566,27 +568,25 @@ export interface Footer {
   special_links?:
     | {
         title: string;
-        link?:
-          | {
-              title: string;
-              linkType: 'internal' | 'external';
-              internalLink?:
-                | ({
-                    relationTo: 'collection';
-                    value: string | Collection;
-                  } | null)
-                | ({
-                    relationTo: 'products';
-                    value: string | Product;
-                  } | null)
-                | ({
-                    relationTo: 'termsPage';
-                    value: string | TermsPage;
-                  } | null);
-              externalUrl?: string | null;
-              id?: string | null;
-            }[]
-          | null;
+        link: {
+          title: string;
+          linkType: 'internal' | 'external';
+          internalLink?:
+            | ({
+                relationTo: 'collection';
+                value: string | Collection;
+              } | null)
+            | ({
+                relationTo: 'products';
+                value: string | Product;
+              } | null)
+            | ({
+                relationTo: 'termsPage';
+                value: string | TermsPage;
+              } | null);
+          externalUrl?: string | null;
+          id?: string | null;
+        }[];
         id?: string | null;
       }[]
     | null;

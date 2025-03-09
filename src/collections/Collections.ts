@@ -4,7 +4,7 @@ export const Collection: CollectionConfig = {
     slug: 'collection',
     fields: [
         {
-            name: 'Title',
+            name: 'title',
             type: 'text',
             required: true
         },
@@ -16,6 +16,6 @@ export const Collection: CollectionConfig = {
         }
     ],
     admin: {
-        useAsTitle: 'Title'
+        useAsTitle: 'title'
     }
 }

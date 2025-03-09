@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import Link from 'next/link'
+import { Link } from '@/i18n/navigation'
 import { useRouter } from "next/navigation";
 import { useTranslations } from 'next-intl'
 
@@ -18,19 +18,14 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import React from 'react'
-
-const formSchema = z.object({
-    email: z.string().min(2, {
-        message: "Email must be at least 2 characters.",
-    }).max(50),
-    password: z.string().min(2, {
-        message: "Password must be at least 2 characters.",
-    }).max(50),
-})
+import { useLocale } from 'next-intl'
+import { LoginFormSchema } from './LoginFormSchema'
 
 const LoginForm = () => {
+    const locale = useLocale();
     const router = useRouter();
     const t = useTranslations("LoginPage");
+    const formSchema = LoginFormSchema();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -95,7 +90,7 @@ const LoginForm = () => {
                 </form>
             </Form>
             <div className='flex gap-2 items-baseline justify-center flex-wrap'>
-                <span className='text-gray-500 text-sm md:text-base'>{t('dontHaveAcc')}</span><Link href="/signup" className='text-gray-500 underline text-sm md:text-base'>{t('signup')}</Link>
+                <span className='text-gray-500 text-sm md:text-base'>{t('dontHaveAcc')}</span><Link href="/signup" locale={locale} className='text-gray-500 underline text-sm md:text-base'>{t('signup')}</Link>
             </div>
         </div>
     )

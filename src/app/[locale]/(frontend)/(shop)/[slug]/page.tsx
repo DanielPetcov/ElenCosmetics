@@ -9,26 +9,26 @@ const GeneralPage = async ({
     params: Promise<{ slug: string }>
 }) => {
     const { slug } = await params;
-    const formattedStr = slug.replace(/%20/g, " ");
 
-    if (!formattedStr) {
+    console.log("Slug received:", slug);
+    if (!slug) {
         return null;
     }
 
     const data = await payload.find({
         'collection': "termsPage",
         where: {
-            title: {
-                equals: formattedStr
+            urlTitle: {
+                equals: slug
             }
         }
     })
 
-    console.log(formattedStr)
+    const title = data.docs[0].title
 
     return (
         <div className="container mx-auto text-gray-700 px-5 md:px-10 py-5 flex flex-col gap-5">
-            <PageTitle title={formattedStr} />
+            <PageTitle title={title} />
             <div>
                 {data.docs.map((item: TermsPage, index) => {
                     if (item.description) {

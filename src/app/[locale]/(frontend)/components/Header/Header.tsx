@@ -63,7 +63,7 @@ const Header = async ({ params }: { params: Promise<{ locale: string }> }) => {
                             <UserRound strokeWidth={1.5} />
                         </Link>
                         <ShoppingBagIcon locale={locale} />
-                        <LanguageSelector />
+                        <LanguageSelector className="hidden md:block" />
                     </div>
                 </div>
             </div>

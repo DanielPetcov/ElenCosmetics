@@ -18,8 +18,8 @@ const Footer = async ({ locale }: { locale: string }) => {
                 <Link href="/">
                     <Logo width={120} color="#fff" />
                 </Link>
-                <FooterLinks footer={result} />
-                <FooterLinksMobile footer={result} />
+                <FooterLinks footer={result} locale={locale} />
+                <FooterLinksMobile footer={result} locale={locale} />
                 <Credentials />
             </div>
         </div>

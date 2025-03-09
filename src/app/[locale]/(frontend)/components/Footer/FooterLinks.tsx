@@ -3,11 +3,11 @@ import FacebookIcon from "../Icons/FacebookIcon";
 import TiktokIcon from "../Icons/TiktokIcon";
 import RichText from "@/blocks/richtext/Server";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Footer } from "@/payload-types";
 import { useTranslations } from "next-intl";
 
-const FooterLinks = ({ footer }: { footer: Footer }) => {
+const FooterLinks = ({ footer, locale }: { footer: Footer, locale: string }) => {
     const t = useTranslations("Footer");
     return (
         <div className="hidden md:grid grid-cols-3 gap-[90px]">
@@ -51,19 +51,42 @@ const FooterLinks = ({ footer }: { footer: Footer }) => {
                 footer.special_links.map((specialLink, index) => (
                     <div className="flex flex-col gap-3" key={index}>
                         <h5 className="text-lg font-semibold uppercase">{specialLink.title}</h5>
-                        {/* {specialLink.link && specialLink.link.length > 0 ?
+                        {specialLink.link && specialLink.link.length > 0 ? (
                             <div className="flex flex-col gap-2">
-                                {specialLink.link.map((linkItem) => (
-                                    <Link
-                                        key={linkItem.title}
-                                        href={typeof linkItem.page === 'string' ? linkItem.page : linkItem.page.title}
-                                        className="text-sm hover:underline"
-                                    >
-                                        {linkItem.title}
-                                    </Link>
-                                ))}
+                                {specialLink.link.map((linkItem) => {
+                                    if (linkItem && linkItem.linkType) {
+                                        let link = '';
+                                        switch (linkItem.linkType) {
+                                            case 'internal':
+                                                if (linkItem.internalLink?.relationTo === 'collection') {
+                                                    link = typeof linkItem.internalLink.value === 'string' ? `/collection/${linkItem.internalLink.value}` : `/collection/${linkItem.internalLink.value.id}`
+                                                } else if (linkItem.internalLink?.relationTo === 'products') {
+                                                    link = typeof linkItem.internalLink.value === 'string' ? `/product/${linkItem.internalLink.value}` : `/product/${linkItem.internalLink.value.id}`;
+                                                } else {
+                                                    link = linkItem.internalLink ? typeof linkItem?.internalLink.value === 'string' ? `/${linkItem.internalLink?.value}` : `/${linkItem.internalLink?.value.urlTitle}` : '';
+                                                }
+                                                break;
+                                            case 'external':
+                                                link = linkItem.externalUrl ? linkItem.externalUrl : ''
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                        return (
+                                            <Link
+                                                key={linkItem.title}
+                                                locale={locale}
+                                                href={link}
+                                                className="text-sm hover:underline"
+                                            >
+                                                {linkItem.title}
+                                            </Link>
+                                        );
+                                    }
+                                    return null;
+                                })}
                             </div>
-                            : null} */}
+                        ) : null}
                     </div>
                 ))
             ) : null}

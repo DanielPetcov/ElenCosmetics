@@ -11,7 +11,7 @@ import { useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 
-const LanguageSelector = () => {
+const LanguageSelector = ({ ...props }) => {
     const locale = useLocale();
     const pathname = usePathname();
     const router = useRouter();
@@ -22,9 +22,9 @@ const LanguageSelector = () => {
     };
 
     return (
-        <div>
+        <div {...props}>
             <Select onValueChange={changeLanguage} defaultValue={locale}>
-                <SelectTrigger className="w-[80px]">
+                <SelectTrigger className="w-full md:w-[80px]">
                     <SelectValue placeholder={locale.toUpperCase()} />
                 </SelectTrigger>
                 <SelectContent>

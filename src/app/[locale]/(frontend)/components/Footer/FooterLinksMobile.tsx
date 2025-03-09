@@ -13,7 +13,7 @@ import RichText from "@/blocks/richtext/Server";
 import { Footer } from "@/payload-types";
 import Link from "next/link";
 
-const FooterLinksMobile = ({ footer }: { footer: Footer }) => {
+const FooterLinksMobile = ({ footer, locale }: { footer: Footer, locale: string }) => {
     return (
         <div className="md:hidden flex flex-col gap-5 w-full">
             <Accordion type="multiple" className="w-full">

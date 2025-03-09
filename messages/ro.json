@@ -8,7 +8,30 @@
         "password": "Parolă",
         "submit": "Conectează-te",
         "dontHaveAcc": "Nu ai cont?",
-        "signup": "Crează cont"
+        "signup": "Crează cont",
+        "errors": {
+            "email": "Emailul trebuie să aibă cel puțin 2 caractere.",
+            "password": "Parola trebuie să aibă cel puțin 2 caractere."
+        }
+    },
+    "SignupPage": {
+        "title": "Crează cont", 
+        "firstName": "Nume",
+        "secondName": "Prenume",
+        "email": "Email",
+        "password": "Parolă",
+        "confirmPassword": "Confirmă Parola",
+        "submit": "Crează cont",
+        "loginLink": "Ai deja un cont?",
+        "login": "Logheză-te",
+        "errors": {
+            "firstName": "Prenumele trebuie să aibă cel puțin 2 caractere.",
+            "secondName": "Numele trebuie să aibă cel puțin 2 caractere.",
+            "email": "Adresă de email invalidă.",
+            "password": "Parola trebuie să aibă între 6 și 100 de caractere.",
+            "confirmPassword": "Parolele nu se potrivesc.",
+            "passwordExceed": "Parola nu poate avea mai multe de 100 de caractere"
+        }
     },
     "CartPage": {
         "title": "Coșul meu",
@@ -68,6 +91,36 @@
             "zip_max": "Codul poștal trebuie să conțină cel mult 20 de caractere.",
             "terms_required": "Trebuie să acceptați termenii.",
             "payment_required": "Trebuie să selectați o metodă de plată."
+        }
+    },
+    "ContactPage": {
+        "title": "Contact",
+        "question": "Ai o intrebare? scriene acum",
+        "firstName": "Nume",
+        "secondName": "Prenume",
+        "email": "Email",
+        "phone": "Telefon",
+        "message": "Mesaj",
+        "terms": "Am luat la cunoștință despre politica de confidentialitate privind prelucrarea datelor cu caracter personal",
+        "submit": "Crează cont",
+        "errors": {
+            "nameMin": "Numele trebuie să aibă cel puțin 2 caractere.",
+            "nameMax": "Numele trebuie să aibă cel mult 50 de caractere.",
+            "secondMin": "Prenumele trebuie să aibă cel puțin 2 caractere.",
+            "secondMax": "Prenumele trebuie să aibă cel mult 50 de caractere.",
+            "email": "Adresa de email este invalidă.",
+            "phoneMin": "Numărul de telefon trebuie să aibă cel puțin 5 caractere.",
+            "phoneMax": "Numărul de telefon trebuie să aibă cel mult 15 caractere.",
+            "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere.",
+            "messageMax": "Mesajul trebuie să aibă cel mult 500 de caractere.",
+            "terms": "Trebuie să fii de acord cu termenii."
+        },
+        "success": {
+            "title": "Felicitări! mesajul dvs. a fost trimis"
+        },
+        "failed": {
+            "title": "Ceva nu a mers bine.",
+            "description":"Vă rugăm să încercați din nou."
         }
     },
     "Searchbar": {
