@@ -6,6 +6,7 @@ export default getRequestConfig(async ({requestLocale}) => {
   let locale = await requestLocale;
  
   // Ensure that a valid locale is used
+  //@typescript-eslint/no-explicit-any : because is for routing
   if (!locale || !routing.locales.includes(locale as any)) {
     locale = routing.defaultLocale;
   }

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 import { useTranslations } from 'next-intl';
 
-export const formSchema = () => {
+export const FormSchema = () => {
     const t = useTranslations('CheckoutPage.errors');
     return z.object({
         name: z.string()
@@ -54,4 +54,4 @@ export const formSchema = () => {
     });
 }
 
-export type CheckoutFormValues = z.infer<Awaited<ReturnType<typeof formSchema>>>;
+export type CheckoutFormValues = z.infer<Awaited<ReturnType<typeof FormSchema>>>;

@@ -23,10 +23,11 @@ interface Props {
 
 const ProductGallery = ({ featuredImg, media }: Props) => {
     const [gallery, setGallery] = useState<string[]>([]);
+    //@typescript-eslint/no-explicit-any : thumbnail
     const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
     useEffect(() => {
-        let initialGallery: string[] = [];
+        const initialGallery: string[] = [];
 
         if (featuredImg && typeof featuredImg !== "string" && featuredImg.url) {
             initialGallery.push(featuredImg.url);

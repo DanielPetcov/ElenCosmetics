@@ -23,6 +23,7 @@ export default async function RootLayout({
 }) {
 
   const { locale } = await params;
+  // @typescript-eslint/no-explicit-any : because of the locale
   if (!routing.locales.includes(locale as any)) {
     notFound();
   }

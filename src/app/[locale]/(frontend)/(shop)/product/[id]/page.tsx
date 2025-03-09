@@ -3,7 +3,6 @@ import payload from "@/queries";
 import ProductGallery from "../../../components/productPage/ProductGallery";
 import ProductAccordion from "./productAccordion";
 import ProductList from "../../../components/productList/ProductList";
-import BuyButtons from "./BuyButtons";
 import ProductBreadCrumbs from "./ProductBreadCrumbs";
 import ProductBuyWindow from "./ProductBuyWindow";
 

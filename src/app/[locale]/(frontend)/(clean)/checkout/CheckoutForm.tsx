@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { Form } from "@/components/ui/form";
 import { useCartStore } from '../../useCartStore';
-import { CheckoutFormValues, formSchema } from "./CheckoutSchema";
+import { CheckoutFormValues, FormSchema } from "./CheckoutSchema";
 import DeliveryForm from './forms/DeliveryForm';
 import PaymentForm from './forms/PaymentForm';
 
@@ -13,7 +13,7 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [orderStatus, setOrderStatus] = useState<'success' | 'error' | null>(null);
 
-    const schema = formSchema();
+    const schema = FormSchema();
 
     const defaultValues: CheckoutFormValues = {
         name: '',
