@@ -123,6 +123,16 @@
             "description":"Vă rugăm să încercați din nou."
         }
     },
+    "CollectionPage": {
+        "pagination": {
+            "next": "Înainte",
+            "prev": "Înapoi"
+        },
+        "sorting": {
+            "ascending": "Preț crescător",
+            "descending": "Preț descrescător"
+        }
+    },
     "Searchbar": {
         "noresults": "Nu au fost gasit rezultate",
         "loading": "Se caută..."

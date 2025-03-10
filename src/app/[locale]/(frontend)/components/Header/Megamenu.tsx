@@ -1,8 +1,7 @@
 'use client'
 import { SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { Header } from "@/payload-types";
-import Link from "next/link";
-import { ArrowRight } from 'lucide-react';
+import { Link } from "@/i18n/navigation";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
 import { motion } from "motion/react";
@@ -10,21 +9,13 @@ import { UserRound } from 'lucide-react';
 import { ShoppingBag } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import MegaMenuItem from "./MegaMenuItem";
+import MegaMenuLastItem from "./MegaMenuLastItem";
 
+type MenuItems = Header['menuItems'];
+type MenuItem = MenuItems[number];
 
-type Props = Header['menuItems'];
-type Sublink = {
-    label: string,
-    link: string
-};
-type MenuItem = {
-    label: string,
-    link: string,
-    id?: string | undefined,
-    subItems?: Sublink[]
-};
-
-const Megamenu = ({ items }: { items: Props }) => {
+const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
     const [selectedLink, setSelectedLink] = useState<MenuItem | null>(null);
 
     const handleItemClick = (item: MenuItem) => {
@@ -53,26 +44,12 @@ const Megamenu = ({ items }: { items: Props }) => {
                     transition={{ duration: 0.3 }}
                 >
                     {items.map((item, index) => (
-                        item.subItems && item.subItems.length > 0 ? (
-                            <div
-                                key={index}
-                                onClick={() => handleItemClick({
-                                    id: item.id ? item.id : undefined,
-                                    label: item.label,
-                                    link: item.link,
-                                    subItems: item.subItems ?? undefined
-                                })}
-                                className={`flex justify-between items-center gap-20 cursor-pointer p-2 border border-gray-100 hover:border-gray-200 rounded-md transition-all duration-200
-                                        ${selectedLink && selectedLink.id !== null && selectedLink?.id === item.id ? 'border-gray-500' : 'border-transparent'}`}
-                            >
-                                <span>{item.label}</span>
-                                <ArrowRight width={20} />
-                            </div>
-                        ) : (
-                            <Link key={index} href={item.link} className="text-gray-700 p-2 border border-transparent rounded-md group">
-                                <span className="group-hover:underline">{item.label}</span>
-                            </Link>
-                        )
+                        <MegaMenuItem
+                            key={index}
+                            item={item}
+                            locale={locale}
+                            handleItemClick={handleItemClick}
+                        />
                     ))}
                 </motion.div>
                 {selectedLink && selectedLink.subItems && selectedLink.subItems.length > 0 && (
@@ -92,21 +69,19 @@ const Megamenu = ({ items }: { items: Props }) => {
                             Înapoi
                         </button>
                         {selectedLink.subItems.map((element, index) => (
-                            <Link href={element.link} key={index} className="text-gray-500 group">
-                                <span className="group-hover:underline">{element.label}</span>
-                            </Link>
+                            <MegaMenuLastItem key={index} item={element} locale={locale} />
                         ))}
                     </motion.div>
                 )}
             </div>
             <div className="grid grid-cols-2 gap-5 md:hidden">
-                <Link href='/cart'>
+                <Link href='/cart' locale={locale}>
                     <Button variant="secondary" className="w-full">
                         <ShoppingBag />
                     </Button>
                 </Link>
                 <LanguageSelector className="md:hidden w-full" />
-                <Link href='/account' className="col-span-2">
+                <Link href='/account' locale={locale} className="col-span-2">
                     <Button variant="secondary" className="w-full">
                         <UserRound />
                     </Button>

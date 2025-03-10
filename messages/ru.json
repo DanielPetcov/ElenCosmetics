@@ -123,13 +123,23 @@
             "description": "Пожалуйста, попробуйте снова."
         }
     },
+    "CollectionPage": {
+        "pagination": {
+            "next": "Вперёд",
+            "prev": "Назад"
+        },
+        "sorting": {
+            "ascending": "Сначала дешёвые",
+            "descending": "Сначала дорогие"
+        }
+    },
     "Searchbar": {
         "noresults": "Результаты не найдены",
         "loading": "Идет поиск..."
     },
     "Product": {
-    "addToCart": "Купить",
-    "addedSuccesfully": "Товар успешно добавлен"
+        "addToCart": "Купить",
+        "addedSuccesfully": "Товар успешно добавлен"
     },
     "Footer": {
         "ourAddress": "Наш адрес"

@@ -67,7 +67,7 @@ export const Products: CollectionConfig = {
             name: 'relatedCollections',
             type: 'join',
             collection: 'collection',
-            on: 'Products'
+            on: 'products'
         }
     ],
     access: {

@@ -6,10 +6,11 @@ export const Collection: CollectionConfig = {
         {
             name: 'title',
             type: 'text',
-            required: true
+            required: true,
+            localized: true
         },
         {
-            name: 'Products',
+            name: 'products',
             type: 'relationship',
             relationTo: 'products',
             hasMany: true,

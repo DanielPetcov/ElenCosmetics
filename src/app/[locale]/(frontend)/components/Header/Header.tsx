@@ -30,7 +30,7 @@ const Header = async ({ params }: { params: Promise<{ locale: string }> }) => {
 
     return (
         <Sheet>
-            <Megamenu items={header.menuItems} />
+            <Megamenu items={header.menuItems} locale={locale} />
             {header.upperHeader ?
                 <Subheader>
                     {header.upperHeader}

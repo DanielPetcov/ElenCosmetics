@@ -6,9 +6,9 @@ import RichText from "@/blocks/richtext/Server";
 const GeneralPage = async ({
     params,
 }: {
-    params: Promise<{ slug: string }>
+    params: Promise<{ slug: string, locale: string }>
 }) => {
-    const { slug } = await params;
+    const { slug, locale } = await params;
 
     console.log("Slug received:", slug);
     if (!slug) {
@@ -21,7 +21,8 @@ const GeneralPage = async ({
             urlTitle: {
                 equals: slug
             }
-        }
+        },
+        locale: locale as 'ro' | 'ru' || 'all'
     })
 
     const title = data.docs[0].title

@@ -235,7 +235,7 @@ export interface Tag {
 export interface Collection {
   id: string;
   title: string;
-  Products?: (string | Product)[] | null;
+  products?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -443,7 +443,7 @@ export interface ProductsSelect<T extends boolean = true> {
  */
 export interface CollectionSelect<T extends boolean = true> {
   title?: T;
-  Products?: T;
+  products?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -659,20 +659,46 @@ export interface Header {
   id: string;
   upperHeader?: string | null;
   logo: string | Media;
-  menuItems?:
-    | {
-        label: string;
-        link: string;
-        subItems?:
-          | {
-              label: string;
-              link: string;
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-      }[]
-    | null;
+  menuItems: {
+    label: string;
+    linkType: 'internal' | 'external';
+    internalLink?:
+      | ({
+          relationTo: 'collection';
+          value: string | Collection;
+        } | null)
+      | ({
+          relationTo: 'products';
+          value: string | Product;
+        } | null)
+      | ({
+          relationTo: 'termsPage';
+          value: string | TermsPage;
+        } | null);
+    externalUrl?: string | null;
+    subItems?:
+      | {
+          label: string;
+          linkType: 'internal' | 'external';
+          internalLink?:
+            | ({
+                relationTo: 'collection';
+                value: string | Collection;
+              } | null)
+            | ({
+                relationTo: 'products';
+                value: string | Product;
+              } | null)
+            | ({
+                relationTo: 'termsPage';
+                value: string | TermsPage;
+              } | null);
+          externalUrl?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+    id?: string | null;
+  }[];
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -820,12 +846,16 @@ export interface HeaderSelect<T extends boolean = true> {
     | T
     | {
         label?: T;
-        link?: T;
+        linkType?: T;
+        internalLink?: T;
+        externalUrl?: T;
         subItems?:
           | T
           | {
               label?: T;
-              link?: T;
+              linkType?: T;
+              internalLink?: T;
+              externalUrl?: T;
               id?: T;
             };
         id?: T;

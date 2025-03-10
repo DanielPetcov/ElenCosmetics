@@ -14,7 +14,7 @@ import ProductListSwiper from "./ProductListSwiper";
 
 const ProductList: React.FC<ProductListProps> = ({ category, title, locale }) => {
     if (typeof category == 'string') return null
-    const products: Product[] = Array.isArray(category.Products) && typeof category !== 'string' ? category.Products.filter((product): product is Product => typeof product !== 'string') : [];
+    const products: Product[] = Array.isArray(category.products) && typeof category !== 'string' ? category.products.filter((product): product is Product => typeof product !== 'string') : [];
 
     return (
         <div className="mx-auto max-w-[1400px] w-full px-5 md:px-4 overflow-hidden">

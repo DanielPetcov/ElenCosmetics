@@ -20,18 +20,42 @@ export const Header: GlobalConfig = {
             name: 'menuItems',
             label: 'Menu Items',
             type: 'array',
+            required: true,
             fields: [
                 {
                     name: 'label',
                     label: 'Label',
                     type: 'text',
+                    required: true,
+                    localized: true
+                },
+                {
+                    name: 'linkType',
+                    type: 'select',
+                    label: 'Link Type',
+                    options: [
+                        { label: 'Internal Link', value: 'internal' },
+                        { label: 'External Link', value: 'external' } 
+                    ],
+                    defaultValue: 'internal',
                     required: true
                 },
                 {
-                    name: 'link',
-                    label: 'Link',
+                    name: 'internalLink',
+                    type: 'relationship',
+                    relationTo: ['collection', 'products', 'termsPage'],
+                    required: true,
+                    admin: {
+                        condition: (_, siblingData) => siblingData.linkType === 'internal'
+                    }
+                },
+                {
+                    name: 'externalUrl',
                     type: 'text',
-                    required: true
+                    required: true,
+                    admin: {
+                        condition: (_, siblingData) => siblingData.linkType === 'external'
+                    }
                 },
                 {
                     name: 'subItems',
@@ -42,14 +66,37 @@ export const Header: GlobalConfig = {
                             name: 'label',
                             label: 'Label',
                             type: 'text',
+                            required: true,
+                            localized: true
+                        },
+                        {
+                            name: 'linkType',
+                            type: 'select',
+                            label: 'Link Type',
+                            options: [
+                                { label: 'Internal Link', value: 'internal' },
+                                { label: 'External Link', value: 'external' } 
+                            ],
+                            defaultValue: 'internal',
                             required: true
                         },
                         {
-                            name: 'link',
-                            label: 'Link',
+                            name: 'internalLink',
+                            type: 'relationship',
+                            relationTo: ['collection', 'products', 'termsPage'],
+                            required: true,
+                            admin: {
+                                condition: (_, siblingData) => siblingData.linkType === 'internal'
+                            }
+                        },
+                        {
+                            name: 'externalUrl',
                             type: 'text',
-                            required: true
-                        }
+                            required: true,
+                            admin: {
+                                condition: (_, siblingData) => siblingData.linkType === 'external'
+                            }
+                        },
                     ]
                 }
             ]
