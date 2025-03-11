@@ -131,6 +131,50 @@
         "sorting": {
             "ascending": "Preț crescător",
             "descending": "Preț descrescător"
+        },
+        "filters": {
+            "byPrice": "Filtrează după preț",
+            "minPrice": "Preț minim",
+            "maxPrice": "Preț maxim",
+            "byVolume": "Volum",
+            "byBrand": "Brand",
+            "apply": "Aplică",
+            "events": {
+                "updated": "Filtrele au fost aplicate",
+                "error": "Upps, a apărut o eroare"
+            }
+        }
+    },
+    "Account": {
+        "orders": {
+            "title": "Comenzi"
+        },
+        "logout": "Delogare",
+        "errors": {
+            "failedLogout": "Logarea nu a reușit"
+        }
+    },
+    "Order": {
+        "order": "Nr. comandă",
+        "status": {
+            "title": "Stare comandă",
+            "pending": "în procesare",
+            "shipped": "Expediat",
+            "delivered": "Livrat",
+            "cancelled": "Anulat"
+        },
+        "date": "Data creării",
+        "totalItems": "Total produse",
+        "total": "Total de plată",
+        "productInfo": {
+            "product": "produs",
+            "plural": "e",
+            "title": "Detalii produs",
+            "viewDetails": "Vezi detalii",
+            "orderItems": "Produse comandate",
+            "productTitle": "Denumire produs",
+            "quantity": "Cantitate",
+            "price": "Preț unitar"
         }
     },
     "Searchbar": {

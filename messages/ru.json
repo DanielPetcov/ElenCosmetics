@@ -129,8 +129,52 @@
             "prev": "Назад"
         },
         "sorting": {
-            "ascending": "Сначала дешёвые",
-            "descending": "Сначала дорогие"
+            "ascending": "Цена по возрастанию",
+            "descending": "Цена по убыванию"
+        },
+        "filters": {
+            "byPrice": "Фильтр по цене",
+            "minPrice": "Минимальная цена",
+            "maxPrice": "Максимальная цена",
+            "byVolume": "Объём",
+            "byBrand": "Бренд",
+            "apply": "Применить",
+            "events": {
+                "updated": "Фильтры были применены",
+                "error": "Упс, произошла ошибка"
+            }
+        }
+    },
+    "Account": {
+        "orders": {
+            "title": "Заказы"
+        },
+        "logout": "Выйти",
+        "errors": {
+            "failedLogout": "Не удалось выйти"
+        }
+    },
+    "Order": {
+        "order": "Номер заказа",
+        "status": {
+            "title": "Статус заказа",
+            "pending": "В обработке",
+            "shipped": "Отправлено",
+            "delivered": "Доставлено",
+            "cancelled": "Отменено"
+        },
+        "date": "Дата создания",
+        "totalItems": "Общее количество товаров",
+        "total": "Общая сумма к оплате",
+        "productInfo": {
+            "product": "продукт",
+            "plural": "ы",
+            "title": "Детали товара",
+            "viewDetails": "Посмотреть детали",
+            "orderItems": "Заказанные товары",
+            "productTitle": "Наименование товара",
+            "quantity": "Количество",
+            "price": "Цена за единицу"
         }
     },
     "Searchbar": {

@@ -1,9 +1,11 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 
-const Logout = () => {
+const Logout = ({ locale }: { locale: string }) => {
     const router = useRouter();
+    const t = useTranslations('Account');
 
     const logoutFunction = async () => {
         try {
@@ -16,9 +18,9 @@ const Logout = () => {
             })
 
             if (response.ok) {
-                router.replace('/login')
+                router.replace(`/${locale}/login`)
             } else {
-                console.error('Failed to log out');
+                console.error(t('errros.failedLogout'));
             }
         } catch (error) {
             console.log(error);
@@ -26,7 +28,7 @@ const Logout = () => {
     }
     return (
         <Button onClick={() => logoutFunction()} className='w-full'>
-            Logout
+            {t('logout')}
         </Button>
     );
 }

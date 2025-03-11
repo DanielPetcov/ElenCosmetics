@@ -1,14 +1,7 @@
-import Logout from "./logout"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Mail } from 'lucide-react';
 import { Phone } from 'lucide-react';
-import { Box } from 'lucide-react'
-import { Button } from "@/components/ui/button";
-
-import OrdersWindow from "./OrdersWindow";
-
-import { Dialog } from "@/components/ui/dialog";
-import { DialogTrigger } from "@radix-ui/react-dialog";
+import DialogWindowAccount from "./components/DialogWindowAccount";
 
 interface UserInfo {
     id?: string | undefined
@@ -16,10 +9,11 @@ interface UserInfo {
     lastName?: string | null
     email?: string | null
     phoneNumber?: string | null
+    locale: string
 }
 
 
-const AccountCard = async ({ id, firstName, lastName, email, phoneNumber }: UserInfo) => {
+const AccountCard = async ({ id, firstName, lastName, email, phoneNumber, locale }: UserInfo) => {
     return (
         <div className="flex flex-col gap-4 items-center bg-white p-5 rounded-md">
             <Avatar className="w-20 h-20">
@@ -42,18 +36,10 @@ const AccountCard = async ({ id, firstName, lastName, email, phoneNumber }: User
                         </div> : null
                 }
             </div>
-            <Dialog >
-                <div className="space-y-2 w-full">
-                    <DialogTrigger asChild>
-                        <Button variant="outline" className="w-full">
-                            <Box />
-                            <span className="text-sm">Orders</span>
-                        </Button>
-                    </DialogTrigger>
-                    <Logout />
-                </div>
-                <OrdersWindow id={id} />
-            </Dialog>
+            <DialogWindowAccount
+                locale={locale}
+                id={id}
+            />
         </div>
     )
 }

@@ -1,9 +1,8 @@
 import { cookies } from 'next/headers';
 import { redirect } from '@/i18n/navigation';
-
 import payload from "@/queries";
-import AccountCard from './accountCard';
 import { Suspense } from 'react';
+import OrderTable from './OrderTable';
 
 const fetchUser = async (token: string | undefined) => {
     if (!token) return null;
@@ -18,7 +17,7 @@ const fetchUser = async (token: string | undefined) => {
     }
 };
 
-const AccountPage = async ({ params }: { params: Promise<{ locale: string }> }) => {
+const OrdersPage = async ({ params }: { params: Promise<{ locale: string }> }) => {
     const token = (await cookies()).get('payload-token')?.value;
     const { locale } = await params;
 
@@ -28,31 +27,45 @@ const AccountPage = async ({ params }: { params: Promise<{ locale: string }> }) 
 
     return (
         <Suspense fallback={<div className="text-center text-gray-500 mt-10">Loading account...</div>}>
-            <AccountContent token={token} locale={locale} />
+            <OrdersContent token={token} locale={locale} />
         </Suspense>
     );
-};
 
-const AccountContent = async ({ token, locale }: { token: string | undefined; locale: string }) => {
+}
+
+const OrdersContent = async ({ token, locale }: { token: string | undefined; locale: string }) => {
     const user = await fetchUser(token);
 
     if (!user) {
         redirect({ href: '/login', locale });
     }
 
-    if (user)
+    if (user && user.id) {
+        const data = await payload.find({
+            collection: 'orders',
+            where: {
+                customer: {
+                    equals: user.id
+                }
+            },
+        })
+
+        if (data.totalDocs === 0) {
+            return (
+                <div>
+                    Momentan nu sunt comenzi
+                </div>
+            )
+        }
+
         return (
-            <div className="text-gray-500 flex flex-1 items-center justify-center py-10 px-5">
-                <AccountCard
-                    id={user.id}
-                    firstName={user.firstName}
-                    lastName={user.lastName}
-                    email={user.email}
-                    phoneNumber={user.phone}
-                    locale={locale}
-                />
+            <div className="text-gray-500 py-10 px-5 lg:px-10">
+                <OrderTable orders={data.docs} />
             </div>
         );
+    }
 };
 
-export default AccountPage;
+
+
+export default OrdersPage;

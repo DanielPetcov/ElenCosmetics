@@ -29,6 +29,12 @@ export const Products: CollectionConfig = {
             hasMany: true
         },
         {
+            name: 'brandRelation',
+            label: 'Brand',
+            type: 'relationship',
+            relationTo: 'brand',
+        },
+        {
             name: 'price',
             label: 'Price',
             type: 'number',
@@ -54,14 +60,13 @@ export const Products: CollectionConfig = {
         {
             name: 'stock',
             label: 'Stock',
-            type: 'number'
+            type: 'number',
         },
         {
-            name: 'tags',
-            label: 'Tags',
+            name: 'volumeRelation',
+            label: 'Volum',
             type: 'relationship',
-            relationTo: 'Tags',
-            hasMany: true
+            relationTo: 'volume',
         },
         {
             name: 'relatedCollections',

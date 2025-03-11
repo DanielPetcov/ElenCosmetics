@@ -15,8 +15,8 @@ const Page = async ({ params }: { params: Promise<{ locale: string, id: number }
             locale: locale as 'ro' | 'ru' || 'all'
         })
         return (
-            <div className="text-gray-700 px-5 md:px-10 py-5">
-                <div className="flex flex-col gap-5">
+            <div className="text-gray-700 px-3 md:px-10 py-5">
+                <div className="flex flex-col gap-5 max-w-[1400px] mx-auto">
                     <CollectionBreadCrumbs locale={locale} title={data.title} />
                     <CollectionBody
                         data={data}

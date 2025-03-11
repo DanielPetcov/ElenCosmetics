@@ -14,8 +14,9 @@ import { Media } from './collections/Media'
 import { Products } from './collections/Products'
 import { Collection } from './collections/Collections'
 import { TermsPage } from './collections/TermsPages'
-import { Tags } from './collections/Tags'
 import { Orders } from './collections/Orders'
+import { Volume } from './collections/Volume'
+import { Brand } from './collections/Brand'
 
 // globals
 import { Footer } from './globals/Footer'
@@ -40,8 +41,9 @@ export default buildConfig({
     Products, 
     Collection,
     TermsPage,
-    Tags,
-    Orders
+    Orders,
+    Volume,
+    Brand
   ],
   globals: [
     Footer,

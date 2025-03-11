@@ -36,7 +36,7 @@ const AddToCartBtn = ({ productId, name, price, quantity, comparePrice, img, img
     }
     return (
         <Button
-            className="text-sm md:text-base font-semibold text px-4 py-2 rounded-md bg-custompink hover:bg-rose-200 focus:bg-rose-400 text-white  transition-all duration-300 h-full w-full"
+            className="text-sm md:text-base font-semibold text px-4 py-2 rounded-md bg-custompink hover:bg-rose-300 focus:bg-rose-400 text-white transition-all duration-300 h-full w-full"
             onClick={() => handleOnclick()}>
             {t('addToCart')}
         </Button>

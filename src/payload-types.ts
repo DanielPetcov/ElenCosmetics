@@ -70,8 +70,9 @@ export interface Config {
     products: Product;
     collection: Collection;
     termsPage: TermsPage;
-    Tags: Tag;
     orders: Order;
+    volume: Volume;
+    brand: Brand;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -87,8 +88,9 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     collection: CollectionSelect<false> | CollectionSelect<true>;
     termsPage: TermsPageSelect<false> | TermsPageSelect<true>;
-    Tags: TagsSelect<false> | TagsSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    volume: VolumeSelect<false> | VolumeSelect<true>;
+    brand: BrandSelect<false> | BrandSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -191,6 +193,7 @@ export interface Product {
   title: string;
   featuredImg: string | Media;
   media?: (string | Media)[] | null;
+  brandRelation?: (string | null) | Brand;
   price: number;
   compare_price?: number | null;
   description?: {
@@ -210,7 +213,7 @@ export interface Product {
   } | null;
   ingredients?: string | null;
   stock?: number | null;
-  tags?: (string | Tag)[] | null;
+  volumeRelation?: (string | null) | Volume;
   relatedCollections?: {
     docs?: (string | Collection)[] | null;
     hasNextPage?: boolean | null;
@@ -220,10 +223,22 @@ export interface Product {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Tags".
+ * via the `definition` "brand".
  */
-export interface Tag {
+export interface Brand {
   id: string;
+  slug: string;
+  assignProducts?: (string | Product)[] | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volume".
+ */
+export interface Volume {
+  id: string;
+  slug: string;
   assignProducts?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -326,12 +341,16 @@ export interface PayloadLockedDocument {
         value: string | TermsPage;
       } | null)
     | ({
-        relationTo: 'Tags';
-        value: string | Tag;
-      } | null)
-    | ({
         relationTo: 'orders';
         value: string | Order;
+      } | null)
+    | ({
+        relationTo: 'volume';
+        value: string | Volume;
+      } | null)
+    | ({
+        relationTo: 'brand';
+        value: string | Brand;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -427,12 +446,13 @@ export interface ProductsSelect<T extends boolean = true> {
   title?: T;
   featuredImg?: T;
   media?: T;
+  brandRelation?: T;
   price?: T;
   compare_price?: T;
   description?: T;
   ingredients?: T;
   stock?: T;
-  tags?: T;
+  volumeRelation?: T;
   relatedCollections?: T;
   updatedAt?: T;
   createdAt?: T;
@@ -455,15 +475,6 @@ export interface TermsPageSelect<T extends boolean = true> {
   title?: T;
   urlTitle?: T;
   description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "Tags_select".
- */
-export interface TagsSelect<T extends boolean = true> {
-  assignProducts?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -504,6 +515,26 @@ export interface OrdersSelect<T extends boolean = true> {
   status?: T;
   createdAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volume_select".
+ */
+export interface VolumeSelect<T extends boolean = true> {
+  slug?: T;
+  assignProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "brand_select".
+ */
+export interface BrandSelect<T extends boolean = true> {
+  slug?: T;
+  assignProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
