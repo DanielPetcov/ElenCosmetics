@@ -1,8 +1,7 @@
 import { CollectionConfig, PayloadRequest } from "payload";
 import { Order } from "@/payload-types";
-const path = require('path')
-const fs = require('fs')
-const ejs = require('ejs')
+import path from 'path';
+import ejs from 'ejs';
 
 
 export const Orders: CollectionConfig = {

@@ -103,6 +103,7 @@ const OrderSummary = ({ items, discount }: Props) => {
                 setDiscount(discountData.code, discountData.amount, discountData.discountType);
             }
         } catch (err) {
+            console.log(err);
             setError(t("errorApplyingDiscount"));
         } finally {
             setLoading(false);
