@@ -17,6 +17,7 @@ import { TermsPage } from './collections/TermsPages'
 import { Orders } from './collections/Orders'
 import { Volume } from './collections/Volume'
 import { Brand } from './collections/Brand'
+import { Discounts } from './collections/Discounts'
 
 // globals
 import { Footer } from './globals/Footer'
@@ -40,8 +41,9 @@ export default buildConfig({
     Media, 
     Products, 
     Collection,
-    TermsPage,
     Orders,
+    Discounts,
+    TermsPage,
     Volume,
     Brand
   ],

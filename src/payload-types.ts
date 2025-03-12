@@ -69,8 +69,9 @@ export interface Config {
     media: Media;
     products: Product;
     collection: Collection;
-    termsPage: TermsPage;
     orders: Order;
+    discounts: Discount;
+    termsPage: TermsPage;
     volume: Volume;
     brand: Brand;
     'payload-locked-documents': PayloadLockedDocument;
@@ -87,8 +88,9 @@ export interface Config {
     media: MediaSelect<false> | MediaSelect<true>;
     products: ProductsSelect<false> | ProductsSelect<true>;
     collection: CollectionSelect<false> | CollectionSelect<true>;
-    termsPage: TermsPageSelect<false> | TermsPageSelect<true>;
     orders: OrdersSelect<false> | OrdersSelect<true>;
+    discounts: DiscountsSelect<false> | DiscountsSelect<true>;
+    termsPage: TermsPageSelect<false> | TermsPageSelect<true>;
     volume: VolumeSelect<false> | VolumeSelect<true>;
     brand: BrandSelect<false> | BrandSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -256,32 +258,6 @@ export interface Collection {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "termsPage".
- */
-export interface TermsPage {
-  id: string;
-  title: string;
-  urlTitle: string;
-  description?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "orders".
  */
 export interface Order {
@@ -309,9 +285,58 @@ export interface Order {
   subtotal: number;
   shippingCost: number;
   totalAmount: number;
+  discount?: {
+    code?: string | null;
+    type?: ('fixed' | 'percent') | null;
+    value?: number | null;
+  };
   status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
   createdAt: string;
   updatedAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "discounts".
+ */
+export interface Discount {
+  id: string;
+  name: string;
+  code: string;
+  discountType: 'percent' | 'fixed';
+  amount?: number | null;
+  minimumOrderAmount?: number | null;
+  user?: (string | null) | User;
+  startDate: string;
+  endDate: string;
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "termsPage".
+ */
+export interface TermsPage {
+  id: string;
+  title: string;
+  urlTitle: string;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -337,12 +362,16 @@ export interface PayloadLockedDocument {
         value: string | Collection;
       } | null)
     | ({
-        relationTo: 'termsPage';
-        value: string | TermsPage;
-      } | null)
-    | ({
         relationTo: 'orders';
         value: string | Order;
+      } | null)
+    | ({
+        relationTo: 'discounts';
+        value: string | Discount;
+      } | null)
+    | ({
+        relationTo: 'termsPage';
+        value: string | TermsPage;
       } | null)
     | ({
         relationTo: 'volume';
@@ -469,17 +498,6 @@ export interface CollectionSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "termsPage_select".
- */
-export interface TermsPageSelect<T extends boolean = true> {
-  title?: T;
-  urlTitle?: T;
-  description?: T;
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "orders_select".
  */
 export interface OrdersSelect<T extends boolean = true> {
@@ -512,9 +530,44 @@ export interface OrdersSelect<T extends boolean = true> {
   subtotal?: T;
   shippingCost?: T;
   totalAmount?: T;
+  discount?:
+    | T
+    | {
+        code?: T;
+        type?: T;
+        value?: T;
+      };
   status?: T;
   createdAt?: T;
   updatedAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "discounts_select".
+ */
+export interface DiscountsSelect<T extends boolean = true> {
+  name?: T;
+  code?: T;
+  discountType?: T;
+  amount?: T;
+  minimumOrderAmount?: T;
+  user?: T;
+  startDate?: T;
+  endDate?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "termsPage_select".
+ */
+export interface TermsPageSelect<T extends boolean = true> {
+  title?: T;
+  urlTitle?: T;
+  description?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

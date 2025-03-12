@@ -80,6 +80,21 @@ export const Orders: CollectionConfig = {
             required: true,
         },
         {
+            name: 'discount',
+            label: 'Discount',
+            type: 'group',
+            fields: [
+                { name: 'code', type: 'text', required: false },
+                { 
+                    name: 'type', 
+                    type: 'select', 
+                    options: ['fixed', 'percent'], 
+                    required: false 
+                },
+                { name: 'value', type: 'number', required: false },
+            ],
+        },
+        {
             name: 'status',
             type: 'select',
             required: true,

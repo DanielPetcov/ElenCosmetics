@@ -10,10 +10,20 @@ import PaymentForm from './forms/PaymentForm';
 
 const CheckoutForm = ({ userId }: { userId: string | null }) => {
     const items = useCartStore(state => state.items);
+    const discount = useCartStore(state => state.discount);
     const [isLoading, setIsLoading] = useState(false);
     const [orderStatus, setOrderStatus] = useState<'success' | 'error' | null>(null);
 
     const schema = FormSchema();
+
+    const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
+    const discountAmount = discount
+        ? discount.type === "percent"
+            ? (subtotal * discount.value) / 100
+            : discount.value
+        : 0;
+
+    const totalAmount = subtotal - discountAmount;
 
     const defaultValues: CheckoutFormValues = {
         name: '',
@@ -26,14 +36,19 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
         numerar: false,
         customer: userId,
         guestInfo: { name: '', email: 'daniel@gmail.com', phone: '' },
-        subtotal: items.reduce((total, item) => total + item.price * item.quantity, 0),
-        totalAmount: items.reduce((total, item) => total + item.price * item.quantity, 0),
+        subtotal,
+        totalAmount,
         shippingCost: 0,
         items: items.map(item => ({
             product: item.productId,
             quantity: item.quantity,
             totalPrice: item.price * item.quantity,
-        }))
+        })),
+        discount: discount ? discount : {
+            code: "",
+            type: "percent",
+            value: 0
+        }
     };
 
     const form = useForm<CheckoutFormValues>({
@@ -42,24 +57,36 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
     });
 
     useEffect(() => {
+        const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
+        const discountAmount = discount
+            ? discount.type === "percent"
+                ? (subtotal * discount.value) / 100
+                : discount.value
+            : 0;
+        const totalAmount = subtotal - discountAmount;
+
         form.reset({
-            ...defaultValues, // Keep other values intact
+            ...defaultValues,
             items: items.map(item => ({
                 product: item.productId,
                 quantity: item.quantity,
                 totalPrice: item.price * item.quantity,
             })),
-            subtotal: items.reduce((total, item) => total + item.price * item.quantity, 0),
-            totalAmount: items.reduce((total, item) => total + item.price * item.quantity, 0),
+            subtotal,
+            totalAmount,
+            discount: discount ? discount : {
+                code: "",
+                type: "percent",
+                value: 0
+            }
         });
-    }, [items]);
+    }, [items, discount]);
 
     async function onSubmit(values: CheckoutFormValues) {
         setIsLoading(true);
         setOrderStatus(null);
 
         const orderNumber = Math.floor(Math.random() * 1000000);
-
         const orderData = {
             orderNumber: orderNumber,
             customer: values.customer,
@@ -79,6 +106,7 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
             subtotal: values.subtotal,
             shippingCost: values.shippingCost,
             totalAmount: values.totalAmount,
+            discount: values.discount,
             status: 'pending'
         }
 

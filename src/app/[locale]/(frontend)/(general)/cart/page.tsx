@@ -1,4 +1,5 @@
 'use client'
+
 import CartIconEmpty from "../../components/Icons/CartIconEmpty";
 import Link from "next/link";
 import PageTitle from "../../components/PageTitle";
@@ -17,17 +18,19 @@ const Cart = () => {
     const t = useTranslations("CartPage");
     const locale = useLocale();
     const items = useCartStore((state) => state.items);
-    const [hydrated, setHydrated] = useState(false)
+    const discount = useCartStore((state) => state.discount); // Get discount from store
+    const [hydrated, setHydrated] = useState(false);
+
     useEffect(() => {
-        const unsubHydrate = useCartStore.persist.onHydrate(() => setHydrated(false))
-        const unsubFinishHydration = useCartStore.persist.onFinishHydration(() => setHydrated(true))
+        const unsubHydrate = useCartStore.persist.onHydrate(() => setHydrated(false));
+        const unsubFinishHydration = useCartStore.persist.onFinishHydration(() => setHydrated(true));
         setHydrated(useCartStore.persist.hasHydrated());
 
         return () => {
-            unsubHydrate()
-            unsubFinishHydration()
-        }
-    }, [])
+            unsubHydrate();
+            unsubFinishHydration();
+        };
+    }, []);
 
     // Show loading spinner until Zustand has finished hydrating
     if (!hydrated) {
@@ -44,9 +47,9 @@ const Cart = () => {
             <div className="w-full flex-1 flex justify-center items-center">
                 <div className="flex flex-col gap-8 items-center">
                     <CartIconEmpty />
-                    <h1 className="text-2xl text-gray-700">{t('title')}</h1>
+                    <h1 className="text-2xl text-gray-700">{t("title")}</h1>
                     <Link href="/" locale={locale} className="bg-custompink hover:bg-rose-200 focus:bg-rose-400 rounded-full p-4">
-                        <span className="text-white">{t('seeMore')}</span>
+                        <span className="text-white">{t("seeMore")}</span>
                     </Link>
                 </div>
             </div>
@@ -55,7 +58,7 @@ const Cart = () => {
 
     return (
         <div className="container flex flex-col gap-4 px-4 md:px-10 py-10 mx-auto">
-            <PageTitle title={t('title')} />
+            <PageTitle title={t("title")} />
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4">
                 <div className="flex flex-col gap-4 text-gray-700 border border-gray-300 rounded-xl p-5 h-fit max-h-[500px] md:max-h-none overflow-y-auto">
                     {items.map((item, index) => {
@@ -71,33 +74,30 @@ const Cart = () => {
                                     quantity={item.quantity}
                                     productId={item.productId}
                                 />
-                            )
+                            );
                         }
 
-                        return (<div key={index} className="flex flex-col gap-4">
-                            <CartItem key={index}
-                                title={item.name}
-                                comparePrice={0}
-                                img={item.img}
-                                imgHeight={item.imgHeight}
-                                imgWidth={item.imgWidth}
-                                price={item.price}
-                                quantity={item.quantity}
-                                productId={item.productId}
-                            />
-                            <Separator />
-                        </div>)
-                    }
-                    )}
+                        return (
+                            <div key={index} className="flex flex-col gap-4">
+                                <CartItem key={index}
+                                    title={item.name}
+                                    comparePrice={0}
+                                    img={item.img}
+                                    imgHeight={item.imgHeight}
+                                    imgWidth={item.imgWidth}
+                                    price={item.price}
+                                    quantity={item.quantity}
+                                    productId={item.productId}
+                                />
+                                <Separator />
+                            </div>
+                        );
+                    })}
                 </div>
-                <OrderSummary
-                    items={items}
-                    discount={20}
-                />
+                <OrderSummary items={items} discount={discount} /> {/* Pass discount */}
             </div>
         </div>
     );
 };
 
 export default Cart;
-

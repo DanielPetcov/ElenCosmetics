@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button"
 import {
     DialogContent,
     DialogDescription,
@@ -9,6 +8,7 @@ import {
 
 import { BadgeX } from 'lucide-react';
 import { useTranslations } from "next-intl";
+import SendHome from "../../(clean)/checkout/components/SendHome";
 
 const FailedDialog = ({ title, description }: { title: string, description: string }) => {
     const t = useTranslations("CheckoutPage");
@@ -22,7 +22,7 @@ const FailedDialog = ({ title, description }: { title: string, description: stri
                 </DialogDescription>
             </DialogHeader>
             <DialogFooter >
-                <Button type="submit">{t('dialog.gohome')}</Button>
+                <SendHome />
             </DialogFooter>
         </DialogContent>
     )

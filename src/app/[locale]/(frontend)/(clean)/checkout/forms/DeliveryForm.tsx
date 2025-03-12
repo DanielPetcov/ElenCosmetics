@@ -12,7 +12,7 @@ const formFields = [
     { name: 'email', type: 'email' },
     { name: 'address', type: 'text' },
     { name: 'city', type: 'text' },
-    { name: 'zipcode', type: 'text' },
+    { name: 'zipCode', type: 'text' },
 ];
 
 const DeliveryForm = ({ form }: { form: UseFormReturn<CheckoutFormValues> }) => {

@@ -45,7 +45,11 @@ export const FormSchema = () => {
         subtotal: z.number(),
         totalAmount: z.number(),
         shippingCost: z.number(),
-
+        discount: z.object({
+            code: z.string(),
+            type: z.enum(['fixed', 'percent']),
+            value: z.number()
+        }).optional().nullable(),
         items: z.array(z.object({
             product: z.string(),
             quantity: z.number(),
