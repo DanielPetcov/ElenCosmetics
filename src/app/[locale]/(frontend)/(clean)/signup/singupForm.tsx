@@ -31,6 +31,7 @@ const SignUpForm = () => {
             firstName: '',
             secondName: '',
             email: '',
+            phone: '',
             password: '',
             confirmPassword: ''
         }
@@ -41,20 +42,23 @@ const SignUpForm = () => {
             email: values.email,
             password: values.password,
             firstName: values.firstName,
-            lastName: values.secondName
+            lastName: values.secondName,
+            phone: values.phone,
+            role: 'customer'
         }
 
         try {
-            const response = await fetch('/api/users', {  // Replace with your Payload CMS endpoint
+            const response = await fetch('/api/users', {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
-                    'Content-Type': 'application/json', // Ensure content type is set to JSON
+                    'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(userData),  // Send the user data as JSON
+                body: JSON.stringify(userData),
             });
 
             if (response.ok) {
-                router.replace('/account')
+                router.replace(`/${locale}/account`)
             } else {
                 console.error('Sign-up failed:', response.statusText);
             }
@@ -102,6 +106,19 @@ const SignUpForm = () => {
                                 <FormLabel className='text-gray-700'>{t('email')}</FormLabel>
                                 <FormControl>
                                     <Input type='email' placeholder='email@gmail.com' className='text-gray-700 w-full md:w-96' {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name='phone'
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className='text-gray-700'>{t('tel')}</FormLabel>
+                                <FormControl>
+                                    <Input type='tel' placeholder='069000000' className='text-gray-700 w-full md:w-96' {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

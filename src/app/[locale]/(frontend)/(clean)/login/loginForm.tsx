@@ -45,9 +45,12 @@ const LoginForm = () => {
             });
 
             if (response.ok) {
-                router.push('/account')
+                router.replace(`/${locale}/account`)
             } else {
-                console.log('bad')
+                form.setError("password", {
+                    type: "manual",
+                    message: t("errors.incorrectPassword"),
+                });
             }
 
         } catch (error) {
@@ -86,6 +89,7 @@ const LoginForm = () => {
                             </FormItem>
                         )}
                     />
+
                     <Button type="submit">{t('submit')}</Button>
                 </form>
             </Form>

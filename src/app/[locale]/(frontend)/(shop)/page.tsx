@@ -14,11 +14,10 @@ export default async function HomePage({
   const homePageBlock = payload.findGlobal(
     {
       slug: 'homepage',
-      depth: 4,
+      depth: 3,
       locale: locale as 'ro' | 'ru' || 'ro'
     }
   )
-
   const layout = (await homePageBlock).Layout;
 
   return (

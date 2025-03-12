@@ -1,14 +1,14 @@
 'use client'
-import { motion } from "motion/react"; // Fixed import
+import { motion } from "motion/react";
 import { Search, X } from 'lucide-react';
 import { useState, useRef, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-
 import SearchResults from "./SearchResults";
 
 const SearchBar = () => {
     const [visible, setVisible] = useState(false);
     const searchContentRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null); // Ref for input
     const [word, setWord] = useState<string>("");
 
     const handleClickOutside = (event: MouseEvent) => {
@@ -20,6 +20,7 @@ const SearchBar = () => {
     useEffect(() => {
         if (visible) {
             document.addEventListener("mousedown", handleClickOutside);
+            inputRef.current?.focus(); // Focus the input when visible
         } else {
             document.removeEventListener("mousedown", handleClickOutside);
         }
@@ -43,6 +44,7 @@ const SearchBar = () => {
                         <div className="bg-white rounded-md p-4 grid grid-cols-[1fr_auto] gap-4 items-center w-full">
                             <Input
                                 type="text"
+                                ref={inputRef} // Assign ref to input
                                 value={word}
                                 onChange={(e) => setWord(e.target.value)}
                                 className="text-sm md:text-base"

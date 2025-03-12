@@ -5,18 +5,19 @@ import { Link } from "@/i18n/navigation";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { UserRound } from 'lucide-react';
-import { ShoppingBag } from 'lucide-react';
+import { UserRound, ArrowLeft, ShoppingBag } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import MegaMenuItem from "./MegaMenuItem";
 import MegaMenuLastItem from "./MegaMenuLastItem";
+import { useTranslations } from "next-intl";
 
 type MenuItems = Header['menuItems'];
 type MenuItem = MenuItems[number];
 
 const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
     const [selectedLink, setSelectedLink] = useState<MenuItem | null>(null);
+    const t = useTranslations("Megamenu")
 
     const handleItemClick = (item: MenuItem) => {
         setSelectedLink(selectedLink?.label === item.label ? null : item);
@@ -65,9 +66,10 @@ const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
                         }}
                         transition={{ duration: 0.3 }}
                     >
-                        <button onClick={handleGoBack} className="text-gray-700 p-2 border border-transparent rounded-md">
-                            Înapoi
-                        </button>
+                        <div onClick={handleGoBack} className="text-gray-700 p-2 rounded-md flex justify-center items-center gap-2 cursor-pointer">
+                            <ArrowLeft width={20} />
+                            <span>{t('back')}</span>
+                        </div>
                         {selectedLink.subItems.map((element, index) => (
                             <MegaMenuLastItem key={index} item={element} locale={locale} />
                         ))}

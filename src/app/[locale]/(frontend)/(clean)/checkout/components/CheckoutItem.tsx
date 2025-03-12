@@ -39,7 +39,7 @@ const CheckoutItem = ({ item }: Props) => {
                 </div>
             </div>
             <div className="flex flex-col justify-between gap-1 flex-1 md:flex-auto text-nowrap">
-                <div className="line-clamp-2 text-sm md:hidden">
+                <div className="line-clamp-2 text-wrap text-sm md:hidden">
                     {item.name}
                 </div>
                 {

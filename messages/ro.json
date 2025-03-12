@@ -11,7 +11,8 @@
         "signup": "Crează cont",
         "errors": {
             "email": "Emailul trebuie să aibă cel puțin 2 caractere.",
-            "password": "Parola trebuie să aibă cel puțin 2 caractere."
+            "password": "Parola trebuie să aibă cel puțin 2 caractere.",
+            "incorrectPassword": "Datele introduse sunt greșite"
         }
     },
     "SignupPage": {
@@ -19,6 +20,7 @@
         "firstName": "Nume",
         "secondName": "Prenume",
         "email": "Email",
+        "tel": "Telefon",
         "password": "Parolă",
         "confirmPassword": "Confirmă Parola",
         "submit": "Crează cont",
@@ -30,7 +32,10 @@
             "email": "Adresă de email invalidă.",
             "password": "Parola trebuie să aibă între 6 și 100 de caractere.",
             "confirmPassword": "Parolele nu se potrivesc.",
-            "passwordExceed": "Parola nu poate avea mai multe de 100 de caractere"
+            "passwordExceed": "Parola nu poate avea mai multe de 100 de caractere",
+            "phoneMin": "Numărul de telefon trebuie să aibă cel puțin 5 caractere.",
+            "phoneMax": "Numărul de telefon trebuie să aibă cel mult 15 caractere.",
+            "phoneInvalid": "Numărul de telefon nu este valid pentru Republica Moldova."
         }
     },
     "CartPage": {
@@ -102,7 +107,7 @@
         "phone": "Telefon",
         "message": "Mesaj",
         "terms": "Am luat la cunoștință despre politica de confidentialitate privind prelucrarea datelor cu caracter personal",
-        "submit": "Crează cont",
+        "submit": "Trimite",
         "errors": {
             "nameMin": "Numele trebuie să aibă cel puțin 2 caractere.",
             "nameMax": "Numele trebuie să aibă cel mult 50 de caractere.",
@@ -111,6 +116,7 @@
             "email": "Adresa de email este invalidă.",
             "phoneMin": "Numărul de telefon trebuie să aibă cel puțin 5 caractere.",
             "phoneMax": "Numărul de telefon trebuie să aibă cel mult 15 caractere.",
+            "phoneInvalid": "Numărul de telefon nu este valid pentru Republica Moldova.",
             "messageMin": "Mesajul trebuie să aibă cel puțin 10 caractere.",
             "messageMax": "Mesajul trebuie să aibă cel mult 500 de caractere.",
             "terms": "Trebuie să fii de acord cu termenii."
@@ -187,5 +193,8 @@
     },
     "Footer": {
         "ourAddress": "Adresa noastră"
+    },
+    "Megamenu": {
+        "back": "Înapoi"
     }
 }

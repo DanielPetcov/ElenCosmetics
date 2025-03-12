@@ -15,7 +15,8 @@ export const Users: CollectionConfig = {
       return {id: {equals: req.user?.id}}
     },
     update: ({req}) => req.user?.role === 'admin',
-    delete: ({req}) => req.user?.role == 'admin'
+    delete: ({req}) => req.user?.role == 'admin',
+    create: () => true
   },
 
   fields: [

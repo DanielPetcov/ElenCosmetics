@@ -6,10 +6,11 @@ import { Product } from "@/payload-types";
 import { useState, useEffect } from "react";
 
 import SearchItem from './SearchItem';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () => void }) => {
     const t = useTranslations('Searchbar')
+    const locale = useLocale();
     const [results, setResults] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
 
@@ -56,7 +57,7 @@ const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () =>
             ) : results && results.length > 0 ? (
                 results.map((doc: Product, index) =>
                     <div key={index}>
-                        <SearchItem product={doc} onItemClick={onItemClick} />
+                        <SearchItem locale={locale} product={doc} onItemClick={onItemClick} />
                     </div>)
             ) : (
                 <div>{t('noresults')}</div>

@@ -18,6 +18,10 @@ export const SignUpFormSchema = () => {
         }).max(100, {
             message: t('passwordExceed')
         }),
+        phone: z.string()
+            .regex(/^(0\d{8}|\+373\d{8})$/, t('phoneInvalid'))
+            .min(9, t('phoneMin'))
+            .max(12, t('phoneMax')),
         confirmPassword: z.string().min(6, {
             message: t('password')
         }).max(100, {
