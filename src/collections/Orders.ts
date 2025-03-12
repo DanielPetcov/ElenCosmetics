@@ -15,7 +15,7 @@ export const Orders: CollectionConfig = {
             label: 'Customer (User ID)',
             type: 'relationship',
             relationTo: 'users',
-            required: false // This field is not required, because the user can checkout as a guestZZ
+            required: false
         },
         {
             name: 'guestInfo',
@@ -106,5 +106,8 @@ export const Orders: CollectionConfig = {
             type: 'date',
             defaultValue: () => new Date().toISOString(),
         },
-    ]
+    ],
+    access: {
+        create: () => true
+    }
 };
