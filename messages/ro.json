@@ -114,6 +114,7 @@
         "email": "Email",
         "phone": "Telefon",
         "message": "Mesaj",
+        "loading": "Se trimite...",
         "terms": "Am luat la cunoștință despre politica de confidentialitate privind prelucrarea datelor cu caracter personal",
         "submit": "Trimite",
         "errors": {

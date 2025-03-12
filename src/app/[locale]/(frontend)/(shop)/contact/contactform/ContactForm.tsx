@@ -20,6 +20,7 @@ import FailedDialog from "../../../components/Dialogs/FaildedDialog";
 import { useTranslations } from "next-intl";
 const ContactForm = () => {
     const [orderStatus, setOrderStatus] = useState<'success' | 'error' | null>(null);
+    const [isLoading, setIsLoading] = useState(false);
     const t = useTranslations("ContactPage")
 
     const defaultValues: ContactFormValues = {
@@ -48,6 +49,35 @@ const ContactForm = () => {
 
     async function onSubmit(values: ContactFormValues) {
         setOrderStatus('success');
+
+        const messageData = {
+            customer: {
+                name: values.name,
+                secondName: values.secondName,
+                email: values.email,
+                phone: values.phone
+            },
+            message: values.message
+        }
+
+        try {
+            const response = await fetch('/api/customerContactMessages', {
+                method: 'POST',
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(messageData)
+            });
+            if (response.ok) {
+                setOrderStatus('success');
+            } else {
+                setOrderStatus('error');
+            }
+        } catch (error) {
+            setOrderStatus('error');
+            console.error("Order Failed", error);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -80,7 +110,9 @@ const ContactForm = () => {
                         />
                         {form.formState.errors.terms && <FormMessage>{form.formState.errors.terms.message}</FormMessage>}
                     </div>
-                    <Button type="submit" className="bg-custompink hover:bg-pink-400 focus:bg-pink-500 py-6 text-sm md:text-base">{t('submit')}</Button>
+                    <Button type="submit" className="bg-custompink hover:bg-pink-400 focus:bg-pink-500 py-6 text-sm md:text-base">
+                        {isLoading ? t('loading') : t('submit')}
+                    </Button>
                     <Dialog open={orderStatus === 'success' || orderStatus === 'error'}>
                         {orderStatus === 'success' ?
                             <SuccessDialog

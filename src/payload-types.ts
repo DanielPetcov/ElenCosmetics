@@ -74,6 +74,7 @@ export interface Config {
     termsPage: TermsPage;
     volume: Volume;
     brand: Brand;
+    customerContactMessages: CustomerContactMessage;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -93,6 +94,7 @@ export interface Config {
     termsPage: TermsPageSelect<false> | TermsPageSelect<true>;
     volume: VolumeSelect<false> | VolumeSelect<true>;
     brand: BrandSelect<false> | BrandSelect<true>;
+    customerContactMessages: CustomerContactMessagesSelect<false> | CustomerContactMessagesSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
     'payload-migrations': PayloadMigrationsSelect<false> | PayloadMigrationsSelect<true>;
@@ -340,6 +342,22 @@ export interface TermsPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customerContactMessages".
+ */
+export interface CustomerContactMessage {
+  id: string;
+  customer: {
+    name: string;
+    secondName: string;
+    email: string;
+    phone: string;
+  };
+  message: string;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
 export interface PayloadLockedDocument {
@@ -380,6 +398,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'brand';
         value: string | Brand;
+      } | null)
+    | ({
+        relationTo: 'customerContactMessages';
+        value: string | CustomerContactMessage;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -586,6 +608,23 @@ export interface VolumeSelect<T extends boolean = true> {
 export interface BrandSelect<T extends boolean = true> {
   slug?: T;
   assignProducts?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customerContactMessages_select".
+ */
+export interface CustomerContactMessagesSelect<T extends boolean = true> {
+  customer?:
+    | T
+    | {
+        name?: T;
+        secondName?: T;
+        email?: T;
+        phone?: T;
+      };
+  message?: T;
   updatedAt?: T;
   createdAt?: T;
 }

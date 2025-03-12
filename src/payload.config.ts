@@ -19,6 +19,7 @@ import { Orders } from './collections/Orders'
 import { Volume } from './collections/Volume'
 import { Brand } from './collections/Brand'
 import { Discounts } from './collections/Discounts'
+import { CustomerContactMessages } from './collections/CustomerContactMessages'
 
 // globals
 import { Footer } from './globals/Footer'
@@ -38,15 +39,16 @@ export default buildConfig({
     },
   },
   collections: [
-    Users, 
-    Media, 
-    Products, 
+    Users,
+    Media,
+    Products,
     Collection,
     Orders,
     Discounts,
     TermsPage,
     Volume,
-    Brand
+    Brand,
+    CustomerContactMessages
   ],
   globals: [
     Footer,
@@ -56,7 +58,7 @@ export default buildConfig({
     Contact
   ],
   editor: lexicalEditor({
-    features: ({defaultFeatures}) => [
+    features: ({ defaultFeatures }) => [
       ...defaultFeatures
     ]
   }),
@@ -73,7 +75,7 @@ export default buildConfig({
     s3Storage({
       collections: {
         media: {
-          generateFileURL: ({filename}) => {
+          generateFileURL: ({ filename }) => {
             return `${process.env.S3_PUBLIC_BUCKET_URL}/elen-cosmetic/${filename}`
           },
           disableLocalStorage: true,
@@ -82,8 +84,8 @@ export default buildConfig({
       bucket: process.env.S3_BUCKET || '',
       config: {
         credentials: {
-          accessKeyId: process.env.S3_ACCESS_KEY_ID  || '',
-          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY_ID || '' ,
+          accessKeyId: process.env.S3_ACCESS_KEY_ID || '',
+          secretAccessKey: process.env.S3_SECRET_ACCESS_KEY_ID || '',
         },
         region: 'auto',
         endpoint: process.env.S3_ENDPOINT || ''
@@ -95,7 +97,7 @@ export default buildConfig({
       {
         label: 'Romanian',
         code: 'ro'
-      }, 
+      },
       {
         label: 'Russian',
         code: 'ru'
