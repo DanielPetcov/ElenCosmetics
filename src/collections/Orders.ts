@@ -1,4 +1,9 @@
-import { CollectionConfig } from "payload";
+import { CollectionConfig, PayloadRequest } from "payload";
+import { Order } from "@/payload-types";
+const path = require('path')
+const fs = require('fs')
+const ejs = require('ejs')
+
 
 export const Orders: CollectionConfig = {
     slug: 'orders',
@@ -85,11 +90,11 @@ export const Orders: CollectionConfig = {
             type: 'group',
             fields: [
                 { name: 'code', type: 'text', required: false },
-                { 
-                    name: 'type', 
-                    type: 'select', 
-                    options: ['fixed', 'percent'], 
-                    required: false 
+                {
+                    name: 'type',
+                    type: 'select',
+                    options: ['fixed', 'percent'],
+                    required: false
                 },
                 { name: 'value', type: 'number', required: false },
             ],
@@ -109,5 +114,80 @@ export const Orders: CollectionConfig = {
     ],
     access: {
         create: () => true
-    }
+    },
+    hooks: {
+        // Trigger this after an order is created
+        afterChange: [
+            async ({ doc, operation, req }: { doc: Order, operation: any, req: PayloadRequest }) => {
+                if (operation === 'create') {
+                    const currentDate = new Date();
+                    const month = currentDate.toLocaleString('default', { month: 'long' });
+                    const year = currentDate.getFullYear();
+
+                    // Replace with actual recipient email and subject
+                    let recipientEmail = ''
+                    if (doc.customer && typeof doc.customer === 'string') {
+                        try {
+                            const customer = await req.payload.findByID({
+                                collection: 'users',
+                                id: doc.customer,
+                                depth: 1
+                            })
+
+                            if (customer && customer.email) {
+                                recipientEmail = customer.email
+                            }
+                        } catch (error) {
+                            console.error('Error fetching customer:', error);
+                        }
+
+                    }
+                    if (!recipientEmail && doc.guestInfo && doc.guestInfo.email) {
+                        recipientEmail = doc.guestInfo.email;
+                    }
+
+                    if (!recipientEmail) {
+                        console.error('No email found for the order');
+                        return; // Don't send email if no recipient email is found
+                    }
+
+                    const items = await Promise.all(doc.items.map(async (item) => {
+                        const product = await req.payload.findByID({
+                            collection: 'products',
+                            id: typeof item.product === 'string' ? item.product : item.product.id,
+                            locale: 'ro', // specify the locale
+                        });
+
+                        return {
+                            productName: product.title, // assuming `title` is localized
+                            quantity: item.quantity,
+                            totalPrice: item.totalPrice,
+                        };
+                    }));
+
+                    const templatePath = path.resolve(process.cwd(), 'src', 'app', 'utils', 'orderConfirmation', 'orderConfirmation.html');
+                    const htmlContent = await ejs.renderFile(templatePath, {
+                        month,
+                        year,
+                        items,
+                        totalAmount: doc.totalAmount,
+                    });
+
+                    const subject = 'Order Confirmation';
+
+                    try {
+                        req.payload.sendEmail({
+                            from: 'noreply@elencosmetic.com',
+                            to: recipientEmail,
+                            subject: subject,
+                            html: htmlContent,
+                        });
+                        console.log('Order confirmation email sent!');
+                    } catch (error) {
+                        console.error('Error sending email:', error);
+                    }
+                }
+            },
+        ],
+    },
 };

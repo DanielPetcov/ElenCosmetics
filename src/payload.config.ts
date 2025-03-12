@@ -7,6 +7,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { s3Storage } from '@payloadcms/storage-s3'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 // collections
 import { Users } from './collections/Users'
@@ -101,5 +102,17 @@ export default buildConfig({
       }
     ],
     defaultLocale: 'ro'
-  }
+  },
+  email: nodemailerAdapter({
+    defaultFromAddress: 'noreply@elencosmetic.com',
+    defaultFromName: 'ElenCosmetic',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: {
+        user: '87d670002@smtp-brevo.com', // Keep this as the SMTP login
+        pass: process.env.SMTP_PASS,
+      },
+    },
+  }),
 })

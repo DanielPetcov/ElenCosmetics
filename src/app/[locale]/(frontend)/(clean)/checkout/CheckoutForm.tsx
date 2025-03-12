@@ -1,13 +1,12 @@
 'use client'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Form } from "@/components/ui/form";
 import { useCartStore } from '../../useCartStore';
 import { CheckoutFormValues, FormSchema } from "./CheckoutSchema";
 import DeliveryForm from './forms/DeliveryForm';
 import PaymentForm from './forms/PaymentForm';
-
 const CheckoutForm = ({ userId }: { userId: string | null }) => {
     const items = useCartStore(state => state.items);
     const discount = useCartStore(state => state.discount);
@@ -25,7 +24,7 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
 
     const totalAmount = subtotal - discountAmount;
 
-    const defaultValues: CheckoutFormValues = {
+    const defaultValues: CheckoutFormValues = useMemo(() => ({
         name: '',
         phone: '',
         email: '',
@@ -49,7 +48,7 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
             type: "percent",
             value: 0
         }
-    };
+    }), [userId, items, discount, subtotal, totalAmount])
 
     const form = useForm<CheckoutFormValues>({
         resolver: zodResolver(schema),
@@ -80,7 +79,7 @@ const CheckoutForm = ({ userId }: { userId: string | null }) => {
                 value: 0
             }
         });
-    }, [items, discount]);
+    }, [items, discount, form, defaultValues]);
 
     async function onSubmit(values: CheckoutFormValues) {
         setIsLoading(true);
