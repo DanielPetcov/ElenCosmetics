@@ -48,7 +48,7 @@ const ProductGallery = ({ featuredImg, media }: Props) => {
         <PhotoProvider>
             <div className="flex flex-col gap-5">
                 {/* Swiper for Thumbnail Navigation */}
-                {gallery.length > 1 && (
+                {gallery.length > 0 && (
                     <div className="max-w-full lg:max-w-[600px] 2xl:max-w-full">
                         <Swiper
                             spaceBetween={10}

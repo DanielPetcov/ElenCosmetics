@@ -17,7 +17,7 @@ interface Props {
 
 const ProductAccordion = ({ description, ingredients }: Props) => {
     return (
-        <Accordion type="single" collapsible className="w-full">
+        <Accordion type="multiple" className="w-full">
             {description ?
                 <AccordionItem value="item-1" className="border-none" >
                     <AccordionTrigger className="text-xl hover:underline-none">Descriere</AccordionTrigger>

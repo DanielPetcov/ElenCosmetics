@@ -195,6 +195,7 @@ export interface Media {
 export interface Product {
   id: string;
   title: string;
+  productCode?: string | null;
   featuredImg: string | Media;
   media?: (string | Media)[] | null;
   brandRelation?: (string | null) | Brand;
@@ -495,6 +496,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
+  productCode?: T;
   featuredImg?: T;
   media?: T;
   brandRelation?: T;

@@ -1,9 +1,9 @@
-const Product = () => {
+const Page = () => {
     return (
-        <div className="text-gray-500">
-            product
+        <div className="text-gray-700">
+            Invalid url
         </div>
     )
 }
 
-export default Product;
+export default Page;

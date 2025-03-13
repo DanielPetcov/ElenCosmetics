@@ -12,12 +12,17 @@ export const Products: CollectionConfig = {
             localized: true
         },
         {
+            name: 'productCode',
+            label: 'CodProdus',
+            type: "text"
+        },
+        {
             name: 'featuredImg',
             label: 'FeaturedImg',
             type: 'upload',
             relationTo: 'media',
             filterOptions: {
-                mimeType: { contains: 'image'}
+                mimeType: { contains: 'image' }
             },
             required: true
         },
