@@ -28,9 +28,9 @@ export default async function HomePage({
             case 'productList':
               return <ProductList locale={locale} key={index} title={block.title} category={block.category} />
             case 'imgslider':
-              return <ImgSlider key={index} slides={block.slides} />
+              return <ImgSlider locale={locale} key={index} slides={block.slides} />
             case 'general-big-categories':
-              return <GeneralCategories key={index} categories={block.categories} />
+              return <GeneralCategories locale={locale} key={index} categories={block.categories} />
             default:
               return null
           }

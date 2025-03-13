@@ -25,6 +25,9 @@ const GeneralPage = async ({
         locale: locale as 'ro' | 'ru' || 'all'
     })
 
+    if (!data.docs[0]) {
+        return <div>missing data</div>
+    }
     const title = data.docs[0].title
 
     return (

@@ -143,10 +143,10 @@ const GridProducts = ({
     const renderSkeletons = () => {
         return Array.from({ length: 20 }).map((_, index) => (
             <div key={index} className='flex flex-col gap-2'>
-                <Skeleton className="h-[125px] w-[250px] rounded-xl" />
+                <Skeleton className="h-[125px] w-[170px] md:w-[220px] lg:w-[250px] rounded-xl" />
                 <div className="space-y-2">
-                    <Skeleton className="h-4 w-[250px]" />
-                    <Skeleton className="h-4 w-[200px]" />
+                    <Skeleton className="h-16 w-full md:w-[220px] lg:w-[250px]" />
+                    <Skeleton className="h-10 w-full" />
                 </div>
             </div>
         ))

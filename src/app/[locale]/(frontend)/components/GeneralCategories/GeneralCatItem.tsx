@@ -6,19 +6,20 @@ type Category = Categories[number];
 
 interface Props {
     category: Category;
+    locale: string;
 }
 
 import Link from 'next/link';
 import Image from 'next/image';
 
-const GeneralCatItem = ({ category }: Props) => {
+const GeneralCatItem = ({ category, locale }: Props) => {
     let link: string = '#';
 
     if (category.linkType === 'internal' && category.internalLink) {
         if (category.internalLink.relationTo === 'collection') {
-            link = `/collection/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.title}`;
+            link = `/${locale}/collection/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.id}`;
         } else if (category.internalLink.relationTo === 'products') {
-            link = `/product/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.title}`;
+            link = `/${locale}/product/${typeof category.internalLink.value === 'string' ? category.internalLink.value : category.internalLink.value.id}`;
         }
     } else if (category.linkType === 'external' && category.externalUrl) {
         link = category.externalUrl;

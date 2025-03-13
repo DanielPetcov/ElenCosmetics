@@ -25,7 +25,7 @@ const CollectionBody = ({ locale, data, id }: Props) => {
 
     return (
         <>
-            <div className="flex justify-between items-baseline text-gray-700">
+            <div className="flex justify-between flex-wrap gap-5 items-baseline text-gray-700">
                 <h1 className="font-semibold text-3xl">{data.title}</h1>
                 <CollectionSelector sort={sortType} setSortType={setSortType} />
             </div>

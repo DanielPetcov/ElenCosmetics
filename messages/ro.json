@@ -148,6 +148,7 @@
             "descending": "Preț descrescător"
         },
         "filters": {
+            "title": "Filtre",
             "byPrice": "Filtrează după preț",
             "minPrice": "Preț minim",
             "maxPrice": "Preț maxim",

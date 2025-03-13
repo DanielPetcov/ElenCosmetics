@@ -17,9 +17,10 @@ type Slides = ImgSliderBlock['slides'];
 
 interface ImgSliderProps {
     slides: Slides;
+    locale: string;
 }
 
-const ImgSlider = ({ slides }: ImgSliderProps) => {
+const ImgSlider = ({ slides, locale }: ImgSliderProps) => {
     return (
         <div className='flex flex-col gap-3 md:gap-6'>
             <div className='max-h-[1000px] overflow-hidden'>
@@ -43,7 +44,13 @@ const ImgSlider = ({ slides }: ImgSliderProps) => {
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={index}>
-                            <ImgSlide img={slide.img} url='string' />
+                            <ImgSlide
+                                locale={locale}
+                                img={slide.img}
+                                linkType={slide.linkType}
+                                internalLink={slide.internalLink}
+                                externalUrl={slide.externalUrl}
+                            />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -60,7 +67,7 @@ const ImgSlider = ({ slides }: ImgSliderProps) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ImgSlider
+export default ImgSlider;

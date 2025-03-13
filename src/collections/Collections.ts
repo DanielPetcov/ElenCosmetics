@@ -18,5 +18,5 @@ export const Collection: CollectionConfig = {
     ],
     admin: {
         useAsTitle: 'title'
-    }
+    },
 }
