@@ -256,6 +256,7 @@ export interface Collection {
   id: string;
   title: string;
   products?: (string | Product)[] | null;
+  all_products?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -517,6 +518,7 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface CollectionSelect<T extends boolean = true> {
   title?: T;
   products?: T;
+  all_products?: T;
   updatedAt?: T;
   createdAt?: T;
 }
