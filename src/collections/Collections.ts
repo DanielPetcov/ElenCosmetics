@@ -16,6 +16,9 @@ export const Collection: CollectionConfig = {
             hasMany: true,
         }
     ],
+    access: {
+        read: () => true
+    },
     admin: {
         useAsTitle: 'title'
     },

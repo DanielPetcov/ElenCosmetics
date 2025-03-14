@@ -44,7 +44,6 @@ const GridProducts = ({
             const sortType = sort === 'ascending' ? 'price' : '-price';
             try {
                 const query = new URLSearchParams({
-                    'joins[relatedCollections][equals]': id.toString(),
                     locale: locale,
                     limit: limit.toString(),
                     page: page.toString(),
@@ -70,7 +69,7 @@ const GridProducts = ({
 
                 query.append('depth', '2');
 
-                const response = await fetch(`/api/products?${query.toString()}`, {
+                const response = await fetch(`/api/collection/${id}?joins[products]${query.toString()}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -81,9 +80,8 @@ const GridProducts = ({
                     throw new Error(`Error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log(data);
-                setProducts(data.docs);
-                setTotalPages(data.totalPages);
+                setProducts(data.products);
+                setTotalPages(data.products.lenght);
             } catch (error) {
                 console.error('Failed to fetch products:', error);
             } finally {
@@ -98,36 +96,40 @@ const GridProducts = ({
         setVolumes((prevVolumes: VolumeType[]) => {
             const newVolumes = [...prevVolumes];
 
-            products.forEach((product) => {
-                const volume = product.volumeRelation;
+            if (products) {
+                products.forEach((product) => {
+                    const volume = product.volumeRelation;
 
-                if (volume && typeof volume === 'object' && 'id' in volume && 'slug' in volume) {
-                    if (!newVolumes.some((v) => v.id === volume.id)) {
-                        newVolumes.push({
-                            id: volume.id,
-                            slug: volume.slug,
-                        });
+                    if (volume && typeof volume === 'object' && 'id' in volume && 'slug' in volume) {
+                        if (!newVolumes.some((v) => v.id === volume.id)) {
+                            newVolumes.push({
+                                id: volume.id,
+                                slug: volume.slug,
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
 
             return newVolumes;
         });
         setBrands((prevBrands: BrandType[]) => {
             const newBrands = [...prevBrands];
 
-            products.forEach((product) => {
-                const brand = product.brandRelation;
+            if (products) {
+                products.forEach((product) => {
+                    const brand = product.brandRelation;
 
-                if (brand && typeof brand === 'object' && 'id' in brand && 'slug' in brand) {
-                    if (!newBrands.some((v) => v.id === brand.id)) {
-                        newBrands.push({
-                            id: brand.id,
-                            slug: brand.slug,
-                        });
+                    if (brand && typeof brand === 'object' && 'id' in brand && 'slug' in brand) {
+                        if (!newBrands.some((v) => v.id === brand.id)) {
+                            newBrands.push({
+                                id: brand.id,
+                                slug: brand.slug,
+                            });
+                        }
                     }
-                }
-            });
+                });
+            }
 
             return newBrands;
         });
@@ -150,6 +152,10 @@ const GridProducts = ({
                 </div>
             </div>
         ))
+    }
+
+    if (!products) {
+        return <div>no products</div>
     }
 
     return (
