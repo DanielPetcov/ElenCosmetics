@@ -64,6 +64,7 @@ export interface Config {
   auth: {
     users: UserAuthOperations;
   };
+  blocks: {};
   collections: {
     users: User;
     media: Media;
@@ -220,9 +221,10 @@ export interface Product {
   stock?: number | null;
   volumeRelation?: (string | null) | Volume;
   relatedCollections?: {
-    docs?: (string | Collection)[] | null;
-    hasNextPage?: boolean | null;
-  } | null;
+    docs?: (string | Collection)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
   updatedAt: string;
   createdAt: string;
 }
