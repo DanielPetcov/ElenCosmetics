@@ -22,8 +22,8 @@ export const Contact: GlobalConfig = {
                     type: 'select',
                     required: true,
                     options: [
-                        {label: 'Link', value: 'link'},
-                        {label: 'Richtext', value: 'richtext'}
+                        { label: 'Link', value: 'link' },
+                        { label: 'Richtext', value: 'richtext' }
                     ]
                 },
                 {
@@ -36,8 +36,8 @@ export const Contact: GlobalConfig = {
                             label: 'Tip',
                             type: 'select',
                             options: [
-                                {label: 'Facebook', value: 'facebook'},
-                                {label: 'Instagram', value: 'instagram'}
+                                { label: 'Facebook', value: 'facebook' },
+                                { label: 'Instagram', value: 'instagram' }
                             ]
                         },
                         {
@@ -70,6 +70,6 @@ export const Contact: GlobalConfig = {
             ],
             minRows: 1,
         },
-        
+
     ]
 }

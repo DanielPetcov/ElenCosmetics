@@ -2,14 +2,23 @@ import type { CollectionConfig } from "payload";
 
 export const Products: CollectionConfig = {
     slug: 'products',
+    labels: {
+        plural: "Produse",
+        singular: "Produs"
+    },
+    admin: {
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'productCode', 'featuredImg'],
+        listSearchableFields: ['title', 'productCode']
+    },
     fields: [
         {
             name: 'title',
-            label: 'Title',
+            label: 'Titlu',
             type: 'text',
             index: true,
             required: true,
-            localized: true
+            localized: true,
         },
         {
             name: 'productCode',
@@ -18,7 +27,7 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'featuredImg',
-            label: 'FeaturedImg',
+            label: 'Imagine Principala',
             type: 'upload',
             relationTo: 'media',
             filterOptions: {
@@ -41,13 +50,13 @@ export const Products: CollectionConfig = {
         },
         {
             name: 'price',
-            label: 'Price',
+            label: 'Pret',
             type: 'number',
             required: true
         },
         {
             name: 'compare_price',
-            label: 'Compare price',
+            label: 'Pret comparatie',
             type: 'number',
         },
         {
@@ -83,7 +92,4 @@ export const Products: CollectionConfig = {
     access: {
         read: () => true
     },
-    admin: {
-        useAsTitle: 'title'
-    }
 }

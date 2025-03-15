@@ -2,6 +2,10 @@ import type { CollectionConfig } from 'payload'
 
 export const Users: CollectionConfig = {
   slug: 'users',
+  labels: {
+    plural: "Utilizatori",
+    singular: "Utilizator"
+  },
   admin: {
     useAsTitle: 'email',
     defaultColumns: ['email', 'role']
@@ -9,13 +13,13 @@ export const Users: CollectionConfig = {
   auth: true,
 
   access: {
-    admin: ({req}) => req.user?.role === 'admin',
-    read: ({req}) => {
-      if(req.user?.role === 'admin') return true;
-      return {id: {equals: req.user?.id}}
+    admin: ({ req }) => req.user?.role === 'admin',
+    read: ({ req }) => {
+      if (req.user?.role === 'admin') return true;
+      return { id: { equals: req.user?.id } }
     },
-    update: ({req}) => req.user?.role === 'admin',
-    delete: ({req}) => req.user?.role == 'admin',
+    update: ({ req }) => req.user?.role === 'admin',
+    delete: ({ req }) => req.user?.role == 'admin',
     create: () => true
   },
 
@@ -27,8 +31,8 @@ export const Users: CollectionConfig = {
       required: true,
       defaultValue: 'customer',
       options: [
-        {label: 'Customer', value: 'customer'},
-        {label: 'Admin', value: 'admin'}
+        { label: 'Customer', value: 'customer' },
+        { label: 'Admin', value: 'admin' }
       ]
     },
     {

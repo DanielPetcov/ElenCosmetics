@@ -6,24 +6,32 @@ import ejs from 'ejs';
 
 export const Orders: CollectionConfig = {
     slug: 'orders',
+    labels: {
+        plural: "Comenzi",
+        singular: "Comanda"
+    },
+    admin: {
+        useAsTitle: 'orderNumber',
+        defaultColumns: ['orderNumber', 'status', 'createdAt']
+    },
     fields: [
         {
             name: 'orderNumber',
-            label: 'Order Number',
+            label: 'Nr.comanda',
             type: 'number',
             unique: true,
             required: true
         },
         {
             name: 'customer',
-            label: 'Customer (User ID)',
+            label: 'ID utilizator',
             type: 'relationship',
             relationTo: 'users',
             required: false
         },
         {
             name: 'guestInfo',
-            label: 'Guest Information',
+            label: 'Informatie utilizator anonim',
             type: 'group',
             fields: [
                 { name: 'name', type: 'text' },
@@ -33,24 +41,27 @@ export const Orders: CollectionConfig = {
         },
         {
             name: 'items',
-            label: 'Ordered Items',
+            label: 'Produsele comandate',
             type: 'array',
             required: true,
             fields: [
                 {
                     name: 'product',
+                    label: "Produs",
                     type: 'relationship',
                     relationTo: 'products',
                     required: true
                 },
                 {
                     name: 'quantity',
+                    label: "Cantitate",
                     type: 'number',
                     min: 1,
                     required: true
                 },
                 {
                     name: 'totalPrice',
+                    label: 'Pret total',
                     type: 'number',
                     required: true
                 }
@@ -58,7 +69,7 @@ export const Orders: CollectionConfig = {
         },
         {
             name: 'shippingAddress',
-            label: 'Shipping Address',
+            label: 'Adresa de livrare',
             type: 'group',
             fields: [
                 { name: 'fullName', type: 'text', required: true },
@@ -70,22 +81,25 @@ export const Orders: CollectionConfig = {
         },
         {
             name: 'subtotal',
+            label: 'Subtotal',
             type: 'number',
             required: true,
         },
         {
             name: 'shippingCost',
+            label: "Cost livrare",
             type: 'number',
             required: true,
         },
         {
             name: 'totalAmount',
+            label: "Suma totala",
             type: 'number',
             required: true,
         },
         {
             name: 'discount',
-            label: 'Discount',
+            label: 'Reducere',
             type: 'group',
             fields: [
                 { name: 'code', type: 'text', required: false },
@@ -100,6 +114,7 @@ export const Orders: CollectionConfig = {
         },
         {
             name: 'status',
+            label: "Status",
             type: 'select',
             required: true,
             defaultValue: 'pending',
@@ -107,6 +122,7 @@ export const Orders: CollectionConfig = {
         },
         {
             name: 'createdAt',
+            label: "Comanda a fost facuta",
             type: 'date',
             defaultValue: () => new Date().toISOString(),
         },

@@ -2,22 +2,32 @@ import type { CollectionConfig } from "payload";
 
 export const Collection: CollectionConfig = {
     slug: 'collection',
+    labels: {
+        plural: "Colectii",
+        singular: "Colectie"
+    },
+    admin: {
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'products'],
+    },
     fields: [
         {
             name: 'title',
+            label: 'Titlu',
             type: 'text',
             required: true,
             localized: true
         },
         {
             name: 'products',
+            label: "Produse",
             type: 'relationship',
             relationTo: 'products',
             hasMany: true,
         },
         {
             name: 'all_products',
-            label: "Add all products on site",
+            label: "Adauga toate produsele de pe site",
             type: "checkbox"
         }
     ],
@@ -40,8 +50,5 @@ export const Collection: CollectionConfig = {
                 return data;
             }
         ]
-    },
-    admin: {
-        useAsTitle: 'title'
     },
 };

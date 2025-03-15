@@ -2,6 +2,14 @@ import type { CollectionConfig } from "payload";
 
 export const Brand: CollectionConfig = {
     slug: 'brand',
+    labels: {
+        plural: "Branduri",
+        singular: "Brand"
+    },
+    admin: {
+        useAsTitle: 'slug',
+        defaultColumns: ['slug', 'createdAt']
+    },
     fields: [
         {
             name: 'slug',
@@ -14,12 +22,12 @@ export const Brand: CollectionConfig = {
             type: 'relationship',
             label: 'Produse atribuite',
             relationTo: 'products',
-            hasMany: true
+            hasMany: true,
+            admin: {
+                hidden: true
+            }
         }
     ],
-    admin: {
-        useAsTitle: 'slug'
-    },
     access: {
         read: () => true,
     }

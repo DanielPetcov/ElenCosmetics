@@ -5,6 +5,7 @@ import GeneralBigCategories from "@/blocks/GeneralBigCategories/GeneralBigCatego
 
 export const HomePage: GlobalConfig = {
     slug: 'homepage',
+    label: "pagina principala",
     fields: [
         {
             name: 'Layout',

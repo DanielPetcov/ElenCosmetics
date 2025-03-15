@@ -2,6 +2,14 @@ import type { CollectionConfig } from "payload";
 
 export const TermsPage: CollectionConfig = {
     slug: 'termsPage',
+    labels: {
+        plural: "Pagini de termeni",
+        singular: "Pagina de termeni"
+    },
+    admin: {
+        useAsTitle: 'title',
+        defaultColumns: ['title', 'urlTitle', 'updatedAt']
+    },
     fields: [
         {
             name: 'title',
@@ -23,7 +31,4 @@ export const TermsPage: CollectionConfig = {
             localized: true
         }
     ],
-    admin: {
-        useAsTitle: 'title'
-    }
 }

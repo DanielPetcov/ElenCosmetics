@@ -2,6 +2,13 @@ import type { CollectionConfig } from "payload";
 
 export const CustomerContactMessages: CollectionConfig = {
     slug: 'customerContactMessages',
+    labels: {
+        plural: "Mesajele de la contact",
+        singular: "Mesaj de la contact"
+    },
+    admin: {
+        defaultColumns: ['message', 'customer', 'createdAt']
+    },
     fields: [
         {
             name: 'customer',

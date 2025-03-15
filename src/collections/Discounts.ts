@@ -2,6 +2,10 @@ import type { CollectionConfig } from "payload";
 
 export const Discounts: CollectionConfig = {
   slug: 'discounts',
+  admin: {
+    useAsTitle: 'name',
+    defaultColumns: ['name', 'code', 'discountType', 'amount']
+  },
   fields: [
     {
       name: 'name',
