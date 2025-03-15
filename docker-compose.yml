@@ -16,15 +16,6 @@ services:
     env_file:
       - .env
 
-  steps:
-  - name: Use Latest Corepack
-    run: |
-      echo "Before: corepack version => $(corepack --version || echo 'not installed')"
-      npm install -g corepack@latest
-      echo "After : corepack version => $(corepack --version)"
-      corepack enable
-      pnpm --version
-
   # Ensure your DATABASE_URI uses 'mongo' as the hostname ie. mongodb://mongo/my-db-name
   mongo:
     image: mongo:latest
