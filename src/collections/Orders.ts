@@ -2,7 +2,7 @@ import { CollectionConfig, PayloadRequest } from "payload";
 import { Order } from "@/payload-types";
 import path from 'path';
 import ejs from 'ejs';
-
+import axios from 'axios'
 
 export const Orders: CollectionConfig = {
     slug: 'orders',
@@ -200,6 +200,15 @@ export const Orders: CollectionConfig = {
                         console.log('Order confirmation email sent!');
                     } catch (error) {
                         console.error('Error sending email:', error);
+                    }
+
+                    try {
+                        await axios.post("https://api.telegram.org/bot7621828283:AAGQ_1kxpeIo6xe8mv7OpmKg3XLzA8NJSrI/sendMessage", {
+                            chat_id: "455247765",
+                            text: `🛒 O comandă nouă a fost efectuată\n\nNr. comandă: ${doc.orderNumber}\nTotal: ${doc.totalAmount}mdl`
+                        });
+                    } catch (error) {
+                        console.error("Error sending message to Telegram:", error);
                     }
                 }
             },
