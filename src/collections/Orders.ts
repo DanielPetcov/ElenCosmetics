@@ -128,7 +128,9 @@ export const Orders: CollectionConfig = {
         },
     ],
     access: {
-        create: () => true
+        create: ({ req }) => {
+            return true; // Ensure guests can create orders
+        }
     },
     hooks: {
         // Trigger this after an order is created
