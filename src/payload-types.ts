@@ -823,6 +823,27 @@ export interface Header {
                 value: string | TermsPage;
               } | null);
           externalUrl?: string | null;
+          subSubItems?:
+            | {
+                label: string;
+                linkType: 'internal' | 'external';
+                internalLink?:
+                  | ({
+                      relationTo: 'collection';
+                      value: string | Collection;
+                    } | null)
+                  | ({
+                      relationTo: 'products';
+                      value: string | Product;
+                    } | null)
+                  | ({
+                      relationTo: 'termsPage';
+                      value: string | TermsPage;
+                    } | null);
+                externalUrl?: string | null;
+                id?: string | null;
+              }[]
+            | null;
           id?: string | null;
         }[]
       | null;
@@ -985,6 +1006,15 @@ export interface HeaderSelect<T extends boolean = true> {
               linkType?: T;
               internalLink?: T;
               externalUrl?: T;
+              subSubItems?:
+                | T
+                | {
+                    label?: T;
+                    linkType?: T;
+                    internalLink?: T;
+                    externalUrl?: T;
+                    id?: T;
+                  };
               id?: T;
             };
         id?: T;

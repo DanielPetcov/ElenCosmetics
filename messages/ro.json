@@ -139,6 +139,7 @@
         }
     },
     "CollectionPage": {
+        "noProducts": "Nu sunt produse momentan",
         "pagination": {
             "next": "Înainte",
             "prev": "Înapoi"

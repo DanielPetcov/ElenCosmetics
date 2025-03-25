@@ -35,7 +35,7 @@ export const Header: GlobalConfig = {
                     label: 'Link Type',
                     options: [
                         { label: 'Internal Link', value: 'internal' },
-                        { label: 'External Link', value: 'external' } 
+                        { label: 'External Link', value: 'external' }
                     ],
                     defaultValue: 'internal',
                     required: true
@@ -75,7 +75,7 @@ export const Header: GlobalConfig = {
                             label: 'Link Type',
                             options: [
                                 { label: 'Internal Link', value: 'internal' },
-                                { label: 'External Link', value: 'external' } 
+                                { label: 'External Link', value: 'external' }
                             ],
                             defaultValue: 'internal',
                             required: true
@@ -97,9 +97,51 @@ export const Header: GlobalConfig = {
                                 condition: (_, siblingData) => siblingData.linkType === 'external'
                             }
                         },
-                    ]
+                        {
+                            name: 'subSubItems',
+                            label: 'Sub Sub Items',
+                            type: 'array',
+                            fields: [
+                                {
+                                    name: 'label',
+                                    label: 'Label',
+                                    type: 'text',
+                                    required: true,
+                                    localized: true
+                                },
+                                {
+                                    name: 'linkType',
+                                    type: 'select',
+                                    label: 'Link Type',
+                                    options: [
+                                        { label: 'Internal Link', value: 'internal' },
+                                        { label: 'External Link', value: 'external' }
+                                    ],
+                                    defaultValue: 'internal',
+                                    required: true
+                                },
+                                {
+                                    name: 'internalLink',
+                                    type: 'relationship',
+                                    relationTo: ['collection', 'products', 'termsPage'],
+                                    required: true,
+                                    admin: {
+                                        condition: (_, siblingData) => siblingData.linkType === 'internal'
+                                    }
+                                },
+                                {
+                                    name: 'externalUrl',
+                                    type: 'text',
+                                    required: true,
+                                    admin: {
+                                        condition: (_, siblingData) => siblingData.linkType === 'external'
+                                    }
+                                }
+                            ]
+                        }
+                    ],
                 }
             ]
         }
     ]
-}
+};

@@ -8,6 +8,7 @@ import VolumeType from '@/app/[locale]/(frontend)/types/VolumeType';
 import BrandType from '@/app/[locale]/(frontend)/types/BrandType';
 
 import { Skeleton } from '@/components/ui/skeleton';
+import { useTranslations } from 'next-intl';
 interface Props {
     locale: string,
     id: number,
@@ -33,22 +34,56 @@ const GridProducts = ({
     selectedBrands,
     setBrands
 }: Props) => {
+    const [productsArray, setProductsArray] = useState<string[]>([]);
     const [products, setProducts] = useState<Product[]>([]);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);  // Store total pages
     const [loading, setLoading] = useState(true);
     const limit = 20;
+    const t = useTranslations('CollectionPage')
+
+    useEffect(() => {
+        const fetchCollection = async () => {
+            try {
+                const response = await fetch(`/api/collection/${id}?depth=0`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+                const data = await response.json();
+                console.log(data);
+                if (data.products) {
+                    setProductsArray(data.products);
+                }
+
+            } catch (error) {
+                console.error('Failed to fetch products:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchCollection();
+        console.log('have been fetched', sort);
+    }, [page, locale, id, sort, priceFilter]);
 
     useEffect(() => {
         const fetchProducts = async () => {
             const sortType = sort === 'ascending' ? 'price' : '-price';
             try {
                 const query = new URLSearchParams({
-                    locale: locale,
-                    limit: limit.toString(),
-                    page: page.toString(),
-                    sort: sortType,
+                    'where[id][in]': productsArray.join(','),  // Filter by IDs
+                    'sort': sortType,  // Sort dynamically
+                    'limit': limit.toString(),
+                    'page': page.toString(),
+                    'depth': '2',  // Include related fields
                 });
+
 
                 if (priceFilter) {
                     query.append('where[price][greater_than_equal]', priceFilter.min.toString());
@@ -67,9 +102,7 @@ const GridProducts = ({
                     query.append('where[brandRelation][equals]', idArray.toString()); // the id
                 }
 
-                query.append('depth', '2');
-
-                const response = await fetch(`/api/collection/${id}?joins[products]${query.toString()}`, {
+                const response = await fetch(`/api/products?${query.toString()}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -80,8 +113,10 @@ const GridProducts = ({
                     throw new Error(`Error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                setProducts(data.products);
-                setTotalPages(data.products.lenght);
+                if (data.docs) {
+                    setProducts(data.docs)
+                    setTotalPages(data.totalPages)
+                }
             } catch (error) {
                 console.error('Failed to fetch products:', error);
             } finally {
@@ -89,8 +124,10 @@ const GridProducts = ({
             }
         };
 
-        fetchProducts();
-    }, [page, locale, id, sort, priceFilter]);
+        if (productsArray.length > 0) {
+            fetchProducts();
+        }
+    }, [productsArray])
 
     useEffect(() => {
         setVolumes((prevVolumes: VolumeType[]) => {
@@ -154,8 +191,8 @@ const GridProducts = ({
         ))
     }
 
-    if (!products) {
-        return <div>no products</div>
+    if (products.length === 0) {
+        return <div>{t('noProducts')}</div>
     }
 
     return (

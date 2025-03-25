@@ -16,7 +16,8 @@ export const Collection: CollectionConfig = {
             label: 'Titlu',
             type: 'text',
             required: true,
-            localized: true
+            localized: true,
+            unique: true
         },
         {
             name: 'products',
@@ -24,6 +25,7 @@ export const Collection: CollectionConfig = {
             type: 'relationship',
             relationTo: 'products',
             hasMany: true,
+            index: true
         },
         {
             name: 'all_products',

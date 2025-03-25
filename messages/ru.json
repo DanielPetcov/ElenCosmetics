@@ -139,6 +139,7 @@
         }
     },
     "CollectionPage": {
+        "noProducts": "В данный момент нет товаров",
         "pagination": {
             "next": "Вперёд",
             "prev": "Назад"

@@ -11,20 +11,80 @@ import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import MegaMenuItem from "./MegaMenuItem";
 import MegaMenuLastItem from "./MegaMenuLastItem";
 import { useTranslations } from "next-intl";
-
+import { Collection, Product, TermsPage } from "@/payload-types";
 type MenuItems = Header['menuItems'];
-type MenuItem = MenuItems[number];
+type MenuItem = MenuItems[0];
+type SubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    subSubItems?: {
+        label: string;
+        linkType: "internal" | "external";
+        internalLink?: ({
+            relationTo: "collection";
+            value: string | Collection;
+        } | null) | ({
+            relationTo: "products";
+            value: string | Product;
+        } | null) | ({
+            relationTo: "termsPage";
+            value: string | TermsPage;
+        } | null);
+        externalUrl?: string | null;
+        id?: string | null;
+    }[] | null;
+    id?: string | null;
+}
+type SubSubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    id?: string | null;
+}
 
 const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
-    const [selectedLink, setSelectedLink] = useState<MenuItem | null>(null);
+    const [selectedLink, setSelectedLink] = useState<MenuItem | SubItem | SubSubItem | null>(null);
+    const [previousItemState, setPreviousItemState] = useState<MenuItem | null>(null);
+
     const t = useTranslations("Megamenu")
 
-    const handleItemClick = (item: MenuItem) => {
+    const handleItemClick = (item: MenuItem | SubItem | SubSubItem, previousItem: MenuItem | null) => {
+        if (previousItem) {
+            setPreviousItemState(previousItem)
+        } else {
+            setPreviousItemState(null);
+        }
         setSelectedLink(selectedLink?.label === item.label ? null : item);
     };
 
-    const handleGoBack = () => {
-        setSelectedLink(null);
+    const handleGoBack = (previousItem: MenuItem | SubItem | SubSubItem | null) => {
+        if (previousItem) {
+            setSelectedLink(previousItem);
+            setPreviousItemState(null)
+        } else {
+            setSelectedLink(null);
+        }
     };
 
     if (!items || items.length <= 0) return null;
@@ -50,31 +110,11 @@ const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
                             item={item}
                             locale={locale}
                             handleItemClick={handleItemClick}
+                            previouseItem={null}
                         />
                     ))}
                 </motion.div>
-                {selectedLink && selectedLink.subItems && selectedLink.subItems.length > 0 && (
-                    <motion.div
-                        className="flex flex-col gap-2 w-full absolute top-0 left-0 p-4"
-                        initial={{
-                            x: '100%',
-                            opacity: 0
-                        }}
-                        animate={{
-                            x: selectedLink ? 0 : '100%',
-                            opacity: selectedLink ? 100 : 0
-                        }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        <div onClick={handleGoBack} className="text-gray-700 p-2 rounded-md flex justify-center items-center gap-2 cursor-pointer">
-                            <ArrowLeft width={20} />
-                            <span>{t('back')}</span>
-                        </div>
-                        {selectedLink.subItems.map((element, index) => (
-                            <MegaMenuLastItem key={index} item={element} locale={locale} />
-                        ))}
-                    </motion.div>
-                )}
+                {selectedLink && <GenerateSubWindow previousItemState={previousItemState} locale={locale} handleItemClick={handleItemClick} selectedLink={selectedLink} handleGoBack={handleGoBack} backText={t('back')} />}
             </div>
             <div className="grid grid-cols-2 gap-5 md:hidden">
                 <Link href='/cart' locale={locale}>
@@ -92,5 +132,78 @@ const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
         </SheetContent>
     );
 }
+
+
+interface GenerateSubWindowProps {
+    selectedLink: MenuItem | SubItem | SubSubItem,
+    previousItemState: MenuItem | null
+    backText: string,
+    locale: string
+    handleGoBack: (previousItem: MenuItem | SubItem | SubSubItem | null) => void,
+    handleItemClick: (item: MenuItem | SubItem | SubSubItem, previousItem: MenuItem | null) => void
+}
+
+const GenerateSubWindow = ({ selectedLink, previousItemState, handleGoBack, backText, locale, handleItemClick }: GenerateSubWindowProps) => {
+    if (isMenuItem(selectedLink)) {
+        if (selectedLink.subItems && selectedLink.subItems.length > 0) {
+            return <motion.div
+                className="flex flex-col gap-2 w-full absolute top-0 left-0 p-4"
+                initial={{
+                    x: '100%',
+                    opacity: 0
+                }}
+                animate={{
+                    x: selectedLink ? 0 : '100%',
+                    opacity: selectedLink ? 100 : 0
+                }}
+                transition={{ duration: 0.3 }}
+            >
+                <div onClick={() => handleGoBack(null)} className="text-gray-700 p-2 rounded-md flex justify-center items-center gap-2 cursor-pointer">
+                    <ArrowLeft width={20} />
+                    <span>{backText}</span>
+                </div>
+                {selectedLink.subItems.map((element, index) => (
+                    element.subSubItems && element.subSubItems.length === 0 ? (
+                        <MegaMenuLastItem key={index} item={element} locale={locale} />
+                    ) : (
+                        <MegaMenuItem previouseItem={selectedLink} handleItemClick={handleItemClick} key={index} item={element} locale={locale} />
+                    )
+                ))}
+            </motion.div>
+        }
+    } else if (isSubItem(selectedLink)) {
+        if (selectedLink.subSubItems && selectedLink.subSubItems.length > 0) {
+            return <motion.div
+                className="flex flex-col gap-2 w-full absolute top-0 left-0 p-4"
+                initial={{
+                    x: '100%',
+                    opacity: 0
+                }}
+                animate={{
+                    x: selectedLink ? 0 : '100%',
+                    opacity: selectedLink ? 100 : 0
+                }}
+                transition={{ duration: 0.3 }}
+            >
+                <div onClick={() => handleGoBack(previousItemState)} className="text-gray-700 p-2 rounded-md flex justify-center items-center gap-2 cursor-pointer">
+                    <ArrowLeft width={20} />
+                    <span>{backText}</span>
+                </div>
+                {selectedLink.subSubItems.map((element, index) => (
+                    <MegaMenuLastItem key={index} item={element} locale={locale} />
+                ))}
+            </motion.div>
+        }
+    }
+    return null;
+}
+
+const isMenuItem = (item: MenuItem | SubItem | SubSubItem): item is MenuItem => {
+    return "subItems" in item;
+};
+
+const isSubItem = (item: MenuItem | SubItem | SubSubItem): item is SubItem => {
+    return "subSubItems" in item;
+};
 
 export default Megamenu;

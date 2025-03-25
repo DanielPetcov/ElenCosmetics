@@ -1,8 +1,59 @@
 import { Header } from "@/payload-types";
-type MenuItems = Header['menuItems'];
-type MenuItem = MenuItems[number];
 import { Link } from "@/i18n/navigation";
-const MegaMenuLastItem = ({ item, locale }: { item: MenuItem, locale: string }) => {
+import { Product, Collection, TermsPage } from "@/payload-types";
+type MenuItems = Header['menuItems'];
+type MenuItem = MenuItems[0];
+type SubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    subSubItems?: {
+        label: string;
+        linkType: "internal" | "external";
+        internalLink?: ({
+            relationTo: "collection";
+            value: string | Collection;
+        } | null) | ({
+            relationTo: "products";
+            value: string | Product;
+        } | null) | ({
+            relationTo: "termsPage";
+            value: string | TermsPage;
+        } | null);
+        externalUrl?: string | null;
+        id?: string | null;
+    }[] | null;
+    id?: string | null;
+}
+type SubSubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    id?: string | null;
+}
+
+
+const MegaMenuLastItem = ({ item, locale }: { item: MenuItem | SubItem | SubSubItem, locale: string }) => {
     let link = '';
     if (item.linkType === 'internal' && item.internalLink) {
         if (typeof item.internalLink === 'object' && 'relationTo' in item.internalLink) {

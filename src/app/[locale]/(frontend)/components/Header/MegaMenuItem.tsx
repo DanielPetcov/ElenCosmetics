@@ -1,17 +1,79 @@
 import { Header } from "@/payload-types";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { Collection, Product, TermsPage } from "@/payload-types";
 
 type MenuItems = Header['menuItems'];
-type MenuItem = MenuItems[number];
-
-interface Props {
-    item: MenuItem;
-    handleItemClick: (item: MenuItem) => void;
-    locale: string;
+type MenuItem = MenuItems[0];
+type SubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    subSubItems?: {
+        label: string;
+        linkType: "internal" | "external";
+        internalLink?: ({
+            relationTo: "collection";
+            value: string | Collection;
+        } | null) | ({
+            relationTo: "products";
+            value: string | Product;
+        } | null) | ({
+            relationTo: "termsPage";
+            value: string | TermsPage;
+        } | null);
+        externalUrl?: string | null;
+        id?: string | null;
+    }[] | null;
+    id?: string | null;
+}
+type SubSubItem = {
+    label: string;
+    linkType: "internal" | "external";
+    internalLink?: ({
+        relationTo: "collection";
+        value: string | Collection;
+    } | null) | ({
+        relationTo: "products";
+        value: string | Product;
+    } | null) | ({
+        relationTo: "termsPage";
+        value: string | TermsPage;
+    } | null);
+    externalUrl?: string | null;
+    id?: string | null;
 }
 
-const MegaMenuItem = ({ item, handleItemClick, locale }: Props) => {
+interface Props {
+    item: MenuItem | SubItem | SubSubItem;
+    handleItemClick: (item: MenuItem | SubItem | SubSubItem, previousItem: MenuItem | null) => void;
+    locale: string;
+    previouseItem: MenuItem | null;
+}
+
+const isMenuItem = (item: MenuItem | SubItem | SubSubItem): item is MenuItem => {
+    return "subItems" in item;
+};
+
+const isSubItem = (item: MenuItem | SubItem | SubSubItem): item is SubItem => {
+    return "subSubItems" in item;
+};
+
+const isSubSubItem = (item: MenuItem | SubItem | SubSubItem): item is SubSubItem => {
+    return !("subItems" in item) && !("subSubItems" in item);
+};
+
+const MegaMenuItem = ({ item, handleItemClick, locale, previouseItem }: Props) => {
     let link = '';
 
     if (item.linkType === 'internal' && item.internalLink) {
@@ -46,26 +108,55 @@ const MegaMenuItem = ({ item, handleItemClick, locale }: Props) => {
         link = typeof item.externalUrl === 'string' ? item.externalUrl : '';
     }
 
-    return item.subItems && item.subItems.length > 0 ? (
-        <div
-            onClick={() => handleItemClick({
-                id: item.id || undefined,
-                label: item.label,
-                subItems: item.subItems ?? undefined,
-                linkType: item.linkType,
-                internalLink: item.internalLink,
-                externalUrl: item.externalUrl
-            })}
-            className="flex justify-between items-center gap-20 cursor-pointer p-2 border border-gray-100 hover:border-gray-200 rounded-md transition-all duration-200"
-        >
-            <span>{item.label}</span>
-            <ArrowRight width={20} />
-        </div>
-    ) : (
-        <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+    if (isMenuItem(item)) {
+        if (item.subItems && item.subItems.length > 0) {
+            return <div
+                onClick={() => handleItemClick({
+                    id: item.id || undefined,
+                    label: item.label,
+                    subItems: item.subItems ?? undefined,
+                    linkType: item.linkType,
+                    internalLink: item.internalLink,
+                    externalUrl: item.externalUrl,
+                }, previouseItem)}
+                className="flex justify-between items-center gap-20 cursor-pointer p-2 border border-gray-100 hover:border-gray-200 rounded-md transition-all duration-200"
+            >
+                <span>{item.label}</span>
+                <ArrowRight width={20} />
+            </div>
+        } else {
+            return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+                <span className="group-hover:underline">{item.label}</span>
+            </Link>
+        }
+    } else if (isSubItem(item)) {
+        if (item.subSubItems && item.subSubItems.length > 0) {
+            return <div
+                onClick={() => handleItemClick({
+                    id: item.id || undefined,
+                    label: item.label,
+                    subSubItems: item.subSubItems ?? undefined,
+                    linkType: item.linkType,
+                    internalLink: item.internalLink,
+                    externalUrl: item.externalUrl,
+                }, previouseItem)}
+                className="flex justify-between items-center gap-20 cursor-pointer p-2 border border-gray-100 hover:border-gray-200 rounded-md transition-all duration-200"
+            >
+                <span>{item.label}</span>
+                <ArrowRight width={20} />
+            </div>
+        } else {
+            return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+                <span className="group-hover:underline">{item.label}</span>
+            </Link>
+        }
+    } else if (isSubSubItem(item)) {
+        return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
             <span className="group-hover:underline">{item.label}</span>
         </Link>
-    );
+    }
+
+    return null;
 };
 
 export default MegaMenuItem;
