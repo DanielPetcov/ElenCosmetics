@@ -212,5 +212,10 @@
         "title": "Favorite",
         "noProducts": "Lista de favorite este goală",
         "noUser": "Trebuie să vă logați!"
+    },
+    "Brands":{
+        "title": "Branduri",
+        "loading": "Se caută...",
+        "noBrands": "Nu sunt branduri disponibile"
     }
 }

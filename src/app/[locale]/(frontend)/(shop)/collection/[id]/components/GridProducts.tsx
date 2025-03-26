@@ -2,13 +2,14 @@
 
 import React, { useEffect, useState } from 'react';
 import ProductCard from '@/app/[locale]/(frontend)/components/productList/ProductCard';
-import { Product } from '@/payload-types';
+import { Product, User } from '@/payload-types';
 import CollectionPagination from './CollectionPagination';
 import VolumeType from '@/app/[locale]/(frontend)/types/VolumeType';
 import BrandType from '@/app/[locale]/(frontend)/types/BrandType';
 
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTranslations } from 'next-intl';
+import CheckUser from '@/app/utils/CheckUser';
 interface Props {
     locale: string,
     id: number,
@@ -39,10 +40,22 @@ const GridProducts = ({
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);  // Store total pages
     const [loading, setLoading] = useState(true);
+
+    const [user, setUser] = useState<User | null>(null);
+    const [wishlist, setWishlist] = useState<Product[] | null>(null);
+
     const limit = 20;
     const t = useTranslations('CollectionPage')
 
     useEffect(() => {
+        const FetchWishlist = async () => {
+            const response = await CheckUser();
+            if (response) {
+                setUser(response);
+                setWishlist(Array.isArray(response.wishlist) ? response.wishlist.filter((item): item is Product => typeof item !== 'string') : []);
+            }
+        };
+
         const fetchCollection = async () => {
             try {
                 const response = await fetch(`/api/collection/${id}?depth=0`, {
@@ -69,10 +82,24 @@ const GridProducts = ({
         };
 
         fetchCollection();
+        FetchWishlist()
         console.log('have been fetched', sort);
     }, [page, locale, id, sort, priceFilter]);
 
+    const handleWishlistUpdate = (updatedWishlist: Product[]) => {
+        setWishlist(updatedWishlist); // No need to filter again, just update state
+        console.log(updatedWishlist);
+    };
+
     useEffect(() => {
+        const FetchWishlist = async () => {
+            const response = await CheckUser();
+            if (response) {
+                setUser(response);
+                setWishlist(Array.isArray(response.wishlist) ? response.wishlist.filter((item): item is Product => typeof item !== 'string') : []);
+            }
+        };
+
         const fetchProducts = async () => {
             const sortType = sort === 'ascending' ? 'price' : '-price';
             try {
@@ -126,6 +153,7 @@ const GridProducts = ({
 
         if (productsArray.length > 0) {
             fetchProducts();
+            FetchWishlist();
         }
     }, [productsArray])
 
@@ -203,14 +231,11 @@ const GridProducts = ({
                     : products.map((product) => (
                         <div key={product.id}>
                             <ProductCard
-                                id={product.id}
-                                title={product.title}
-                                price={product.price}
-                                featuredImg={product.featuredImg}
-                                comparePrice={product.compare_price}
+                                product={product}
                                 locale={locale}
-                                updatedAt={product.updatedAt}
-                                createdAt={product.createdAt}
+                                user={user}
+                                wishlist={wishlist}
+                                onWishlistUpdate={handleWishlistUpdate}
                             />
                         </div>
                     ))

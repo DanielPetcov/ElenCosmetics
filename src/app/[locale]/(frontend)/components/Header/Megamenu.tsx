@@ -5,7 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { useState } from "react";
 import { motion } from "motion/react";
-import { UserRound, ArrowLeft, ShoppingBag } from 'lucide-react';
+import { UserRound, ArrowLeft, ShoppingBag, Heart } from 'lucide-react';
 import { Button } from "@/components/ui/button"
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
 import MegaMenuItem from "./MegaMenuItem";
@@ -122,12 +122,17 @@ const Megamenu = ({ items, locale }: { items: MenuItems, locale: string }) => {
                         <ShoppingBag />
                     </Button>
                 </Link>
-                <LanguageSelector className="md:hidden w-full" />
+                <Link href='/wishlist' locale={locale}>
+                    <Button variant="secondary" className="w-full">
+                        <Heart />
+                    </Button>
+                </Link>
                 <Link href='/account' locale={locale} className="col-span-2">
                     <Button variant="secondary" className="w-full">
                         <UserRound />
                     </Button>
                 </Link>
+                <LanguageSelector className="md:hidden w-full col-span-2" />
             </div>
         </SheetContent>
     );

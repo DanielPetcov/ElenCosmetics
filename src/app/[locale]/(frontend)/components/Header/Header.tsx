@@ -15,6 +15,7 @@ import ShoppingBagIcon from "./ShoppingBagIcon";
 
 import SearchBar from "../SearchBar/SearchBar";
 import LanguageSelector from "../LanguageSelector/LanguageSelector";
+import WishlistIcon from "./WishlisIcon";
 
 const Header = async ({ params }: { params: Promise<{ locale: string }> }) => {
 
@@ -62,6 +63,7 @@ const Header = async ({ params }: { params: Promise<{ locale: string }> }) => {
                             className="hidden md:block">
                             <UserRound strokeWidth={1.5} />
                         </Link>
+                        <WishlistIcon locale={locale} />
                         <ShoppingBagIcon locale={locale} />
                         <LanguageSelector className="hidden md:block" />
                     </div>
