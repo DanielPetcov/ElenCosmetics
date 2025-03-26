@@ -4,9 +4,35 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Product } from "@/payload-types";
+import { User } from "@/payload-types";
+import { useState, useEffect } from "react";
+import CheckUser from "@/app/utils/CheckUser";
+interface Props {
+    products: Product[],
+    locale: string,
+}
+const ProductListSwiper = ({ products, locale }: Props) => {
+    const [user, setUser] = useState<User | null>(null);
+    const [wishlist, setWishlist] = useState<Product[] | null>(null);
+
+    useEffect(() => {
+        const FetchData = async () => {
+            const response = await CheckUser();
+            if (response) {
+                setUser(response);
+                setWishlist(Array.isArray(response.wishlist) ? response.wishlist.filter((item): item is Product => typeof item !== 'string') : []);
+            }
+        };
+
+        FetchData();
+    }, []);
+
+    const handleWishlistUpdate = (updatedWishlist: Product[]) => {
+        setWishlist(updatedWishlist); // No need to filter again, just update state
+        console.log(updatedWishlist);
+    };
 
 
-const ProductListSwiper = ({ products, locale }: { products: Product[], locale: string }) => {
     return (
         <div>
             <Swiper
@@ -16,14 +42,11 @@ const ProductListSwiper = ({ products, locale }: { products: Product[], locale: 
                 {products.map((product, index) => (
                     <SwiperSlide key={index} style={{ width: "auto", height: "auto" }}>
                         <ProductCard
-                            id={product.id}
-                            title={product.title}
-                            price={product.price}
-                            featuredImg={product.featuredImg}
-                            updatedAt={product.updatedAt}
-                            createdAt={product.createdAt}
-                            comparePrice={product.compare_price}
+                            product={product}
                             locale={locale}
+                            user={user}
+                            wishlist={wishlist}
+                            onWishlistUpdate={handleWishlistUpdate}
                         />
                     </SwiperSlide>
                 ))}

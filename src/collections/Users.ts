@@ -62,5 +62,15 @@ export const Users: CollectionConfig = {
         { name: 'zipCode', type: 'text' },
       ],
     },
+    {
+      name: 'wishlist',
+      label: 'Wishlist',
+      type: 'relationship',
+      relationTo: 'products',
+      hasMany: true,
+      admin: {
+        hidden: true
+      }
+    }
   ],
 }

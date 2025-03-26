@@ -5,12 +5,15 @@ const ProductBuyWindow = ({ product }: { product: Product }) => {
         <div className="sticky top-5 bg-white p-5 lg:p-10 rounded-md h-fit">
             <div className="flex flex-col gap-3 h-fit">
                 <p className="text-slate-800 text-xl md:text-2xl font-semibold">{product.title}</p>
-                <div>
+                {/* <div>
                     reviews
-                </div>
-                <div>
-                    volum: 19
-                </div>
+                </div> */}
+                {product.volumeRelation && typeof product.volumeRelation !== 'string' && (
+                    <div className="flex items-baseline gap-2 text-gray-700">
+                        <span className="font-semibold">Volum:</span>
+                        <span>{product.volumeRelation.slug}</span>
+                    </div>
+                )}
                 <div className="text-gray-700">
                     {
                         product.compare_price ?

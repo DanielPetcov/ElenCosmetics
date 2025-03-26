@@ -5,7 +5,7 @@ import { Suspense } from "react";
 interface ProductListProps {
     category: string | Collection,
     title: string,
-    locale: string
+    locale: string,
 }
 
 import 'swiper/css';

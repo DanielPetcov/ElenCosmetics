@@ -207,5 +207,10 @@
     },
     "Megamenu": {
         "back": "Înapoi"
+    },
+    "Wishlist":{
+        "title": "Favorite",
+        "noProducts": "Lista de favorite este goală",
+        "noUser": "Trebuie să vă logați!"
     }
 }

@@ -75,6 +75,9 @@ export const Products: CollectionConfig = {
             name: 'stock',
             label: 'Stock',
             type: 'number',
+            admin: {
+                hidden: true
+            }
         },
         {
             name: 'volumeRelation',
@@ -86,7 +89,10 @@ export const Products: CollectionConfig = {
             name: 'relatedCollections',
             type: 'join',
             collection: 'collection',
-            on: 'products'
+            on: 'products',
+            admin: {
+                hidden: true
+            }
         }
     ],
     access: {

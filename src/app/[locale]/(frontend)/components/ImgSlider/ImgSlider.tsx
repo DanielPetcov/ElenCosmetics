@@ -1,7 +1,7 @@
 'use client'
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
 import PrevSlide from '../navigationIcons/prevSlide';
 import NextSlide from '../navigationIcons/nextSlide';
@@ -36,11 +36,14 @@ const ImgSlider = ({ slides, locale }: ImgSliderProps) => {
                         bulletClass: "swiper-bullet",
                         bulletActiveClass: "active",
                     }}
+                    autoplay={{
+                        delay: 4000
+                    }}
                     navigation={{
                         nextEl: '.next-slide',
                         prevEl: '.prev-slide',
                     }}
-                    modules={[Pagination, Navigation]}
+                    modules={[Pagination, Navigation, Autoplay]}
                 >
                     {slides.map((slide, index) => (
                         <SwiperSlide key={index}>

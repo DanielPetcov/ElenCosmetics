@@ -1,36 +1,46 @@
+'use client'
 import { Product } from "@/payload-types";
 import { Link } from "@/i18n/navigation";
 import Image from "next/image";
-
 import AddToCartBtn from "../AddToCartBtn";
+import HeartIcon from "./HeartIcon";
+import { User } from "@/payload-types";
+interface Props {
+    product: Product,
+    locale: string,
+    user: User | null,
+    wishlist: Product[] | null | undefined,
+    onWishlistUpdate: (updatedWishlist: Product[]) => void;
+}
 
-const ProductCard = ({ id, title, price, featuredImg, comparePrice, locale }: Product & { comparePrice: number | null | undefined, locale: string }) => {
+const ProductCard = ({ product, locale, user, wishlist, onWishlistUpdate }: Props) => {
     return (
-        <div className="flex flex-col justify-between gap-3 md:gap-8 bg-white w-[170px] md:w-[220px] lg:w-[250px] rounded-md p-5 group h-full">
-            <Link href={`/product/${id}`} locale={locale} className="w-full aspect-square mx-auto overflow-hidden text-gray-700 relative">
-                {(featuredImg && typeof featuredImg !== 'string' && featuredImg.url) ?
+        <div className="flex relative flex-col justify-between gap-3 md:gap-8 bg-white w-[170px] md:w-[220px] lg:w-[250px] rounded-md p-5 h-full">
+            <HeartIcon onWishlistUpdate={onWishlistUpdate} productIncoming={product} locale={locale} user={user ? user : null} wishlist={wishlist} />
+            <Link href={`/product/${product.id}`} locale={locale} className="w-full aspect-square mx-auto overflow-hidden text-gray-700 relative">
+                {(product.featuredImg && typeof product.featuredImg !== 'string' && product.featuredImg.url) ?
                     <Image
-                        src={featuredImg.url}
-                        alt={title}
-                        className="w-full object-contain object-center group-hover:scale-105 transition-all"
-                        width={featuredImg.width || 100}
-                        height={featuredImg.height || 100} />
+                        src={product.featuredImg.url}
+                        alt={product.title}
+                        className="w-full object-contain object-center hover:scale-105 transition-all"
+                        width={product.featuredImg.width || 100}
+                        height={product.featuredImg.height || 100} />
                     : 'invalid url'}
             </Link>
-            <Link href={`/product/${id}`} locale={locale} className="flex flex-col gap-1 md:gap-[10px]">
-                <span className="text-gray-700 font-semibold line-clamp-2">{title}</span>
-                <span className="text-gray-500 font-bold text-sm">{price} mdl</span>
+            <Link href={`/product/${product.id}`} locale={locale} className="flex flex-col gap-1 md:gap-[10px]">
+                <span className="text-gray-700 font-semibold line-clamp-2">{product.title}</span>
+                <span className="text-gray-500 font-bold text-sm">{product.price} mdl</span>
             </Link>
             <div className="w-full">
                 <AddToCartBtn
-                    productId={id}
-                    price={price}
-                    img={featuredImg && typeof featuredImg !== 'string' ? featuredImg.url ? featuredImg.url : null : null}
-                    imgHeight={featuredImg && typeof featuredImg !== 'string' ? featuredImg.height ? featuredImg.height : null : null}
-                    imgWidth={featuredImg && typeof featuredImg !== 'string' ? featuredImg.width ? featuredImg.width : null : null}
+                    productId={product.id}
+                    price={product.price}
+                    img={product.featuredImg && typeof product.featuredImg !== 'string' ? product.featuredImg.url ? product.featuredImg.url : null : null}
+                    imgHeight={product.featuredImg && typeof product.featuredImg !== 'string' ? product.featuredImg.height ? product.featuredImg.height : null : null}
+                    imgWidth={product.featuredImg && typeof product.featuredImg !== 'string' ? product.featuredImg.width ? product.featuredImg.width : null : null}
                     quantity={1}
-                    name={title}
-                    comparePrice={comparePrice ? comparePrice : null}
+                    name={product.title}
+                    comparePrice={product.compare_price ? product.compare_price : null}
                 />
             </div>
         </div>
