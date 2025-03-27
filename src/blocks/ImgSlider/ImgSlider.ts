@@ -1,4 +1,4 @@
-import type {Block} from 'payload';
+import type { Block } from 'payload';
 
 const ImgSliderBlock: Block = {
     slug: 'imgslider',
@@ -9,18 +9,19 @@ const ImgSliderBlock: Block = {
             fields: [
                 {
                     name: 'img',
+                    label: 'Imaginea',
                     type: 'relationship',
                     relationTo: 'media',
                     required: true,
                 },
                 {
                     name: 'linkType',
+                    label: 'Link Tip',
                     type: 'select',
-                    label: 'Link Type',
                     options: [
                         { label: 'None', value: 'none' },
-                        { label: 'Internal Link', value: 'internal' },
-                        { label: 'External Link', value: 'external' } 
+                        { label: 'Link Intern', value: 'internal' },
+                        { label: 'Link Extern', value: 'external' }
                     ],
                     defaultValue: 'none',
                     required: true

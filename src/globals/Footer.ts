@@ -19,16 +19,16 @@ export const Footer: GlobalConfig = {
                     label: 'Url',
                     type: 'text',
                     required: true
-                }, 
+                },
                 {
                     name: 'social_icon',
                     label: 'Icon',
                     type: 'select',
                     required: true,
                     options: [
-                        {label: 'Instagram', value: 'instagram'},
-                        {label: 'Facebook', value: 'facebook'},
-                        {label: 'TikTok', value: 'tiktok'}
+                        { label: 'Instagram', value: 'instagram' },
+                        { label: 'Facebook', value: 'facebook' },
+                        { label: 'TikTok', value: 'tiktok' }
                     ]
                 }
             ]
@@ -40,7 +40,7 @@ export const Footer: GlobalConfig = {
             fields: [
                 {
                     name: 'title',
-                    label: 'Title',
+                    label: 'Titlu',
                     type: 'text',
                     required: true,
                     localized: true
@@ -53,7 +53,7 @@ export const Footer: GlobalConfig = {
                     fields: [
                         {
                             name: 'title',
-                            label: 'Title',
+                            label: 'Titlu',
                             type: 'text',
                             required: true,
                             localized: true
@@ -61,16 +61,17 @@ export const Footer: GlobalConfig = {
                         {
                             name: 'linkType',
                             type: 'select',
-                            label: 'Link Type',
+                            label: 'Link Tip',
                             options: [
-                                { label: 'Internal Link', value: 'internal' },
-                                { label: 'External Link', value: 'external' } 
+                                { label: 'Link Intern', value: 'internal' },
+                                { label: 'Link Extern', value: 'external' }
                             ],
                             defaultValue: 'internal',
                             required: true
                         },
                         {
                             name: 'internalLink',
+                            label: "Link Intern",
                             type: 'relationship',
                             relationTo: ['collection', 'products', 'termsPage'],
                             required: true,
@@ -80,6 +81,7 @@ export const Footer: GlobalConfig = {
                         },
                         {
                             name: 'externalUrl',
+                            label: "Link Extern",
                             type: 'text',
                             required: true,
                             admin: {

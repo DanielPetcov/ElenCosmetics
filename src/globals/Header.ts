@@ -5,43 +5,44 @@ export const Header: GlobalConfig = {
     fields: [
         {
             name: 'upperHeader',
-            label: 'Upper Header',
+            label: 'Sus header',
             type: 'text',
             localized: true
         },
         {
             name: 'logo',
-            label: 'Header Logo',
+            label: 'Logo',
             type: 'relationship',
             relationTo: 'media',
             required: true
         },
         {
             name: 'menuItems',
-            label: 'Menu Items',
+            label: 'Menu Itemi',
             type: 'array',
             required: true,
             fields: [
                 {
                     name: 'label',
-                    label: 'Label',
+                    label: 'Denumirea',
                     type: 'text',
                     required: true,
                     localized: true
                 },
                 {
                     name: 'linkType',
+                    label: 'Link Tip',
                     type: 'select',
-                    label: 'Link Type',
                     options: [
-                        { label: 'Internal Link', value: 'internal' },
-                        { label: 'External Link', value: 'external' }
+                        { label: 'Link Intern', value: 'internal' },
+                        { label: 'Link Extern', value: 'external' }
                     ],
                     defaultValue: 'internal',
                     required: true
                 },
                 {
                     name: 'internalLink',
+                    label: "Link Intern",
                     type: 'relationship',
                     relationTo: ['collection', 'products', 'termsPage'],
                     required: true,
@@ -51,6 +52,7 @@ export const Header: GlobalConfig = {
                 },
                 {
                     name: 'externalUrl',
+                    label: "Link Extern",
                     type: 'text',
                     required: true,
                     admin: {
@@ -59,12 +61,12 @@ export const Header: GlobalConfig = {
                 },
                 {
                     name: 'subItems',
-                    label: 'Sub Items',
+                    label: 'Itemi nivel 2',
                     type: 'array',
                     fields: [
                         {
                             name: 'label',
-                            label: 'Label',
+                            label: 'Denumirea',
                             type: 'text',
                             required: true,
                             localized: true
@@ -72,16 +74,17 @@ export const Header: GlobalConfig = {
                         {
                             name: 'linkType',
                             type: 'select',
-                            label: 'Link Type',
+                            label: 'Link Tip',
                             options: [
-                                { label: 'Internal Link', value: 'internal' },
-                                { label: 'External Link', value: 'external' }
+                                { label: 'Link Intern', value: 'internal' },
+                                { label: 'Link Extern', value: 'external' }
                             ],
                             defaultValue: 'internal',
                             required: true
                         },
                         {
                             name: 'internalLink',
+                            label: "Link Intern",
                             type: 'relationship',
                             relationTo: ['collection', 'products', 'termsPage'],
                             required: true,
@@ -91,6 +94,7 @@ export const Header: GlobalConfig = {
                         },
                         {
                             name: 'externalUrl',
+                            label: 'Link Extern',
                             type: 'text',
                             required: true,
                             admin: {
@@ -99,29 +103,30 @@ export const Header: GlobalConfig = {
                         },
                         {
                             name: 'subSubItems',
-                            label: 'Sub Sub Items',
+                            label: 'Itemi nivel 3',
                             type: 'array',
                             fields: [
                                 {
                                     name: 'label',
-                                    label: 'Label',
+                                    label: 'Denumirea',
                                     type: 'text',
                                     required: true,
                                     localized: true
                                 },
                                 {
                                     name: 'linkType',
+                                    label: 'Link Tip',
                                     type: 'select',
-                                    label: 'Link Type',
                                     options: [
-                                        { label: 'Internal Link', value: 'internal' },
-                                        { label: 'External Link', value: 'external' }
+                                        { label: 'Link Intern', value: 'internal' },
+                                        { label: 'Link Extern', value: 'external' }
                                     ],
                                     defaultValue: 'internal',
                                     required: true
                                 },
                                 {
                                     name: 'internalLink',
+                                    label: "Link Intern",
                                     type: 'relationship',
                                     relationTo: ['collection', 'products', 'termsPage'],
                                     required: true,
@@ -131,6 +136,7 @@ export const Header: GlobalConfig = {
                                 },
                                 {
                                     name: 'externalUrl',
+                                    label: "Link Extern",
                                     type: 'text',
                                     required: true,
                                     admin: {

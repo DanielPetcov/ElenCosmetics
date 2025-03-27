@@ -26,7 +26,7 @@ export const Users: CollectionConfig = {
   fields: [
     {
       name: 'role',
-      label: 'User Role',
+      label: 'Rol utilizator',
       type: 'select',
       required: true,
       defaultValue: 'customer',
@@ -37,24 +37,24 @@ export const Users: CollectionConfig = {
     },
     {
       name: 'firstName',
-      label: 'First Name',
+      label: 'Nume',
       type: 'text',
       required: true,
     },
     {
       name: 'lastName',
-      label: 'Last Name',
+      label: 'Prenume',
       type: 'text',
       required: true,
     },
     {
       name: 'phone',
-      label: 'Phone Number',
+      label: 'Nr.tel',
       type: 'text',
     },
     {
       name: 'address',
-      label: 'Shipping Address',
+      label: 'Adresa livrare',
       type: 'group',
       fields: [
         { name: 'street', type: 'text' },

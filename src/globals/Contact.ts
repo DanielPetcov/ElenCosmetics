@@ -42,7 +42,7 @@ export const Contact: GlobalConfig = {
                         },
                         {
                             name: 'label',
-                            label: 'Label',
+                            label: 'Denumirea',
                             type: 'text',
                             required: true,
                             localized: true

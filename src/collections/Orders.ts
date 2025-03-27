@@ -34,9 +34,9 @@ export const Orders: CollectionConfig = {
             label: 'Informatie utilizator anonim',
             type: 'group',
             fields: [
-                { name: 'name', type: 'text' },
-                { name: 'email', type: 'text' },
-                { name: 'phone', type: 'text' },
+                { name: 'name', label: 'Nume', type: 'text' },
+                { name: 'email', label: 'Email', type: 'text' },
+                { name: 'phone', label: 'Nr.tel', type: 'text' },
             ],
         },
         {
@@ -118,7 +118,12 @@ export const Orders: CollectionConfig = {
             type: 'select',
             required: true,
             defaultValue: 'pending',
-            options: ['pending', 'shipped', 'delivered', 'cancelled'],
+            options: [
+                { label: 'În așteptare', value: 'pending' },
+                { label: 'Expediată', value: 'shipped' },
+                { label: 'Livrată', value: 'delivered' },
+                { label: 'Anulată', value: 'cancelled' }
+            ],
         },
         {
             name: 'createdAt',

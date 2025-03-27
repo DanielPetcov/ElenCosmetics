@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { s3Storage } from '@payloadcms/storage-s3'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { en } from '@payloadcms/translations/languages/en'
+import { ro } from '@payloadcms/translations/languages/ro'
 
 // collections
 import { Users } from './collections/Users'
@@ -117,4 +119,10 @@ export default buildConfig({
       },
     },
   }),
+  i18n: {
+    supportedLanguages: {
+      en: en,
+      ro: ro
+    },
+  }
 })

@@ -1,4 +1,4 @@
-import type {Block} from 'payload';
+import type { Block } from 'payload';
 
 const GeneralBigCategoriesBlock: Block = {
     slug: 'general-big-categories',
@@ -9,17 +9,18 @@ const GeneralBigCategoriesBlock: Block = {
             fields: [
                 {
                     name: 'image',
+                    label: "Imagine",
                     type: 'relationship',
                     relationTo: 'media',
                     required: true,
                 },
                 {
                     name: 'linkType',
+                    label: 'Link Tip',
                     type: 'select',
-                    label: 'Link Type',
                     options: [
-                        { label: 'Internal Link', value: 'internal' },
-                        { label: 'External Link', value: 'external' } 
+                        { label: 'Link Intern', value: 'internal' },
+                        { label: 'Link Extern', value: 'external' }
                     ],
                     defaultValue: 'internal',
                     required: true
