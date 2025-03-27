@@ -8,7 +8,7 @@ export const Products: CollectionConfig = {
     },
     admin: {
         useAsTitle: 'title',
-        defaultColumns: ['title', 'productCode', 'featuredImg'],
+        defaultColumns: ['title', 'productCode', 'featuredImg', 'status'],
         listSearchableFields: ['title', 'productCode']
     },
     fields: [
@@ -19,6 +19,19 @@ export const Products: CollectionConfig = {
             index: true,
             required: true,
             localized: true,
+        },
+        {
+            name: 'status',
+            label: 'Stare',
+            type: 'select',
+            options: [
+                { label: 'Draft', value: 'draft' },
+                { label: 'Public', value: 'published' }
+            ],
+            defaultValue: 'published',
+            admin: {
+                position: 'sidebar',
+            }
         },
         {
             name: 'productCode',
@@ -96,6 +109,20 @@ export const Products: CollectionConfig = {
         }
     ],
     access: {
-        read: () => true
-    },
-}
+        read: ({ req }) => {
+            // Allow public access only to published products
+            if (!req.user) {
+                return {
+                    and: [
+                        {
+                            status: {
+                                equals: 'published'
+                            }
+                        }
+                    ]
+                };
+            }
+            return true; // Admins can access all products
+        }
+    }
+};

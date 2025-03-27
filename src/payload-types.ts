@@ -178,6 +178,7 @@ export interface User {
 export interface Product {
   id: string;
   title: string;
+  status?: ('draft' | 'published') | null;
   productCode?: string | null;
   featuredImg: string | Media;
   media?: (string | Media)[] | null;
@@ -501,6 +502,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface ProductsSelect<T extends boolean = true> {
   title?: T;
+  status?: T;
   productCode?: T;
   featuredImg?: T;
   media?: T;
