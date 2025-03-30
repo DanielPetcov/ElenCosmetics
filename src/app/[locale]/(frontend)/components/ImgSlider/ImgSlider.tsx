@@ -29,6 +29,7 @@ const ImgSlider = ({ slides, locale }: ImgSliderProps) => {
                     spaceBetween={10}
                     speed={800}
                     loop={true}
+                    autoHeight={true}
                     pagination={{
                         el: ".swiper-pagination",
                         type: "bullets",

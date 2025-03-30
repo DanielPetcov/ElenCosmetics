@@ -10,8 +10,8 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
 export const metadata = {
-  description: 'ElenCosmetics',
-  title: 'ElenCosmetics',
+  description: 'ElanCosmetics - magazin specializat în produse cosmetice de top, cu o selecție variată de branduri premium, inclusiv cosmetice coreene inovatoare. Descoperă cele mai noi tendințe în îngrijirea pielii și machiaj, produse autentice și calitate garantată.',
+  title: 'ElanCosmetics',
 }
 
 export default async function RootLayout({
