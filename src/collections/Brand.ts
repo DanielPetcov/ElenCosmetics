@@ -18,6 +18,12 @@ export const Brand: CollectionConfig = {
             required: true
         },
         {
+            name: 'associated_collection',
+            label: 'Colectia asociata',
+            type: 'relationship',
+            relationTo: 'collection'
+        },
+        {
             name: 'assignProducts',
             type: 'relationship',
             label: 'Produse atribuite',

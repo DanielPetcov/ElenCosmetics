@@ -200,7 +200,10 @@
     },
     "Product": {
         "addToCart": "Купить",
-        "addedSuccesfully": "Товар успешно добавлен"
+        "addedSuccesfully": "Товар успешно добавлен",
+        "codProdus": "Код товара",
+        "brand": "Производитель",
+        "volum": "Объем"
     },
     "Footer": {
         "ourAddress": "Наш адрес"

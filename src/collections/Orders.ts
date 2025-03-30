@@ -204,7 +204,6 @@ export const Orders: CollectionConfig = {
                             subject: subject,
                             html: htmlContent,
                         });
-                        console.log('Order confirmation email sent!');
                     } catch (error) {
                         console.error('Error sending email:', error);
                     }

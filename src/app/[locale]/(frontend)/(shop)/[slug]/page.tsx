@@ -10,7 +10,6 @@ const GeneralPage = async ({
 }) => {
     const { slug, locale } = await params;
 
-    console.log("Slug received:", slug);
     if (!slug) {
         return null;
     }

@@ -1,6 +1,7 @@
 import { Product } from "@/payload-types";
 import { Collection } from "@/payload-types";
 import { Suspense } from "react";
+import { Link } from "@/i18n/navigation";
 
 interface ProductListProps {
     category: string | Collection,
@@ -18,8 +19,11 @@ const ProductList: React.FC<ProductListProps> = ({ category, title, locale }) =>
 
     return (
         <div className="mx-auto max-w-[1400px] w-full px-5 md:px-4 overflow-hidden">
-            <div className="flex flex-col gap-5 lg:gap-10 max-w-full">
-                <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-700 text-center uppercase">{title}</div>
+            <div className="flex flex-col gap-5 lg:gap-10 max-w-full text-gray-700">
+                <div className="flex flex-col gap-3">
+                    <div className="text-2xl md:text-3xl lg:text-4xl font-semibold text-center uppercase">{title}</div>
+                    <Link href={`/collection/${category.id}`} locale={locale} className="text-center text-base md:tex-xl lg:text-2xl hover:underline">Vezi mai multe</Link>
+                </div>
                 {products.length > 0 ? (
                     <Suspense fallback={<div>is loading</div>}>
                         <ProductListSwiper

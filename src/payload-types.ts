@@ -237,17 +237,7 @@ export interface Media {
 export interface Brand {
   id: string;
   slug: string;
-  assignProducts?: (string | Product)[] | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "volume".
- */
-export interface Volume {
-  id: string;
-  slug: string;
+  associated_collection?: (string | null) | Collection;
   assignProducts?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
@@ -261,6 +251,17 @@ export interface Collection {
   title: string;
   products?: (string | Product)[] | null;
   all_products?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "volume".
+ */
+export interface Volume {
+  id: string;
+  slug: string;
+  assignProducts?: (string | Product)[] | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -617,6 +618,7 @@ export interface VolumeSelect<T extends boolean = true> {
  */
 export interface BrandSelect<T extends boolean = true> {
   slug?: T;
+  associated_collection?: T;
   assignProducts?: T;
   updatedAt?: T;
   createdAt?: T;

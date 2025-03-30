@@ -73,8 +73,8 @@ const ProductGallery = ({ featuredImg, media }: Props) => {
                                                 src={item}
                                                 alt={`Product image ${index + 1}`}
                                                 className=" object-contain object-center cursor-pointer h-full w-auto max-w-full mx-auto"
-                                                width={100}
-                                                height={100}
+                                                width={500}
+                                                height={500}
                                             />
                                         </PhotoView>
                                     )}

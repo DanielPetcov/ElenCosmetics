@@ -110,19 +110,14 @@ export const Products: CollectionConfig = {
     ],
     access: {
         read: ({ req }) => {
-            // Allow public access only to published products
-            if (!req.user) {
-                return {
-                    and: [
-                        {
-                            status: {
-                                equals: 'published'
-                            }
-                        }
-                    ]
-                };
+            if (req?.user?.role === "admin") {
+                return true; // Admins can see all products
             }
-            return true; // Admins can access all products
+            return {
+                status: {
+                    equals: "published"
+                }
+            };
         }
     }
 };

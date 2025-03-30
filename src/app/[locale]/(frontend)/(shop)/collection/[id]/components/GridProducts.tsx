@@ -69,7 +69,6 @@ const GridProducts = ({
                     throw new Error(`Error: ${response.statusText}`);
                 }
                 const data = await response.json();
-                console.log(data);
                 if (data.products) {
                     setProductsArray(data.products);
                 }
@@ -83,12 +82,10 @@ const GridProducts = ({
 
         fetchCollection();
         FetchWishlist()
-        console.log('have been fetched', sort);
     }, [page, locale, id, sort, priceFilter]);
 
     const handleWishlistUpdate = (updatedWishlist: Product[]) => {
         setWishlist(updatedWishlist); // No need to filter again, just update state
-        console.log(updatedWishlist);
     };
 
     useEffect(() => {

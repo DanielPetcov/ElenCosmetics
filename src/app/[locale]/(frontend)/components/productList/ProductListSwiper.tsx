@@ -29,7 +29,6 @@ const ProductListSwiper = ({ products, locale }: Props) => {
 
     const handleWishlistUpdate = (updatedWishlist: Product[]) => {
         setWishlist(updatedWishlist); // No need to filter again, just update state
-        console.log(updatedWishlist);
     };
 
 

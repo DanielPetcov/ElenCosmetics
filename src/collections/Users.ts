@@ -10,8 +10,10 @@ export const Users: CollectionConfig = {
     useAsTitle: 'email',
     defaultColumns: ['email', 'role']
   },
-  auth: true,
-
+  auth: {
+    maxLoginAttempts: 10,
+    lockTime: 300000
+  },
   access: {
     admin: ({ req }) => req.user?.role === 'admin',
     read: ({ req }) => {

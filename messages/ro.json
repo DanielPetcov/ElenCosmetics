@@ -200,7 +200,10 @@
     },
     "Product": {
         "addToCart": "Cumpără",
-        "addedSuccesfully": "Produsul a fost adaugat cu succes"
+        "addedSuccesfully": "Produsul a fost adaugat cu succes",
+        "codProdus": "Cod produs",
+        "brand": "Producător",
+        "volum": "Volum"
     },
     "Footer": {
         "ourAddress": "Adresa noastră"
