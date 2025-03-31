@@ -1,6 +1,7 @@
 import { Header } from "@/payload-types";
 import { Link } from "@/i18n/navigation";
 import { Product, Collection, TermsPage } from "@/payload-types";
+import { SheetTrigger } from "@/components/ui/sheet";
 type MenuItems = Header['menuItems'];
 type MenuItem = MenuItems[0];
 type SubItem = {
@@ -87,9 +88,11 @@ const MegaMenuLastItem = ({ item, locale }: { item: MenuItem | SubItem | SubSubI
         link = typeof item.externalUrl === 'string' ? item.externalUrl : '';
     }
     return (
-        <Link locale={locale} href={link} className="text-gray-500 group">
-            <span className="group-hover:underline">{item.label}</span>
-        </Link>
+        <SheetTrigger asChild>
+            <Link locale={locale} href={link} className="text-gray-500 group">
+                <span className="group-hover:underline">{item.label}</span>
+            </Link>
+        </SheetTrigger>
     )
 }
 

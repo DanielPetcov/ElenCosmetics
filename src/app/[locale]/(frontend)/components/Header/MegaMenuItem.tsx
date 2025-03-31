@@ -2,6 +2,7 @@ import { Header } from "@/payload-types";
 import { ArrowRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Collection, Product, TermsPage } from "@/payload-types";
+import { SheetTrigger } from "@/components/ui/sheet";
 
 type MenuItems = Header['menuItems'];
 type MenuItem = MenuItems[0];
@@ -125,9 +126,11 @@ const MegaMenuItem = ({ item, handleItemClick, locale, previouseItem }: Props) =
                 <ArrowRight width={20} />
             </div>
         } else {
-            return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
-                <span className="group-hover:underline">{item.label}</span>
-            </Link>
+            return <SheetTrigger asChild>
+                <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+                    <span className="group-hover:underline">{item.label}</span>
+                </Link>
+            </SheetTrigger>
         }
     } else if (isSubItem(item)) {
         if (item.subSubItems && item.subSubItems.length > 0) {
@@ -146,14 +149,18 @@ const MegaMenuItem = ({ item, handleItemClick, locale, previouseItem }: Props) =
                 <ArrowRight width={20} />
             </div>
         } else {
-            return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
-                <span className="group-hover:underline">{item.label}</span>
-            </Link>
+            return <SheetTrigger asChild>
+                <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+                    <span className="group-hover:underline">{item.label}</span>
+                </Link>
+            </SheetTrigger>
         }
     } else if (isSubSubItem(item)) {
-        return <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
-            <span className="group-hover:underline">{item.label}</span>
-        </Link>
+        return <SheetTrigger asChild>
+            <Link locale={locale} href={link} className="text-gray-700 p-2 border border-transparent rounded-md group">
+                <span className="group-hover:underline">{item.label}</span>
+            </Link>
+        </SheetTrigger>
     }
 
     return null;

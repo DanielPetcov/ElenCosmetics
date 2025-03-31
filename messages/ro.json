@@ -196,7 +196,8 @@
     },
     "Searchbar": {
         "noresults": "Nu au fost gasit rezultate",
-        "loading": "Se caută..."
+        "loading": "Se caută...",
+        "seeMore": "Vezi mai mult"
     },
     "Product": {
         "addToCart": "Cumpără",

@@ -196,7 +196,8 @@
     },
     "Searchbar": {
         "noresults": "Результаты не найдены",
-        "loading": "Идет поиск..."
+        "loading": "Идет поиск...",
+        "seeMore": "Показать больше"
     },
     "Product": {
         "addToCart": "Купить",

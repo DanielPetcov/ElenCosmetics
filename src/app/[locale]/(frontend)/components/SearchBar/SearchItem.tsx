@@ -11,7 +11,7 @@ const SearchItem = ({ product, onItemClick, locale }: { product: Product, onItem
                     : <div>no image</div>}
             </div>
             <div>
-                <div className="text-base md:text-lg font-semibold">
+                <div className="text-base md:text-lg font-semibold line-clamp-2">
                     {product.title}
                 </div>
                 <div className="text-sm md:text-base">

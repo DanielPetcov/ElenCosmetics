@@ -1,6 +1,7 @@
 "use client";
 import { stringify } from 'qs-esm'
 import type { Where } from 'payload'
+import { Link } from '@/i18n/navigation';
 
 import { Product } from "@/payload-types";
 import { useState, useEffect } from "react";
@@ -14,11 +15,15 @@ const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () =>
     const [results, setResults] = useState<Product[]>([]);
     const [loading, setLoading] = useState(false);
 
-    const query: Where = {
-        title: {
-            contains: word
-        },
-    }
+    const isNumeric = /^\d+$/.test(word);
+
+    // Build the query conditionally
+    const query: Where = isNumeric
+        ? { productCode: { equals: word } } // Exact match for numbers
+        : {
+            title: { contains: word },
+        };
+
 
     const stringifiedQuery = stringify(
         {
@@ -48,7 +53,7 @@ const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () =>
         };
 
         fetchResults();
-    }, [word, stringifiedQuery]);
+    }, [word]);
 
     return (
         <div className="text-gray-700 w-full bg-white p-5 rounded-md grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 gap-y-10 md:gap-5 overflow-y-auto max-h-[500px]">
@@ -62,6 +67,14 @@ const SearchResults = ({ word, onItemClick }: { word: string, onItemClick: () =>
             ) : (
                 <div>{t('noresults')}</div>
             )}
+
+            {
+                loading ? null : results && results.length == 12 ? (
+                    <Link locale={locale} href={`/search/${stringifiedQuery}`} onClick={() => onItemClick()} className='col-span-4 text-center hover:underline'>
+                        {t('seeMore')}
+                    </Link>
+                ) : null
+            }
         </div>
     );
 };

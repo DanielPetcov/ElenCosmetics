@@ -36,7 +36,8 @@ export const Products: CollectionConfig = {
         {
             name: 'productCode',
             label: 'CodProdus',
-            type: "text"
+            type: "text",
+            index: true
         },
         {
             name: 'featuredImg',
@@ -76,7 +77,7 @@ export const Products: CollectionConfig = {
             name: 'description',
             label: 'Descriere',
             type: 'richText',
-            localized: true
+            localized: true,
         },
         {
             name: 'ingredients',
