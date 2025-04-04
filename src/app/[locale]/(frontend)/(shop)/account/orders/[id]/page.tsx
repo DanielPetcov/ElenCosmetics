@@ -4,6 +4,7 @@ import payload from "@/queries";
 import { Suspense } from 'react';
 import OrderTable from './OrderTable';
 import { useTranslations } from 'next-intl';
+import { string } from 'zod';
 
 const fetchUser = async (token: string | undefined) => {
     if (!token) return null;
@@ -35,7 +36,6 @@ const OrdersPage = async ({ params }: { params: Promise<{ locale: string }> }) =
 }
 
 const OrdersContent = async ({ token, locale }: { token: string | undefined; locale: string }) => {
-    const t = useTranslations('Order');
     const user = await fetchUser(token);
 
     if (!user) {
@@ -52,21 +52,26 @@ const OrdersContent = async ({ token, locale }: { token: string | undefined; loc
             },
         })
 
-        if (data.totalDocs === 0) {
-            return (
-                <div className='text-gray-700'>
-                    {t('noOrders')}
-                </div>
-            )
-        }
-
-        return (
-            <div className="text-gray-500 py-10 px-5 lg:px-10">
-                <OrderTable orders={data.docs} />
-            </div>
-        );
+        return <OrderInfo data={data} />
     }
 };
+
+const OrderInfo = ({ data }: { data: any }) => {
+    const t = useTranslations('Order');
+    if (data.totalDocs === 0) {
+        return (
+            <div className='text-gray-700'>
+                {t('noOrders')}
+            </div>
+        )
+    }
+
+    return (
+        <div className="text-gray-500 py-10 px-5 lg:px-10">
+            <OrderTable orders={data.docs} />
+        </div>
+    );
+}
 
 
 
