@@ -883,11 +883,14 @@ export interface Contact {
   contacts: {
     title: string;
     type: 'link' | 'richtext';
-    link?: {
-      type?: ('facebook' | 'instagram') | null;
-      label: string;
-      url: string;
-    };
+    links?:
+      | {
+          type?: ('facebook' | 'instagram' | 'tiktok') | null;
+          label: string;
+          url: string;
+          id?: string | null;
+        }[]
+      | null;
     richtext?: {
       root: {
         type: string;
@@ -1070,12 +1073,13 @@ export interface ContactSelect<T extends boolean = true> {
     | {
         title?: T;
         type?: T;
-        link?:
+        links?:
           | T
           | {
               type?: T;
               label?: T;
               url?: T;
+              id?: T;
             };
         richtext?: T;
         id?: T;

@@ -27,9 +27,12 @@ export const Contact: GlobalConfig = {
                     ]
                 },
                 {
-                    name: 'link',
-                    label: 'Link',
-                    type: 'group',
+                    name: 'links',
+                    label: 'Linkuri',
+                    type: 'array',
+                    admin: {
+                        condition: (_, siblingData) => siblingData.type === 'link'
+                    },
                     fields: [
                         {
                             name: 'type',
@@ -37,7 +40,8 @@ export const Contact: GlobalConfig = {
                             type: 'select',
                             options: [
                                 { label: 'Facebook', value: 'facebook' },
-                                { label: 'Instagram', value: 'instagram' }
+                                { label: 'Instagram', value: 'instagram' },
+                                { label: 'TikTok', value: 'tiktok' },
                             ]
                         },
                         {
@@ -53,10 +57,7 @@ export const Contact: GlobalConfig = {
                             type: 'text',
                             required: true
                         }
-                    ],
-                    admin: {
-                        condition: (_, siblingData) => siblingData.type === 'link'
-                    }
+                    ]
                 },
                 {
                     name: 'richtext',
