@@ -222,5 +222,10 @@
         "title": "Branduri",
         "loading": "Se caută...",
         "noBrands": "Nu sunt branduri disponibile"
+    },
+    "ProductList": {
+        "noProducts": "Nu sunt produse disponibile",
+        "loading": "Se caută...",
+        "seeMore": "Vezi mai mult"
     }
 }
