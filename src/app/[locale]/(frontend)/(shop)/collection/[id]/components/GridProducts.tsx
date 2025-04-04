@@ -216,7 +216,7 @@ const GridProducts = ({
         ))
     }
 
-    if (products.length === 0) {
+    if (products.length === 0 && loading === false) {
         return <div>{t('noProducts')}</div>
     }
 

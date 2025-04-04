@@ -3,6 +3,7 @@ import { redirect } from '@/i18n/navigation';
 import payload from "@/queries";
 import { Suspense } from 'react';
 import OrderTable from './OrderTable';
+import { useTranslations } from 'next-intl';
 
 const fetchUser = async (token: string | undefined) => {
     if (!token) return null;
@@ -34,6 +35,7 @@ const OrdersPage = async ({ params }: { params: Promise<{ locale: string }> }) =
 }
 
 const OrdersContent = async ({ token, locale }: { token: string | undefined; locale: string }) => {
+    const t = useTranslations('Order');
     const user = await fetchUser(token);
 
     if (!user) {
@@ -52,8 +54,8 @@ const OrdersContent = async ({ token, locale }: { token: string | undefined; loc
 
         if (data.totalDocs === 0) {
             return (
-                <div>
-                    Momentan nu sunt comenzi
+                <div className='text-gray-700'>
+                    {t('noOrders')}
                 </div>
             )
         }

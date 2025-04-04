@@ -173,6 +173,7 @@
         }
     },
     "Order": {
+        "noOrders": "Nu ai comenzi",
         "order": "Nr. comandă",
         "status": {
             "title": "Stare comandă",
