@@ -64,7 +64,7 @@
             "phone": "Telefon",
             "email": "Email",
             "address": "Adresa",
-            "city": "City",
+            "city": "Oraș",
             "zipCode": "Zip Cod",
             "terms": "Am luat la cunoștință despre politica de confidentialitate privind prelucrarea datelor cu caracter personal"
         },
@@ -88,6 +88,7 @@
         "summary": {
             "subtotal": "Subtotal",
             "total": "Total",
+            "delivery": "Livrare",
             "discountApplied": "Reducerea a fost aplicată"
         },
         "errors": {

@@ -75,7 +75,6 @@ export const Orders: CollectionConfig = {
                 { name: 'fullName', type: 'text', required: true },
                 { name: 'street', type: 'text', required: true },
                 { name: 'city', type: 'text', required: true },
-                { name: 'zipCode', type: 'text', required: true },
                 { name: 'phone', type: 'text', required: true },
             ],
         },

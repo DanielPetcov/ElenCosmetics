@@ -109,6 +109,7 @@ export interface Config {
     header: Header;
     productPage: ProductPage;
     contact: Contact;
+    delivery: Delivery;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
@@ -116,6 +117,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     productPage: ProductPageSelect<false> | ProductPageSelect<true>;
     contact: ContactSelect<false> | ContactSelect<true>;
+    delivery: DeliverySelect<false> | DeliverySelect<true>;
   };
   locale: 'ro' | 'ru';
   user: User & {
@@ -288,7 +290,6 @@ export interface Order {
     fullName: string;
     street: string;
     city: string;
-    zipCode: string;
     phone: string;
   };
   subtotal: number;
@@ -557,7 +558,6 @@ export interface OrdersSelect<T extends boolean = true> {
         fullName?: T;
         street?: T;
         city?: T;
-        zipCode?: T;
         phone?: T;
       };
   subtotal?: T;
@@ -910,6 +910,16 @@ export interface Contact {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delivery".
+ */
+export interface Delivery {
+  id: string;
+  tax?: number | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -1070,6 +1080,16 @@ export interface ContactSelect<T extends boolean = true> {
         richtext?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "delivery_select".
+ */
+export interface DeliverySelect<T extends boolean = true> {
+  tax?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

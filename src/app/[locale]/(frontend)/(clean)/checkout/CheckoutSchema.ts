@@ -22,10 +22,6 @@ export const FormSchema = () => {
             .min(2, t('city_min'))
             .max(50, t('city_max')),
 
-        zipCode: z.string()
-            .min(2, t('zip_min'))
-            .max(20, t('zip_max')),
-
         terms: z.boolean().refine(value => value === true, {
             message: t('terms_required'),
         }),

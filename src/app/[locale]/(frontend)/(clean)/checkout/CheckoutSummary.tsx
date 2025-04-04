@@ -8,7 +8,7 @@ interface DiscountType {
     type: "fixed" | "percent";
 }
 
-const CheckoutSummary = ({ discount }: { discount: DiscountType | null }) => {
+const CheckoutSummary = ({ discount, delivery }: { discount: DiscountType | null, delivery: number }) => {
     const items = useCartStore((state) => state.items);
     const t = useTranslations("CheckoutPage");
 
@@ -22,7 +22,7 @@ const CheckoutSummary = ({ discount }: { discount: DiscountType | null }) => {
             : discount.value
         : 0;
 
-    const total = subtotal - discountAmount;
+    const total = subtotal - discountAmount + delivery;
 
     return (
         <div className="border border-gray-300 text-gray-700 p-5 rounded-2xl h-fit flex flex-col gap-10 max-h-[450px] md:max-h-none overflow-y-auto">
@@ -35,6 +35,10 @@ const CheckoutSummary = ({ discount }: { discount: DiscountType | null }) => {
                 <div className="flex justify-between items-baseline text-lg">
                     <span className="font-semibold">{t('summary.subtotal')}</span>
                     <span className="font-semibold">{subtotal.toFixed(2)} MDL</span>
+                </div>
+                <div className="flex justify-between items-baseline text-md">
+                    <span>{t('summary.delivery')}</span>
+                    <span>{delivery} MDL</span>
                 </div>
                 {discount && (
                     <div className="flex justify-between items-baseline text-base text-green-600">
